@@ -1,0 +1,47 @@
+---
+title: "statpsych for Sample-Size Planning"
+author: "Bob Calin-Jageman"
+date: "2024-10-20"
+categories: [news, tools]
+image: "image.webp"
+---
+
+One great tool for sample-size planning is the [statpsych](https://github.com/dgbonett/statpsych/) package by Doug Bonett.
+
+There are loads and loads of goodies in statpsych, and [the documentation](https://dgbonett.github.io/statpsych/reference/index.html) is excellent and authoritative.
+
+Here, for example, is how you can find the sample-size needed to obtain a desired level of power for a predicted effect in a 2-group design
+
+```{r}
+# If you don't have statpsych installed, install it!
+if (!require("statpsych")) install.packages("statpsych")
+
+# size.test.mean2 gives power for the mean difference in a 2-group design
+# parameters are alpha level, desired power, average within-group variance, effect size, and ratio of group1 to group2 sample sizes
+# Full documentation is at: https://dgbonett.github.io/statpsych/reference/size.test.mean2.html
+# In this example, we have 
+#  * an alpha of .05, 
+#  * desired power of .95, 
+#  * expected average variance of 100 (sd_avg = 10)
+#  * an predicted effect size of 10
+#  * and equal sample-sizes in both groups (ratio of 1 between n1 and n2)
+# The output shows that we need n = 27 per group.
+statpsych::size.test.mean2(.05, .95, 100, 10, 1) 
+
+
+# We can easiy investigate other effect sizes, power levels, etc.  For example:
+#  Here we explore effect sizes of 5, 10, and 20 while keeping
+#  all other parameters constant
+for(e_size in c(5, 10, 20)){
+  print(
+    paste(
+      "For effect size of", e_size,
+      "need sample size of", 
+      paste(statpsych::size.test.mean2(.05, .95, 100, e_size, 1), collapse = ", ")
+    )
+  )
+  
+}
+```
+
+\

@@ -1,0 +1,15 @@
+{
+  "hash": "fe17d96b2c2f0a244c1568f78e7b49b8",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"statpsych for Sample-Size Planning\"\nauthor: \"Bob Calin-Jageman\"\ndate: \"2024-10-20\"\ncategories: [news, tools]\nimage: \"image.webp\"\n---\n\n\n\n\nOne great tool for sample-size planning is the [statpsych](https://github.com/dgbonett/statpsych/) package by Doug Bonett.\n\nThere are loads and loads of goodies in statpsych, and [the documentation](https://dgbonett.github.io/statpsych/reference/index.html) is excellent and authoritative.\n\nHere, for example, is how you can find the sample-size needed to obtain a desired level of power for a predicted effect in a 2-group design\n\n\n\n\n::: {.cell}\n\n```{.r .cell-code}\n# If you don't have statpsych installed, install it!\nif (!require(\"statpsych\")) install.packages(\"statpsych\")\n```\n\n::: {.cell-output .cell-output-stderr}\n\n```\nLoading required package: statpsych\n```\n\n\n:::\n\n```{.r .cell-code}\n# size.test.mean2 gives power for the mean difference in a 2-group design\n# parameters are alpha level, desired power, average within-group variance, effect size, and ratio of group1 to group2 sample sizes\n# Full documentation is at: https://dgbonett.github.io/statpsych/reference/size.test.mean2.html\n# In this example, we have \n#  * an alpha of .05, \n#  * desired power of .95, \n#  * expected average variance of 100 (sd_avg = 10)\n#  * an predicted effect size of 10\n#  * and equal sample-sizes in both groups (ratio of 1 between n1 and n2)\n# The output shows that we need n = 27 per group.\nstatpsych::size.test.mean2(.05, .95, 100, 10, 1) \n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n n1 n2\n 27 27\n```\n\n\n:::\n\n```{.r .cell-code}\n# We can easiy investigate other effect sizes, power levels, etc.  For example:\n#  Here we explore effect sizes of 5, 10, and 20 while keeping\n#  all other parameters constant\nfor(e_size in c(5, 10, 20)){\n  print(\n    paste(\n      \"For effect size of\", e_size,\n      \"need sample size of\", \n      paste(statpsych::size.test.mean2(.05, .95, 100, e_size, 1), collapse = \", \")\n    )\n  )\n  \n}\n```\n\n::: {.cell-output .cell-output-stdout}\n\n```\n[1] \"For effect size of 5 need sample size of 105, 105\"\n[1] \"For effect size of 10 need sample size of 27, 27\"\n[1] \"For effect size of 20 need sample size of 8, 8\"\n```\n\n\n:::\n:::\n\n\n\n\n\\\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -2,8 +2,10 @@ project:
   type: website
   output-dir: docs
 
+
 website:
   title: "How Much Data?"
+  site-url: http://www.howmuchdata.net/
   navbar:
     search: true
     right:
@@ -35,8 +37,6 @@ website:
         href: Decreasing Sample-Size Needs.qmd
       - text: Resources
         href: Resources.qmd
-      - text: Blog
-        href: blog.qmd
 
 format:
   html:
