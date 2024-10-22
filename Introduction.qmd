@@ -2,6 +2,8 @@
 title: "An Introduction to How Much Data"
 ---
 
+{{< video https://youtu.be/vXdOBKJ5DSg >}}
+
 The topic of this course is sample-size planning: How do you know how much data to collect for a research project? 
 
 Strangely, this is not often a point of emphasis in our scientific training. It is common for even advanced graduate courses in statistics to omit this topic or touch on it rarely. Even worse, the informal training you might receive in a lab is often **wrong**.
