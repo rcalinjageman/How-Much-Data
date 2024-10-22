@@ -9,14 +9,14 @@ website:
       - text: Course
         href: Introduction.qmd
       - text: Blog
-        href: Blog.qmd
+        href: blog.qmd
       - icon: github
-        href: https://github.com/rcalinjageman/How Much Data
+        href: https://github.com/rcalinjageman/How-Much-Data
   sidebar:
     style: "docked"
     contents:
       - text: Introduction
-        href: index.qmd
+        href: Introduction.qmd
       - text: Why You Need Sample-Size Planning
         href: Why You Need Sample-Size Planning.qmd
       - text: What Not To Do
@@ -35,7 +35,7 @@ website:
       - text: Resources
         href: Resources.qmd
       - text: Blog
-        href: Blog.qmd
+        href: blog.qmd
 
 format:
   html:

@@ -22,5 +22,26 @@
   },
   "Resources.qmd": {
     "Resources.html": "b49efb04"
+  },
+  "Decreasing Sample-Size Needs.qmd": {
+    "Decreasing Sample-Size Needs.html": "7e1d0a86"
+  },
+  "Effect Sizes.qmd": {
+    "Effect Sizes.html": "c8fe6e5e"
+  },
+  "Model Sample-Size Plans.qmd": {
+    "Model Sample-Size Plans.html": "fc5e8390"
+  },
+  "Planning for Evidence.qmd": {
+    "Planning for Evidence.html": "1252def6"
+  },
+  "Planning for Power.qmd": {
+    "Planning for Power.html": "9506d53d"
+  },
+  "Planning for Precision.qmd": {
+    "Planning for Precision.html": "74419a9e"
+  },
+  "What Not To Do.qmd": {
+    "What Not To Do.html": "b4d83463"
   }
 }
