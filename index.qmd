@@ -10,7 +10,7 @@ Here you will find:
 
 -   A list of [resources](Resources.qmd) for helping you on your sample-size planning journey
 
--   A [blog](Blog.qmd) with updates and news relevant for sample-size planning
+-   A [blog](blog.qmd) with updates and news relevant for sample-size planning
 
 -   The source code for this course and website that you may use to help customize these resources for your own training purposes and programs.
 
