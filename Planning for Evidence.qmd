@@ -3,3 +3,21 @@ title: "Planning for Evidence"
 ---
 
 Planning for Evidence
+
+-   **Numeric questions** How much is 2+3?
+
+```{r}
+fitb(2+3)
+```
+
+fitb(c("A", "E", "I", "O" , "U"), ignore_case = TRUE)
+
+```{r}
+fitb(c("A", "E", "I", "O" , "U"), ignore_case = TRUE)
+```
+
+-   **Numeric questions** How much is 2+3? `r fitb(2+3)`
+-   **Multiple Choice** Which is the capital city of Barbados? `r mcq(c(answer="Bridgetown", "Georgetown",             "Kingston", "Bridgerton"))`
+-   **True or False** Quarto is very cool `r torf(TRUE)`.
+
+**Grade**: `r total_correct()`.

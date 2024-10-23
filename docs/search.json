@@ -11,111 +11,39 @@
     ]
   },
   {
-    "objectID": "Resources.html",
-    "href": "Resources.html",
-    "title": "Resources",
+    "objectID": "webexercises.html",
+    "href": "webexercises.html",
+    "title": "Webexercises",
     "section": "",
-    "text": "Resources",
-    "crumbs": [
-      "Course",
-      "Resources"
-    ]
+    "text": "This is a Web Exercise template created by the psychology teaching team at the University of Glasgow, based on ideas from Software Carpentry. This template shows how instructors can easily create interactive web documents that students can use in self-guided learning.\nThe {webexercises} package provides a number of functions that you use in inline R code or through code chunk options to create HTML widgets (text boxes, pull down menus, buttons that reveal hidden content). Examples are given below. Render this file to HTML to see how it works.\nNOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser."
   },
   {
-    "objectID": "posts/statpsych-for-sample-size-planning/index.html",
-    "href": "posts/statpsych-for-sample-size-planning/index.html",
-    "title": "statpsych for Sample-Size Planning",
-    "section": "",
-    "text": "One great tool for sample-size planning is the statpsych package by Doug Bonett.\nThere are loads and loads of goodies in statpsych, and the documentation is excellent and authoritative.\nHere, for example, is how you can find the sample-size needed to obtain a desired level of power for a predicted effect in a 2-group design\n\n# If you don't have statpsych installed, install it!\nif (!require(\"statpsych\")) install.packages(\"statpsych\")\n\nLoading required package: statpsych\n\n# size.test.mean2 gives power for the mean difference in a 2-group design\n# parameters are alpha level, desired power, average within-group variance, effect size, and ratio of group1 to group2 sample sizes\n# Full documentation is at: https://dgbonett.github.io/statpsych/reference/size.test.mean2.html\n# In this example, we have \n#  * an alpha of .05, \n#  * desired power of .95, \n#  * expected average variance of 100 (sd_avg = 10)\n#  * an predicted effect size of 10\n#  * and equal sample-sizes in both groups (ratio of 1 between n1 and n2)\n# The output shows that we need n = 27 per group.\nstatpsych::size.test.mean2(.05, .95, 100, 10, 1) \n\n n1 n2\n 27 27\n\n# We can easiy investigate other effect sizes, power levels, etc.  For example:\n#  Here we explore effect sizes of 5, 10, and 20 while keeping\n#  all other parameters constant\nfor(e_size in c(5, 10, 20)){\n  print(\n    paste(\n      \"For effect size of\", e_size,\n      \"need sample size of\", \n      paste(statpsych::size.test.mean2(.05, .95, 100, e_size, 1), collapse = \", \")\n    )\n  )\n  \n}\n\n[1] \"For effect size of 5 need sample size of 105, 105\"\n[1] \"For effect size of 10 need sample size of 27, 27\"\n[1] \"For effect size of 20 need sample size of 8, 8\""
+    "objectID": "webexercises.html#example-questions",
+    "href": "webexercises.html#example-questions",
+    "title": "Webexercises",
+    "section": "Example Questions",
+    "text": "Example Questions\n\nFill-In-The-Blanks (fitb())\nCreate fill-in-the-blank questions using fitb(), providing the answer as the first argument.\n\n2 + 2 is \n\nYou can also create these questions dynamically, using variables from your R session.\n\nThe square root of 36 is: \n\nThe blanks are case-sensitive; if you don’t care about case, use the argument ignore_case = TRUE.\n\nWhat is the letter after D? \n\nIf you want to ignore differences in whitespace use, use the argument ignore_ws = TRUE (which is the default) and include spaces in your answer anywhere they could be acceptable.\n\nHow do you load the tidyverse package? \n\nYou can set more than one possible correct answer by setting the answers as a vector.\n\nType a vowel: \n\nYou can use regular expressions to test answers against more complex rules.\n\nType any 3 letters: \n\n\n\nMultiple Choice (mcq())\n\n“Never gonna give you up, never gonna: let you goturn you downrun awaylet you down”\n“I bless the rainsguess it rainssense the rain down in Africa” -Toto\n\n\n\nTrue or False (torf())\n\nTrue or False? You can permute values in a vector using sample(). TRUEFALSE\n\n\n\nLonger MCQs (longmcq())\nWhen your answers are very long, sometimes a drop-down select box gets formatted oddly. You can use longmcq() to deal with this. Since the answers are long, It’s probably best to set up the options inside an R chunk with echo=FALSE.\nWhat is a p-value?\n\n the probability that the null hypothesis is true the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true the probability of making an error in your conclusion\n\nWhat is true about a 95% confidence interval of the mean?\n\n if you repeated the process many times, 95% of intervals calculated in this way contain the true mean there is a 95% probability that the true mean lies within this range 95% of the data fall within this range"
   },
   {
-    "objectID": "Planning for Power.html",
-    "href": "Planning for Power.html",
-    "title": "Planning for Power",
-    "section": "",
-    "text": "Planning for Power",
-    "crumbs": [
-      "Course",
-      "Three Approaches",
-      "Planning for Power"
-    ]
+    "objectID": "webexercises.html#checked-sections",
+    "href": "webexercises.html#checked-sections",
+    "title": "Webexercises",
+    "section": "Checked sections",
+    "text": "Checked sections\nCreate sections with the class webex-check to add a button that hides feedback until it is pressed. Add the class webex-box to draw a box around the section (or use your own styles).\n\nI am going to learn a lot: TRUEFALSE\nWhat is a p-value?\n\n the probability that the null hypothesis is true the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true the probability of making an error in your conclusion"
   },
   {
-    "objectID": "Model Sample-Size Plans.html",
-    "href": "Model Sample-Size Plans.html",
-    "title": "Model Sample-Size Plans",
-    "section": "",
-    "text": "Model Sample-Size Plans",
-    "crumbs": [
-      "Course",
-      "Model Sample-Size Plans"
-    ]
+    "objectID": "webexercises.html#hidden-solutions-and-hints",
+    "href": "webexercises.html#hidden-solutions-and-hints",
+    "title": "Webexercises",
+    "section": "Hidden solutions and hints",
+    "text": "Hidden solutions and hints\nYou can fence off a solution area that will be hidden behind a button using hide() before the solution and unhide() after, each as inline R code. Pass the text you want to appear on the button to the hide() function.\nIf the solution is a code chunk, instead of using hide() and unhide(), simply set the webex.hide chunk option to TRUE, or set it to the string you wish to display on the button.\nRecreate the scatterplot below, using the built-in cars dataset.\n\n\n\n\n\n\n\n\n\n\n\nI need a hint\n\nSee the documentation for plot() (?plot)\n\n\n\n\n\nClick here to see the solution\n\nplot(cars$speed, cars$dist)"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Welcome to How Much Data?",
+    "objectID": "posts/welcome/index.html",
+    "href": "posts/welcome/index.html",
+    "title": "Welcome To How Much Data",
     "section": "",
-    "text": "Welcome to How Much Data?, an online workshop on sample-size determination.\nHere you will find:\n\nA self-paced course to help you gain skills with sample-size planning\nA list of resources for helping you on your sample-size planning journey\nA blog with updates and news relevant for sample-size planning\nThe source code for this course and website that you may use to help customize these resources for your own training purposes and programs.\n\nThis course was developed by Bob Calin-Jageman at Dominican University. Your feedback, comments, and bug reports are very welcome – submit them via Github here.\nThis course has been a long time in the making and is still under active development. Expect addition of new topics (e.g. Simulation for Sample-Size Planning), additional simulations, and more.\nThe development of this course was supported by NIH."
-  },
-  {
-    "objectID": "Decreasing Sample-Size Needs.html",
-    "href": "Decreasing Sample-Size Needs.html",
-    "title": "Decreasing Sample-Size Needs",
-    "section": "",
-    "text": "How can you decrease your sample-size needs?",
-    "crumbs": [
-      "Course",
-      "Decreasing Sample-Size Needs"
-    ]
-  },
-  {
-    "objectID": "about.html",
-    "href": "about.html",
-    "title": "About",
-    "section": "",
-    "text": "About this blog"
-  },
-  {
-    "objectID": "blog.html",
-    "href": "blog.html",
-    "title": "myblog",
-    "section": "",
-    "text": "statpsych for Sample-Size Planning\n\n\n\n\n\n\nnews\n\n\ntools\n\n\n\n\n\n\n\n\n\nOct 20, 2024\n\n\nBob Calin-Jageman\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To How Much Data\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nOct 1, 2024\n\n\nBob Calin-Jageman\n\n\n\n\n\n\nNo matching items"
-  },
-  {
-    "objectID": "Effect Sizes.html",
-    "href": "Effect Sizes.html",
-    "title": "Effect Sizes",
-    "section": "",
-    "text": "What is an effect size?",
-    "crumbs": [
-      "Course",
-      "Effect Sizes"
-    ]
-  },
-  {
-    "objectID": "Introduction.html",
-    "href": "Introduction.html",
-    "title": "An Introduction to How Much Data",
-    "section": "",
-    "text": "The topic of this course is sample-size planning: How do you know how much data to collect for a research project? \nStrangely, this is not often a point of emphasis in our scientific training. It is common for even advanced graduate courses in statistics to omit this topic or touch on it rarely. Even worse, the informal training you might receive in a lab is often wrong.\nThe lack of strong training on sample-size determination in science is worrisome. You wouldn’t get into a plane with a pilot who didn’t have a flight plan. So it seems a bit strange that often we charge off into experimentation with no real sense of where we are going and when it will end. That’s a missed opportunity, because with just a bit of initial planning we can do research that is more fruitful and reproducible. \nThe goal of this workshop is to dymystify sample-size planning and to provide actionable, practical advice about how to develop solid sample-size plans for your research. This course was developed not by a professional statistician but by a neuroscientist who accidentally fell down the rabbit hole of caring deeply about statistical inference. Thus, the course hopes to present material clearly, in language fellow bench-scientists can understand without having to delve too deeply into statistical arcana.   \nHere’s the outline of the course:\n\nFirst, we’ll discuss why sample-size planning is so vital to good science and therefore why it is worth investing your time and energy into completing this workshop. You may have been driven to this class because of some external mandate imposed by a funder or training program. The goal for this section is to help develop your own, intrinsic motivation for learning how to plan sample sizes.\nNext, we need to clear some very common but very bad practices: we’ll discuss the perils of “run-and-check” and of just copying forward sample-sizes from previous studies. It turns out these informal approaches to sample-size determination undermine sound science.\nThe unit on effect sizes provides some of the foundational knowledge needed to understand sample-size planning. Specifically, we define effect sizes, discuss how they can be expressed in different units, and provide some tips on how to build “effect size zoos” and start thinking in effect sizes.\nFinally, we get to the actual nitty-gritty of sample-size planning, covering three major approaches:\n\nPlanning for Power\nPlanning for Precision\nPlanning for Evidence\n\nWith an understanding of some of the different approaches to sample-size planning, we’re ready for a check-list for a quality sample-size plan and to review some model plans.\nLast but not least, this workshop describes some important strategies for dealing with sample-size sticker shock. There are lots of ways to optimize your experiments to help reduce your sample-size needs and get more information out of your experiments.",
-    "crumbs": [
-      "Course",
-      "Introduction"
-    ]
-  },
-  {
-    "objectID": "Planning for Evidence.html",
-    "href": "Planning for Evidence.html",
-    "title": "Planning for Evidence",
-    "section": "",
-    "text": "Planning for Evidence",
-    "crumbs": [
-      "Course",
-      "Three Approaches",
-      "Planning for Evidence"
-    ]
+    "text": "This is the first post to the How Much Data blog! More to come!"
   },
   {
     "objectID": "Planning for Precision.html",
@@ -130,11 +58,111 @@
     ]
   },
   {
-    "objectID": "posts/welcome/index.html",
-    "href": "posts/welcome/index.html",
-    "title": "Welcome To How Much Data",
+    "objectID": "Planning for Evidence.html",
+    "href": "Planning for Evidence.html",
+    "title": "Planning for Evidence",
     "section": "",
-    "text": "This is the first post to the How Much Data blog! More to come!"
+    "text": "Planning for Evidence\n\nNumeric questions How much is 2+3?\n\n\nfitb(2+3)\n\n[1] \"&lt;input class='webex-solveme nospaces' size='1' data-answer='[\\\"5\\\"]'/&gt;\"\n\n\nfitb(c(“A”, “E”, “I”, “O” , “U”), ignore_case = TRUE)\n\nfitb(c(\"A\", \"E\", \"I\", \"O\" , \"U\"), ignore_case = TRUE)\n\n[1] \"&lt;input class='webex-solveme nospaces ignorecase' size='1' data-answer='[\\\"A\\\",\\\"E\\\",\\\"I\\\",\\\"O\\\",\\\"U\\\"]'/&gt;\"\n\n\n\nNumeric questions How much is 2+3? \nMultiple Choice Which is the capital city of Barbados? BridgetownGeorgetownKingstonBridgerton\nTrue or False Quarto is very cool TRUEFALSE.\n\nGrade: .",
+    "crumbs": [
+      "Course",
+      "Three Approaches",
+      "Planning for Evidence"
+    ]
+  },
+  {
+    "objectID": "Introduction.html",
+    "href": "Introduction.html",
+    "title": "An Introduction to How Much Data",
+    "section": "",
+    "text": "The topic of this course is sample-size planning: How do you know how much data to collect for a research project? \nStrangely, this is not often a point of emphasis in our scientific training. It is common for even advanced graduate courses in statistics to omit this topic or touch on it rarely. Even worse, the informal training you might receive in a lab is often wrong.\nThe lack of strong training on sample-size determination in science is worrisome. You wouldn’t get into a plane with a pilot who didn’t have a flight plan. So it seems a bit strange that often we charge off into experimentation with no real sense of where we are going and when it will end. That’s a missed opportunity, because with just a bit of initial planning we can do research that is more fruitful and reproducible. \nThe goal of this workshop is to dymystify sample-size planning and to provide actionable, practical advice about how to develop solid sample-size plans for your research. This course was developed not by a professional statistician but by a neuroscientist who accidentally fell down the rabbit hole of caring deeply about statistical inference. Thus, the course hopes to present material clearly, in language fellow bench-scientists can understand without having to delve too deeply into statistical arcana.   \nHere’s the outline of the course:\n\nFirst, we’ll discuss why sample-size planning is so vital to good science and therefore why it is worth investing your time and energy into completing this workshop. You may have been driven to this class because of some external mandate imposed by a funder or training program. The goal for this section is to help develop your own, intrinsic motivation for learning how to plan sample sizes.\nNext, we need to clear some very common but very bad practices: we’ll discuss the perils of “run-and-check” and of just copying forward sample-sizes from previous studies. It turns out these informal approaches to sample-size determination undermine sound science.\nThe unit on effect sizes provides some of the foundational knowledge needed to understand sample-size planning. Specifically, we define effect sizes, discuss how they can be expressed in different units, and provide some tips on how to build “effect size zoos” and start thinking in effect sizes.\nFinally, we get to the actual nitty-gritty of sample-size planning, covering three major approaches:\n\nPlanning for Power\nPlanning for Precision\nPlanning for Evidence\n\nWith an understanding of some of the different approaches to sample-size planning, we’re ready for a check-list for a quality sample-size plan and to review some model plans.\nLast but not least, this workshop describes some important strategies for dealing with sample-size sticker shock. There are lots of ways to optimize your experiments to help reduce your sample-size needs and get more information out of your experiments.",
+    "crumbs": [
+      "Course",
+      "Introduction"
+    ]
+  },
+  {
+    "objectID": "Effect Sizes.html",
+    "href": "Effect Sizes.html",
+    "title": "Effect Sizes",
+    "section": "",
+    "text": "What is an effect size?",
+    "crumbs": [
+      "Course",
+      "Effect Sizes"
+    ]
+  },
+  {
+    "objectID": "blog.html",
+    "href": "blog.html",
+    "title": "myblog",
+    "section": "",
+    "text": "statpsych for Sample-Size Planning\n\n\n\n\n\n\nnews\n\n\ntools\n\n\n\n\n\n\n\n\n\nOct 20, 2024\n\n\nBob Calin-Jageman\n\n\n\n\n\n\n\n\n\n\n\n\nWelcome To How Much Data\n\n\n\n\n\n\nnews\n\n\n\n\n\n\n\n\n\nOct 1, 2024\n\n\nBob Calin-Jageman\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "About this blog"
+  },
+  {
+    "objectID": "Decreasing Sample-Size Needs.html",
+    "href": "Decreasing Sample-Size Needs.html",
+    "title": "Decreasing Sample-Size Needs",
+    "section": "",
+    "text": "How can you decrease your sample-size needs?",
+    "crumbs": [
+      "Course",
+      "Decreasing Sample-Size Needs"
+    ]
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Welcome to How Much Data?",
+    "section": "",
+    "text": "Welcome to How Much Data?, an online workshop on sample-size determination.\nHere you will find:\n\nA self-paced course to help you gain skills with sample-size planning\nA list of resources for helping you on your sample-size planning journey\nA blog with updates and news relevant for sample-size planning\nThe source code for this course and website that you may use to help customize these resources for your own training purposes and programs.\n\nThis course was developed by Bob Calin-Jageman at Dominican University. Your feedback, comments, and bug reports are very welcome – submit them via Github here.\nThis course has been a long time in the making and is still under active development. Expect addition of new topics (e.g. Simulation for Sample-Size Planning), additional simulations, and more.\nThe development of this course was supported by NIH."
+  },
+  {
+    "objectID": "Model Sample-Size Plans.html",
+    "href": "Model Sample-Size Plans.html",
+    "title": "Model Sample-Size Plans",
+    "section": "",
+    "text": "Model Sample-Size Plans",
+    "crumbs": [
+      "Course",
+      "Model Sample-Size Plans"
+    ]
+  },
+  {
+    "objectID": "Planning for Power.html",
+    "href": "Planning for Power.html",
+    "title": "Planning for Power",
+    "section": "",
+    "text": "Planning for Power",
+    "crumbs": [
+      "Course",
+      "Three Approaches",
+      "Planning for Power"
+    ]
+  },
+  {
+    "objectID": "posts/statpsych-for-sample-size-planning/index.html",
+    "href": "posts/statpsych-for-sample-size-planning/index.html",
+    "title": "statpsych for Sample-Size Planning",
+    "section": "",
+    "text": "One great tool for sample-size planning is the statpsych package by Doug Bonett.\nThere are loads and loads of goodies in statpsych, and the documentation is excellent and authoritative.\nHere, for example, is how you can find the sample-size needed to obtain a desired level of power for a predicted effect in a 2-group design\n\n# If you don't have statpsych installed, install it!\nif (!require(\"statpsych\")) install.packages(\"statpsych\")\n\nLoading required package: statpsych\n\n# size.test.mean2 gives power for the mean difference in a 2-group design\n# parameters are alpha level, desired power, average within-group variance, effect size, and ratio of group1 to group2 sample sizes\n# Full documentation is at: https://dgbonett.github.io/statpsych/reference/size.test.mean2.html\n# In this example, we have \n#  * an alpha of .05, \n#  * desired power of .95, \n#  * expected average variance of 100 (sd_avg = 10)\n#  * an predicted effect size of 10\n#  * and equal sample-sizes in both groups (ratio of 1 between n1 and n2)\n# The output shows that we need n = 27 per group.\nstatpsych::size.test.mean2(.05, .95, 100, 10, 1) \n\n n1 n2\n 27 27\n\n# We can easiy investigate other effect sizes, power levels, etc.  For example:\n#  Here we explore effect sizes of 5, 10, and 20 while keeping\n#  all other parameters constant\nfor(e_size in c(5, 10, 20)){\n  print(\n    paste(\n      \"For effect size of\", e_size,\n      \"need sample size of\", \n      paste(statpsych::size.test.mean2(.05, .95, 100, e_size, 1), collapse = \", \")\n    )\n  )\n  \n}\n\n[1] \"For effect size of 5 need sample size of 105, 105\"\n[1] \"For effect size of 10 need sample size of 27, 27\"\n[1] \"For effect size of 20 need sample size of 8, 8\""
+  },
+  {
+    "objectID": "Resources.html",
+    "href": "Resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "Resources",
+    "crumbs": [
+      "Course",
+      "Resources"
+    ]
   },
   {
     "objectID": "What Not To Do.html",

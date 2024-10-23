@@ -1,47 +1,43 @@
 project:
   type: website
   output-dir: docs
-
-
 website:
-  title: "How Much Data?"
+  title: How Much Data?
   site-url: http://www.howmuchdata.net/
   navbar:
     search: true
     right:
-      - text: Course
-        href: Introduction.qmd
-      - text: Blog
-        href: blog.qmd
-      - icon: github
-        href: https://github.com/rcalinjageman/How-Much-Data
+    - text: Course
+      href: Introduction.qmd
+    - text: Blog
+      href: blog.qmd
+    - icon: github
+      href: https://github.com/rcalinjageman/How-Much-Data
   sidebar:
-    style: "docked"
+    style: docked
     contents:
-      - text: Introduction
-        href: Introduction.qmd
-      - text: Why You Need Sample-Size Planning
-        href: Why You Need Sample-Size Planning.qmd
-      - text: What Not To Do
-        href: What Not To Do.qmd
-      - text: Effect Sizes
-        href: Effect Sizes.qmd
-      - section: "Three Approaches"
-        contents:
-          - Planning for Power.qmd
-          - Planning for Precision.qmd
-          - Planning for Evidence.qmd
-      - text: Model Sample-Size Plans
-        href: Model Sample-Size Plans.qmd
-      - text: Decreasing Sample-Size Needs
-        href: Decreasing Sample-Size Needs.qmd
-      - text: Resources
-        href: Resources.qmd
-
+    - text: Introduction
+      href: Introduction.qmd
+    - text: Why You Need Sample-Size Planning
+      href: Why You Need Sample-Size Planning.qmd
+    - text: What Not To Do
+      href: What Not To Do.qmd
+    - text: Effect Sizes
+      href: Effect Sizes.qmd
+    - section: Three Approaches
+      contents:
+      - Planning for Power.qmd
+      - Planning for Precision.qmd
+      - Planning for Evidence.qmd
+    - text: Model Sample-Size Plans
+      href: Model Sample-Size Plans.qmd
+    - text: Decreasing Sample-Size Needs
+      href: Decreasing Sample-Size Needs.qmd
+    - text: Resources
+      href: Resources.qmd
 format:
   html:
     theme: cosmo
-    css: styles.css
-
+    css: include/webex.css
+    include-after-body: include/webex.js
 editor: visual
-
