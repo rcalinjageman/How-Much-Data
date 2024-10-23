@@ -2,4 +2,6 @@
 title: "Planning for Precision"
 ---
 
+{{< video https://youtu.be/1SG8-XgYp7c >}}
+
 Planning for Precision

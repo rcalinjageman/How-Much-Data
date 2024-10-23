@@ -2,4 +2,6 @@
 title: "Why You Need Sample-Size Planning"
 ---
 
+{{< video https://youtu.be/_X0Alxwhvoo >}}
+
 Why is sample-size planning so important?

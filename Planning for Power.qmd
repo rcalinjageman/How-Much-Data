@@ -2,4 +2,6 @@
 title: "Planning for Power"
 ---
 
+{{< video https://youtu.be/nyvswy8jBlU >}}
+
 Planning for Power
