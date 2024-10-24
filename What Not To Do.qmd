@@ -1,5 +1,6 @@
 ---
 title: "How *Not* to Get Your Sample Size"
+bibliography: references.bib
 ---
 
 {{< video https://youtu.be/dwyYmGmdFHA >}}
@@ -10,9 +11,145 @@ In the explorations below you can dig into why run-and-check is so bad, and you 
 
 ## Exploration: Don't Run-and-Check!
 
-## Exploration: The Perils of Inadequate Samples, Even When *p* \< .05
+A common approach to sample-size determination is Run-and-Check: you run a small batch of samples, check for significance, and then keep adding samples until you either get what you want or run out of time/resources. Sometimes run-and-check is conducted over people/labs – keep assigning the same project to different trainees until someone with 'good hands' gets it to work (sometimes that really is good hands, but it can also easily be capitalization chance!).
 
-Let's explore why inadequate samples are so problematic.
+Let's examine why run-and-check is so dangerous to good science. We'll simulate data for a two-group experiment, with the simulation set so that there is no true effect in the population. We'll start with *n* = 3/group, then check. If the results are significant, we stop, otherwise we add 1 sample/group and check again, and so on, to a limit of *n* = 30 group. In this scenario, any statistically significant finding is a false positive. We'll run 10,000 simulations and check the false-positive rate.
+
+The code for the simulation is below. Before you scroll down to its output, what is your guess for the false positive rate for this run-and-check approach?
+
+```{r}
+#| echo: true
+#| output: false
+#| label: run-and-check-simulation
+
+
+# If needed, install needed libraries
+if (!require("statpsych")) install.packages("statpsych")
+if (!require("ggplot2")) install.packages("ggplot2")
+if (!require("gganimate")) install.packages("gganimate")
+if (!require("gifski")) install.packages("gifski")
+
+
+# Load needed libraries
+library(statpsych)
+library(ggplot2)
+library(gganimate)
+
+
+# Simulation parameters
+n_initial <- 3
+n_add_per_round <- 1
+n_to_give_up <- 30
+true_effect_size <- 0
+total_sims <- 1000
+
+# Initialize variables for results
+false_positives <- 0
+randc_res <- data.frame(p = NA, n = NA, sample = NA, eventually_significant = NA)
+results_row <- 0
+
+# simulation 
+for (i in 1:total_sims) {
+  
+  # simulate data at initial sample size for both groups and do t.test
+  n_current <- n_initial
+  g1 <- rnorm(n_current, 0, 1)
+  g2 <- rnorm(n_current, 0 + true_effect_size, 1)
+  res <- t.test(g1, g2)$p.value
+  results_row <- results_row + 1
+  
+  # store the results for plotting
+  randc_res[results_row, ] <- c(
+    res,
+    n_current,
+    i,
+    FALSE
+  )
+  
+  # if not significant and not at n_to_give_up yet, keep going
+  while (res >= .05 & n_current < n_to_give_up) {
+    g1 <- c(g1, rnorm(n_add_per_round, 0, 1))
+    g2 <- c(g2, rnorm(n_add_per_round, 0 + true_effect_size, 1))
+    n_current <- n_current + n_add_per_round
+    results_row <- results_row + 1
+    res <- t.test(g1, g2)$p.value
+    
+    randc_res[results_row, ] <- c(
+      res,
+      n_current,
+      i,
+      FALSE
+    )
+  }
+  
+  # If the final result is significnt, that's a false positive (assuming true_effect_size == 0)
+  if (res < .05) {
+    false_positives <- false_positives + 1
+    randc_res[randc_res$sample == i, ]$eventually_significant <- TRUE
+  }
+  
+}
+
+
+print(
+  paste(
+    "Simulated", total_sims, 
+    "two-group studies with a true mean difference of", true_effect_size,
+    "where sample sizes started off with", n_initial, "/group",
+    "and if not significant added", n_add_per_round, "/group and re-checked,",
+    "up to significance or a max sample size of", n_to_give_up, "."
+  )
+)
+print("Proportion of significant findings")
+print(false_positives / total_sims)
+```
+
+### Simulation Results: False-Positive Rate
+
+The code simulated `{r} sprintf("%0.0f", total_sims)` two-group studies with a true mean difference `{r} true_effect_size` where sample sizes started off with `{r} n_initial`/group and if not significant added `{r} n_add_per_round`/group up to significance or a max sample size of `{r} n_to_give_up`.
+
+Under this scenario, the proportion of false positives is: `{r} sprintf("%0.1f%%", false_positives / total_sims*100)`.
+
+This scenario is a bit extreme, but it makes it clear that run-and-check is not a good method for determining sample size.
+
+### Simulation Results: The Deceptive Dance of the p Value
+
+To make this even more clear, we're going to plot the p values as sample sizes are added, cycling through the first 10 simulations(@fig-run_and_check). What you'll notice is that the p values "feel" like they are following trajectories, swining higher or lower. This can give the researcher using run-and-check the feeling that they're on to something, and that they are justified adding more samples, or worse, adjusting their analyses to coax the p value below .05.
+
+```{r}
+#| label: fig-run_and_check
+#| fig-cap: "Evolution of p values as samples are added but no true effect"
+#| warning: false
+#| code-fold: true
+#| 
+randc_res$animate_frame <- 1:nrow(randc_res)
+randc_res$eventually_significant <- as.factor(randc_res$eventually_significant)
+randc_res$sample_as_factor <- as.factor(randc_res$sample)
+
+pdance_plot <- ggplot(data = randc_res[randc_res$sample < 5 , ], aes(x = n, y = p, group = sample, colour = eventually_significant))
+pdance_plot <- pdance_plot + ylab("Obtained p value")
+pdance_plot <- pdance_plot + xlab("Sample size")
+pdance_plot <- pdance_plot + geom_point(size = 3)
+pdance_plot <- pdance_plot + theme_classic() + theme(legend.position = "none")
+pdance_plot <- pdance_plot + geom_hline(yintercept = 0.05, linetype = "dotted")
+pdance_plot <- pdance_plot + scale_colour_manual(values = c("1" = "red", "0" = "dodgerblue1"))
+pdance_plot <- pdance_plot + ylim(c(0, 1))
+pdance_plot <- pdance_plot + xlim(c(n_initial, n_to_give_up))
+pdance_plot <- pdance_plot + transition_reveal(animate_frame, keep_last = FALSE)
+animate(pdance_plot, fps = 2, renderer = gifski_renderer("run_and_check.gif"))
+```
+
+Thus, it's not just the instinsic false-positive rate of run-and-check that is dangerous but also the false impression it can give that might license analytic flexibility towards erroneous results.
+
+# Exploration: The Perils of Inadequate Samples, Even When *p* \< .05
+
+Despite calls for sample-size plans, many researchers seem to avoid sample-size planning or conduct *pro forma* plans to evade the requirement. Why? One reason seems to be the misconception that if your lab gets *p* \< .05, then you have nothing to worry about. Here's an editorial where this sentiment was very clearly expressed:
+
+> However, somehow, journals have taken to asking how our animal studies were powered − and here's the point: If the results are statistically significant then, indeed, our study is appropriately powered. Sometimes, I'm not sure that the editors who insist on this information understand this.
+>
+> [@mole2017]
+
+This attitude is seductive, but ultimately incorrect [@mole2018]. It's important to think this through for yourself so you can understand why inadequate samples are so problematic.
 
 Imagine you are measuring the effect of maternal separation on gene expression in the hippocampus. You'll have two groups: Control and Separated. You'll use qPCR to measure expression of *egr1*, a constituitvely-expressed gene that plays an important role in learning and memory.
 
@@ -29,6 +166,7 @@ In the simulation below, we randomly generate gene-expression data for the Contr
 ```{r}
 #| echo: true
 #| output: false
+#| label: simulation_effect_size_inflation_main
 
 # If needed, install needed libraries
 if (!require("statpsych")) install.packages("statpsych")
@@ -112,7 +250,7 @@ Let's see this in more detail. @fig-effect_size_inlfation plots the effect obser
 #| label: fig-effect_size_inflation
 #| fig-cap: "Observed effect sizes by stat significance status."
 #| warning: false
-#| 
+#| code-fold: true
 time_plot <- ggplot(data = all_res[all_res$sample < 200, ], aes(x=sample, y = d, colour = (p < alpha)))
 time_plot <- time_plot + ylab("Standardized Mean Difference in egr Expression (Experimental vs. Control)")
 time_plot <- time_plot + geom_point(aes(group = sample))
@@ -131,6 +269,7 @@ How bad is this over-estimation? Let's find out:
 ```{r}
 #| echo: true
 #| output: false
+#| label: simulation_effect_size_inflation_output
 
 print("In this scenario, the true effect size is 1 standard deviations")
 print("Across all stimulated studies, the average effect size observed is:")
