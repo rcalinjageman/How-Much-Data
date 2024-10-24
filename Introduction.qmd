@@ -14,20 +14,20 @@ The goal of this workshop is to dymystify sample-size planning and to provide *a
 
 Here's the outline of the course:
 
--   First, we'll discuss why sample-size planning is so vital to good science and therefore why it is worth investing your time and energy into completing this workshop. You may have been driven to this class because of some external mandate imposed by a funder or training program. The goal for this section is to help develop your own, intrinsic motivation for learning how to plan sample sizes.
+-   First, we'll discuss [why sample-size planning is so vital to good science](Why You Need Sample-Size Planning.qmd) and therefore why it is worth investing your time and energy into completing this workshop. You may have been driven to this class because of some external mandate imposed by a funder or training program. The goal for this section is to help develop your own, intrinsic motivation for learning how to plan sample sizes.
 
--   Next, we need to clear some very common but very bad practices: we'll discuss the perils of "run-and-check" and of just copying forward sample-sizes from previous studies. It turns out these informal approaches to sample-size determination undermine sound science.
+-   Next, we need to clear [some very common but very bad practices](What Not To Do.qmd): we'll discuss the perils of "run-and-check" and of just copying forward sample-sizes from previous studies. It turns out these informal approaches to sample-size determination undermine sound science.
 
--   The unit on effect sizes provides some of the foundational knowledge needed to understand sample-size planning. Specifically, we define **effect sizes**, discuss how they can be expressed in different units, and provide some tips on how to build "effect size zoos" and start thinking in effect sizes.
+-   [The unit on effect sizes](Effect Sizes.qmd) provides some of the foundational knowledge needed to understand sample-size planning. Specifically, we define **effect sizes**, discuss how they can be expressed in different units, and provide some tips on how to build "effect size zoos" and start thinking in effect sizes.
 
 -   Finally, we get to the actual nitty-gritty of sample-size planning, covering three major approaches:
 
-    -   Planning for Power
+    -   [Planning for Power](Planning for Power.qmd)
 
-    -   Planning for Precision
+    -   [Planning for Precision](Planning for Precision.qmd)
 
-    -   Planning for Evidence
+    -   [Planning for Evidence](Planning for Evidence.qmd) (still under development)
 
--   With an understanding of some of the different approaches to sample-size planning, we're ready for a check-list for a quality sample-size plan and to review some model plans.
+-   With an understanding of some of the different approaches to sample-size planning, we're ready for a check-list for a [quality sample-size plan](Model Sample-Size Plans.qmd) and to review some model plans.
 
--   Last but not least, this workshop describes some important strategies for dealing with sample-size sticker shock. There are lots of ways to optimize your experiments to help reduce your sample-size needs and get more information out of your experiments.
+-   Last but not least, this workshop describes [some important strategies for dealing with sample-size sticker shock](Decreasing Sample-Size Needs.qmd). There are lots of ways to optimize your experiments to help reduce your sample-size needs and get more information out of your experiments.

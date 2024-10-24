@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>How Much Data?</title>
+<link>http://www.howmuchdata.net/blog.html</link>
+<atom:link href="http://www.howmuchdata.net/blog.xml" rel="self" type="application/rss+xml"/>
+<description></description>
+<generator>quarto-1.5.57</generator>
+<lastBuildDate>Sun, 20 Oct 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>statpsych for Sample-Size Planning</title>
+  <dc:creator>Bob Calin-Jageman</dc:creator>
+  <link>http://www.howmuchdata.net/posts/statpsych-for-sample-size-planning/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>One great tool for sample-size planning is the <a href="https://github.com/dgbonett/statpsych/">statpsych</a> package by Doug Bonett.</p>
+<p>There are loads and loads of goodies in statpsych, and <a href="https://dgbonett.github.io/statpsych/reference/index.html">the documentation</a> is excellent and authoritative.</p>
+<p>Here, for example, is how you can find the sample-size needed to obtain a desired level of power for a predicted effect in a 2-group design</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># If you don't have statpsych installed, install it!</span></span>
+<span id="cb1-2"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">if</span> (<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">!</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">require</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"statpsych"</span>)) <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">install.packages</span>(<span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"statpsych"</span>)</span></code></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: statpsych</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># size.test.mean2 gives power for the mean difference in a 2-group design</span></span>
+<span id="cb3-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># parameters are alpha level, desired power, average within-group variance, effect size, and ratio of group1 to group2 sample sizes</span></span>
+<span id="cb3-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># Full documentation is at: https://dgbonett.github.io/statpsych/reference/size.test.mean2.html</span></span>
+<span id="cb3-4"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># In this example, we have </span></span>
+<span id="cb3-5"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#  * an alpha of .05, </span></span>
+<span id="cb3-6"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#  * desired power of .95, </span></span>
+<span id="cb3-7"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#  * expected average variance of 100 (sd_avg = 10)</span></span>
+<span id="cb3-8"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#  * an predicted effect size of 10</span></span>
+<span id="cb3-9"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#  * and equal sample-sizes in both groups (ratio of 1 between n1 and n2)</span></span>
+<span id="cb3-10"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># The output shows that we need n = 27 per group.</span></span>
+<span id="cb3-11">statpsych<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">size.test.mean2</span>(.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">05</span>, .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>) </span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> n1 n2
+ 27 27</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb5" style="background: #f1f3f5;"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;"># We can easiy investigate other effect sizes, power levels, etc.  For example:</span></span>
+<span id="cb5-2"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#  Here we explore effect sizes of 5, 10, and 20 while keeping</span></span>
+<span id="cb5-3"><span class="co" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">#  all other parameters constant</span></span>
+<span id="cb5-4"><span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">for</span>(e_size <span class="cf" style="color: #003B4F;
+background-color: null;
+font-weight: bold;
+font-style: inherit;">in</span> <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">c</span>(<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">5</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">10</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">20</span>)){</span>
+<span id="cb5-5">  <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">print</span>(</span>
+<span id="cb5-6">    <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(</span>
+<span id="cb5-7">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"For effect size of"</span>, e_size,</span>
+<span id="cb5-8">      <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">"need sample size of"</span>, </span>
+<span id="cb5-9">      <span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">paste</span>(statpsych<span class="sc" style="color: #5E5E5E;
+background-color: null;
+font-style: inherit;">::</span><span class="fu" style="color: #4758AB;
+background-color: null;
+font-style: inherit;">size.test.mean2</span>(.<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">05</span>, .<span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">95</span>, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">100</span>, e_size, <span class="dv" style="color: #AD0000;
+background-color: null;
+font-style: inherit;">1</span>), <span class="at" style="color: #657422;
+background-color: null;
+font-style: inherit;">collapse =</span> <span class="st" style="color: #20794D;
+background-color: null;
+font-style: inherit;">", "</span>)</span>
+<span id="cb5-10">    )</span>
+<span id="cb5-11">  )</span>
+<span id="cb5-12">  </span>
+<span id="cb5-13">}</span></code></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "For effect size of 5 need sample size of 105, 105"
+[1] "For effect size of 10 need sample size of 27, 27"
+[1] "For effect size of 20 need sample size of 8, 8"</code></pre>
+</div>
+</div>
+<p><br>
+</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <category>tools</category>
+  <guid>http://www.howmuchdata.net/posts/statpsych-for-sample-size-planning/</guid>
+  <pubDate>Sun, 20 Oct 2024 05:00:00 GMT</pubDate>
+  <media:content url="http://www.howmuchdata.net/posts/statpsych-for-sample-size-planning/image.webp" medium="image" type="image/webp"/>
+</item>
+<item>
+  <title>Welcome To How Much Data</title>
+  <dc:creator>Bob Calin-Jageman</dc:creator>
+  <link>http://www.howmuchdata.net/posts/welcome/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>This is the first post to the How Much Data blog! More to come!</p>
+
+
+
+ ]]></description>
+  <category>news</category>
+  <guid>http://www.howmuchdata.net/posts/welcome/</guid>
+  <pubDate>Tue, 01 Oct 2024 05:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

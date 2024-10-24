@@ -2,7 +2,7 @@ project:
   type: website
   output-dir: docs
   resources:
-    - CNAME
+    - "CNAME"
 website:
   title: How Much Data?
   site-url: http://www.howmuchdata.net/
@@ -13,6 +13,8 @@ website:
       href: Introduction.qmd
     - text: Blog
       href: blog.qmd
+    - text: License
+      href: LICENSE-CC-BY-NC-4.0.qmd
     - icon: github
       href: https://github.com/rcalinjageman/How-Much-Data
   sidebar:

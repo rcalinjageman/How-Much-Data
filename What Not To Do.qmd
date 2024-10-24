@@ -34,6 +34,8 @@ In the simulation below, we randomly generate gene-expression data for the Contr
 if (!require("statpsych")) install.packages("statpsych")
 if (!require("ggplot2")) install.packages("ggplot2")
 if (!require("gganimate")) install.packages("gganimate")
+if (!require("gifski")) install.packages("gifski")
+
 
 # Load needed libraries
 library(statpsych)
@@ -157,4 +159,4 @@ That's a big distortion, and it really matters. It means:
 
 -   Follow-up studies done at the same sample-size are more likely than not to fail!
 
-This is the difficult truth about inadequate sample-sizes: it's not just about the waste of not detecting true effects.  Inadequate samples are problematic because the significant findings they generate are likely to be distorted and misleading.  It's very difficult to do fruitful, generative science if what you publish is a distorted view of reality.
+This is the difficult truth about inadequate sample-sizes: it's not just about the waste of not detecting true effects. Inadequate samples are problematic because the significant findings they generate are likely to be distorted and misleading. It's very difficult to do fruitful, generative science if what you publish is a distorted view of reality.
