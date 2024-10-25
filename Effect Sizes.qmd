@@ -1,8 +1,20 @@
 ---
 title: "Effect Sizes"
+bibliography: references.bib
 ---
 
 {{< video https://youtu.be/MwFbt8Qx0Rk >}}
 
+The video above provides an introduction to **effect sizes**. An effect size is a quantitative answer to a research question. Any research question you can obtain a *p* value for has a corresponding effect size and confidence interval (or, if you use Bayesian statistics, a credible interval). Although the word "effect" is in the phrase "effect size", these are not just for experimental studies (e.g. in a correlational study, Pearson's r is an effect size).
 
-What is an effect size?
+## Tools for Obtaining Effect Sizes
+
+Most statistical software will report effect sizes. Here are a couple of specific tools of note.
+
+If you want a graphical interface, the esci module [@cumming2024; @calin-jageman2024] for jamovi is a great option . jamovi is a free, open-source, cross-platform analysis program (like GraphPad prism or SPSS, but free). jamovi has library of free modules that extend its base functionality. The esci package (Estimation Statistics with Confidence Intervals) provides effect sizes, confidence intervals, and lovely visualizations for lots of basic research designs. A guide to getting started is here: <https://thenewstatistics.com/itns/esci/jesci/>
+
+If you're using R or Python for analysis, most packages natively provide effect sizes. For R, a special resource is [statpsych](https://cran.r-project.org/package=statpsych) [@bonett2023]. statpsych has functions for effect sizes for lots of designs. The functions all maintain a consistent API. Each has good documentation linked to authoritative references on the calculation of the effect size and its confidence interval. statpsych is well worth learning as a way of bringing a bit of order to what can otherwise feel a bit like the wild west in the command-line analysis world.
+
+For Python (and R), the [dabest package](https://acclab.github.io/DABEST-python/) and webtools provide effect sizes with lovely visualizations [@ho2019]. This package takes a bootstrap approach to calculating confidence intervals. This is often a very strong approach, as it makes fewer underlying assumptions about the structure of the data – but it may only be appropriate when you have *n* \> 30/cell.
+
+## From *p* Values to Effect Sizes
