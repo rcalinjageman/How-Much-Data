@@ -4,5 +4,4 @@ title: "Effect Sizes"
 
 {{< video https://youtu.be/MwFbt8Qx0Rk >}}
 
-
 What is an effect size?

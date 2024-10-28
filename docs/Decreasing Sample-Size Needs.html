@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -228,11 +282,248 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/erwvvKqZsYw" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>How can you decrease your sample-size needs?</p>
+<p>When you get serious about sample-size planning, you can often find that it takes much larger samples than you’d like to get clear answers to your scientific questions. While there is no doubt that many fields have settled on demonstrably inadequate sample sizes, the answer doesn’t have to be solely focused on collecting more data: we can also design better studies!</p>
+<p>The video above gives an example of <strong>optimization</strong> - the art of coaxing more out of your data. There are three basic approaches:</p>
+<ul>
+<li><p>Maximizing impact – the biggers, stronger, and more conisstent the experimental manipulation, the larger the effect size and the less resources needed to characterize the effect.</p></li>
+<li><p>Minimizing noise - the more consistent and reliable your measures, the smaller your margin of error and the higher your power.</p></li>
+<li><p>Experimental design - a basic two-group design is the least efficient in science. You can achieve more bang for your sample-size buck by using within-subjects designs, matched control designs, and/or carefully selecting covariates. These all decrease expected sampling variation and therefore shrink your expected margin of error and increase your power.</p></li>
+</ul>
+<section id="reducing-variation-is-gold" class="level2">
+<h2 class="anchored" data-anchor-id="reducing-variation-is-gold">Reducing Variation is Gold</h2>
+<p>Imagine you are characterizing neurogenesis in animals raised in stressed vs.&nbsp;standard conditions. From prevous studies, you know expect control animals to have about 3500 new neurons labelled 1 hour after BRDU injection, with a standard deviation of 500. You expect stress to have a pretty notable effect, say a 20% reduction to 2,800 labelled neurons, a difference of 3,500 - 2,800 = 700 neurons. This example is inspired by <span class="citation" data-cites="mirescu2004">(<a href="#ref-mirescu2004" role="doc-biblioref">Mirescu, Peters, and Gould 2004</a>)</span> (note that we’ll analyze this scenario with t-tests, as the original authors did, even though count data is typically not normally distributed and therefore not suitable for analysis in this way).</p>
+<p>Let’s say the typical study in your field uses <em>n</em> = 6/group. Is that adequate? Let’s find out with statpsych:</p>
+<p>What’s alpha = 0.05, what sample size do you need for 90% power? Let’s find out with statpsych:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: statpsych</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate power for a 2-group design</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">power.mean2</span>(</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> <span class="dv">6</span>,</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> <span class="dv">6</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">var1 =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">var2 =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">es =</span> <span class="dv">3500-2800</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Power
+ 0.5906058</code></pre>
+</div>
+</div>
+<p>Uh oh, power is only 60%. That means we have a high risk of missing true effects <strong>and that statistically significant effects are likely to be inflated</strong> (see <a href="./What Not To Do.html">What Not To Do</a>).</p>
+<p>We <em>could</em> throw more data at the problem. But first, what would happen if we could reduce our sampling variability? Imagine, for example, that we might better-standardize our cell counts, perhaps by having two trainees count them independently and use the average. We could also refine what to do with borderline cases, and maybe standardize our injection and dissection protocols a little better. Suppose through these steps we could reduce within-group variation by just 20%. What would that do to our power?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Same scenario, within group sd reduced by 20% through optimization</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">power.mean2</span>(</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> <span class="dv">6</span>,</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> <span class="dv">6</span>,</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var1 =</span> (<span class="dv">500</span> <span class="sc">*</span> .<span class="dv">8</span>) <span class="sc">^</span><span class="dv">2</span>,   <span class="co"># Imagine reducing the sd to 80% of what your lab typically obtains</span></span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var2 =</span> (<span class="dv">500</span> <span class="sc">*</span> .<span class="dv">8</span>) <span class="sc">^</span><span class="dv">2</span>,   <span class="co"># same reduction in both groups</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">es =</span> <span class="dv">3500-2800</span></span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Power
+ 0.7797131</code></pre>
+</div>
+</div>
+<p>That’s a big jump in power! We’re now getting close to a reasonable power with the same number of samples.<br>
+<br>
+Would a 20% increase in sample size have the same impact?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Same scenario but increase sample-size by 20%... not the same impact!</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">power.mean2</span>(</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> <span class="dv">6</span> <span class="sc">*</span> <span class="fl">1.2</span>,</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> <span class="dv">6</span> <span class="sc">*</span> <span class="fl">1.2</span>,</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var1 =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var2 =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">es =</span> <span class="dv">3500-2800</span></span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Power
+ 0.6868732</code></pre>
+</div>
+</div>
+<p>No! Why not? Well, recall that formula for the standard error of the mean:</p>
+<p>$$</p>
+<pre><code>sigma_{M} = frac{sigma}{sqrt(N)}</code></pre>
+<p>$$</p>
+<p>This shows us that changes in within-group variation is directly related to expected sampling error, whiles sample-size is only related by its square root. That means that reducing noise (when possible) can be much more impactful than increasing sample size. If takes a 56% increase in sample-size to obtain the same benefit of a 20% reduction in within-group standard deviation!</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="co"># To get the same impact through sample-size, we need ~50% increase</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">power.mean2</span>(</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> <span class="dv">6</span> <span class="sc">*</span> <span class="fl">1.5</span>,</span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> <span class="dv">6</span> <span class="sc">*</span> <span class="fl">1.5</span>,</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var1 =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var2 =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">es =</span> <span class="dv">3500-2800</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>   Power
+ 0.79613</code></pre>
+</div>
+</div>
+</section>
+<section id="more-gold-optimizing-for-larger-effects" class="level2">
+<h2 class="anchored" data-anchor-id="more-gold-optimizing-for-larger-effects">More Gold: Optimizing for Larger Effects</h2>
+<p>In addition to reducing noise, we can work on maximizing signal. We might extend our treatement (longer stress), increase the magnitude of treatment (stronger stress), and/or focus in on measures which are especially susceptible to the treatment. For example, we might find that only some layers of the hippocampus undergo significant neurogenesis. If we could restrict our labelling to these layers, we could avoid having our effect diluted by unaffected measures.</p>
+<p>As with reducing noise, increasing signal gets us a lot more bang for the buck. Let’s continue the previous example (2-group design, 6 per group, reduction of neurogenesis by 700 neurons, within-group standard deviaiton of 500 neurons).</p>
+<p>Again, here is our ‘standard scenario’, in which we learn we have an inadequate sample size:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate power for a 2-group design</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">power.mean2</span>(</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> <span class="dv">6</span>,</span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> <span class="dv">6</span>,</span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var1 =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var2 =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">es =</span> <span class="dv">3500-2800</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Power
+ 0.5906058</code></pre>
+</div>
+</div>
+<p>And now let’s check our power if we can increase the effect size by just 20%</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Estimate power for a 2-group design</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">power.mean2</span>(</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> <span class="dv">6</span>,</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> <span class="dv">6</span>,</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">var1 =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var2 =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">es =</span> (<span class="dv">3500-2800</span>) <span class="sc">*</span> <span class="fl">1.2</span>   <span class="co"># increase effect size</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     Power
+ 0.7463204</code></pre>
+</div>
+</div>
+<p>Wow! We’ve get to nearly reasonable power without needing more resources.</p>
+<p>Certainly there are limits to what optimization can do, but working diligently to increase signal and decrease noise can help you get clearer answers with the same resources! That’s the type of thing that can make a huge difference over the course of your career.</p>
+</section>
+<section id="design-matters-too" class="level2">
+<h2 class="anchored" data-anchor-id="design-matters-too">Design Matters, Too</h2>
+<p>Our experimental design can also influence the efficiency of our experiment. In general, the simple two-group design is the <em>least</em> efficient design. Within-subjects designs typically have much more bang for the buck.</p>
+<p>Let’s take a look at the benefits, this time using an precision approach. Here we’ll use statpsych to simulate converting a between-subjects study to within-subjects. For each set of simulations we’ll focus on the typical confidence interval width.</p>
+<p>First, the between-subjects scenario. We’ll again work with 6 animals per group. We’ll assume the groups have equal variation (sd.ratio = 1) and that both come from normal distributions (dist1 = 1; dist2 = 1; where 1 tells statpsych to simulate draws from a normal distribution). We’ll conduct 1000 studies and report the average 95% confidence-interval width in standard deviation units:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Base scenario - 6 animals/group, between subjects, equal variance</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">sim.ci.mean2</span>(</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> <span class="dv">6</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> <span class="dv">6</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd.ratio =</span> <span class="dv">1</span>,</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist1 =</span> <span class="dv">1</span>,</span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist2 =</span> <span class="dv">1</span>,</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">rep =</span> <span class="dv">1000</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                             Coverage Lower Error Upper Error Ave CI Width
+Equal Variances Assumed:        0.957       0.024       0.019     2.507701
+Equal Variances Not Assumed:    0.962       0.021       0.017     2.567401</code></pre>
+</div>
+</div>
+<p>Wow! Our typical confidence interval will be ~2.5 standard deviations wide! That’s a lot of uncertainty, showing that our sample-size is appropriate only for assays in which we are justified in expecting truly massive effects.</p>
+<p>What if we ran the same study as a within-subject design? We’ll keep everything the same, but will also specifiy the correlation between pre/post measures. We’ll use 0.70, which is a reasonable estimate for a measure that has reasonable reliability.</p>
+<p>While within-subjects designs may not be feasible for studies in which the measurement requires destruction of the sample, matched-control designs can offer some of the same benefits.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Switch to within-subjects, just n = 6, correlation of .7 between repeated measures</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">sim.ci.mean.ps</span>(</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">6</span>,</span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd.ratio =</span> <span class="dv">1</span>,</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor =</span> <span class="fl">0.7</span>,</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist1 =</span> <span class="dv">1</span>,</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist2 =</span> <span class="dv">1</span>,</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">rep =</span> <span class="dv">1000</span></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Coverage Lower Error Upper Error Ave CI Width
+    0.952       0.023       0.025     1.556658</code></pre>
+</div>
+</div>
+<p>Holy cow! We are now using 1/2 the animals (1 group of 6 rather than 2 groups of 6), but our confidence interval is now much reduced, to about 1.5 standard deviations in length. That’s still quite long, and only acceptable for assays where we expect pretty large effects… but <em>much</em> despite using 1/2 the resources. And what if we kept with 12 animals, but all in the within-subjects design?</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Switch to within-subjects, n = 12</span></span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">sim.ci.mean.ps</span>(</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">n =</span> <span class="dv">12</span>,</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd.ratio =</span> <span class="dv">1</span>,</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">cor =</span> <span class="fl">0.7</span>,</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist1 =</span> <span class="dv">1</span>,</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">dist2 =</span> <span class="dv">1</span>,</span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">rep =</span> <span class="dv">1000</span></span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> Coverage Lower Error Upper Error Ave CI Width
+     0.96       0.016       0.024    0.9719917</code></pre>
+</div>
+</div>
+<p>Nice - we’ve got our precision down to ~1 standard deviation without increasing our sample-size. Of course, we need to think critically about if a control/untreated design is needed – but we might be able to show no effect in control once and leverage that finding for repeated mechanistic studies with within-subjects designs–getting a lot more out of each experiment without much more in resources!</p>
+<p>For many studies, within-subjects measurement is simply not feasible. With neurogenesis, for example, counting new neurons requires sacrificing the animal subjects, so additional measures are no longer feasible. In those cases, though, matched control designs and/or rigorous selection of covariates can provide many of the same benefits. For example, we could conduct a matched-control design by pre-testing stress-reactivity in all animals prior to the stress manipulation, making matched pairs of similar reactivity, and conducting random assignment to treatment within each pair. Depending on how linked scores are across match pairs, we can obtain many of the same benefits of a within-subjects design.</p>
+</section>
+<section id="further-resources" class="level2">
+<h2 class="anchored" data-anchor-id="further-resources">Further Resources</h2>
+<p>It’s surprisingly difficult to find good practical advice on optimization. Here are some papers I’ve found helpful:</p>
+<ul>
+<li><p>Written for marking and consumer researchers, this paper nevertheless has vital tips for maximizing effect size <span class="citation" data-cites="meyvis2018">(<a href="#ref-meyvis2018" role="doc-biblioref">Meyvis and Van Osselaer 2018</a>)</span>.</p></li>
+<li><p>Focused on animal research, this paper explains the 3R principles and how you can maximize the information you gain from each study <span class="citation" data-cites="lazic2018">(<a href="#ref-lazic2018" role="doc-biblioref">Lazic 2018</a>)</span>.</p></li>
+<li><p>Here’s a primer focused on clinical trials, but again with lots of good advice that is broadly applicable <span class="citation" data-cites="kraemer1991">(<a href="#ref-kraemer1991" role="doc-biblioref">Kraemer 1991</a>)</span></p></li>
+<li><p>A blog post from the OSF with good advice <span class="citation" data-cites="mackinnon2013">(<a href="#ref-mackinnon2013" role="doc-biblioref">MacKinnon 2013</a>)</span></p></li>
+<li><p>A broader focus on reducing waste in research <span class="citation" data-cites="ioannidis2014">(<a href="#ref-ioannidis2014" role="doc-biblioref">Ioannidis et al. 2014</a>)</span></p></li>
+<li><p>And finally, a blog post from Andrew Gelman that has some great advice <span class="citation" data-cites="hereare">(<a href="#ref-hereare" role="doc-biblioref"><span>“Here Are Some Ways of Making Your Study Replicable. (No, the First Steps Are Not Preregistration or Increasing the Sample Size!),”</span> n.d.</a>)</span></p></li>
+</ul>
 
 
 
-</main> <!-- /main -->
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-hereare" class="csl-entry" role="listitem">
+<span>“Here Are Some Ways of Making Your Study Replicable. (No, the First Steps Are Not Preregistration or Increasing the Sample Size!).”</span> n.d. <a href="https://statmodeling.stat.columbia.edu/2023/06/22/here-are-some-ways-of-making-your-study-replicable-no-its-not-what-you-think/">https://statmodeling.stat.columbia.edu/2023/06/22/here-are-some-ways-of-making-your-study-replicable-no-its-not-what-you-think/</a>.
+</div>
+<div id="ref-ioannidis2014" class="csl-entry" role="listitem">
+Ioannidis, John P A, Sander Greenland, Mark a. Hlatky, Muin J. Khoury, Malcolm R. Macleod, David Moher, Kenneth F. Schulz, and Robert Tibshirani. 2014. <span>“Increasing Value and Reducing Waste in Research Design, Conduct, and Analysis.”</span> <em>The Lancet</em> 383 (9912): 166–75. <a href="https://doi.org/10.1016/S0140-6736(13)62227-8">https://doi.org/10.1016/S0140-6736(13)62227-8</a>.
+</div>
+<div id="ref-kraemer1991" class="csl-entry" role="listitem">
+Kraemer, H C. 1991. <span>“To Increase Power in Randomized Clinical Trials Without Increasing Sample Size.”</span> <em>Psychopharmacology Bulletin</em> 27 (3): 217–24. <a href="http://www.ncbi.nlm.nih.gov/pubmed/1775591">http://www.ncbi.nlm.nih.gov/pubmed/1775591</a>.
+</div>
+<div id="ref-lazic2018" class="csl-entry" role="listitem">
+Lazic, Stanley E. 2018. <span>“Four Simple Ways to Increase Power Without Increasing the Sample Size.”</span> <em>Laboratory Animals</em> 52 (6): 621–29. <a href="https://doi.org/10.1177/0023677218767478">https://doi.org/10.1177/0023677218767478</a>.
+</div>
+<div id="ref-mackinnon2013" class="csl-entry" role="listitem">
+MacKinnon, Sean. 2013. <span>“Increasing Statistical Power in Psychological Research Without Increasing Sample Size.”</span> <a href="http://osc.centerforopenscience.org/2013/11/03/Increasing-statistical-power/">http://osc.centerforopenscience.org/2013/11/03/Increasing-statistical-power/</a>.
+</div>
+<div id="ref-meyvis2018" class="csl-entry" role="listitem">
+Meyvis, Tom, and Stijn M. J. Van Osselaer. 2018. <span>“Increasing the Power of Your Study by Increasing the Effect Size.”</span> <em>Journal of Consumer Research</em> 44 (5): 1157–73. <a href="https://doi.org/10.1093/jcr/ucx110">https://doi.org/10.1093/jcr/ucx110</a>.
+</div>
+<div id="ref-mirescu2004" class="csl-entry" role="listitem">
+Mirescu, Christian, Jennifer D. Peters, and Elizabeth Gould. 2004. <span>“Early Life Experience Alters Response of Adult Neurogenesis to Stress.”</span> <em>Nature Neuroscience</em> 7 (8): 841–46. <a href="https://doi.org/10.1038/nn1290">https://doi.org/10.1038/nn1290</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script>
 
 /* update total correct if #webex-total_correct exists */

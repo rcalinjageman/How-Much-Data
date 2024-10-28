@@ -1,7 +1,12 @@
 ---
 title: "Model Sample-Size Plans"
+bibliography: references.bib
 ---
 
 {{< video https://youtu.be/TTsvTyUeFrc >}}
 
-Model Sample-Size Plans
+The video above walks through model sample size plans when planning for power and for precision.
+
+If this workshop helps inform your own sample-size plan, please share it with our community! Submit your sample size plans to the GitHub discussion page for this course, here: <https://github.com/rcalinjageman/How-Much-Data/discussions>. When you do, please indicated if you are willing for your sample-size plan to be linked/featured/discussed from this page as well.
+
+While working on your sample-size plan,it can also be helpful to reflect on what **not** to do. You may find this commentary on sample-size reporting in *Nature Neuroscience* useful [@goodhill2017]. Sadly, *Nature Neuroscience* did not seem to feel it was worth alerting its readers to these issues.

@@ -20,41 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-</style>
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -261,33 +247,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>Planning for Evidence</p>
-<ul>
-<li><strong>Numeric questions</strong> How much is 2+3?</li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitb</span>(<span class="dv">2</span><span class="sc">+</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "&lt;input class='webex-solveme nospaces' size='1' data-answer='[\"5\"]'/&gt;"</code></pre>
-</div>
-</div>
-<p>fitb(c(“A”, “E”, “I”, “O” , “U”), ignore_case = TRUE)</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">fitb</span>(<span class="fu">c</span>(<span class="st">"A"</span>, <span class="st">"E"</span>, <span class="st">"I"</span>, <span class="st">"O"</span> , <span class="st">"U"</span>), <span class="at">ignore_case =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] "&lt;input class='webex-solveme nospaces ignorecase' size='1' data-answer='[\"A\",\"E\",\"I\",\"O\",\"U\"]'/&gt;"</code></pre>
-</div>
-</div>
-<ul>
-<li><strong>Numeric questions</strong> How much is 2+3? <input class="webex-solveme nospaces" size="1" data-answer="[&quot;5&quot;]"></li>
-<li><strong>Multiple Choice</strong> Which is the capital city of Barbados? <select class="webex-select"><option value="blank"></option><option value="answer">Bridgetown</option><option value="">Georgetown</option><option value="">Kingston</option><option value="">Bridgerton</option></select></li>
-<li><strong>True or False</strong> Quarto is very cool <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select>.</li>
-</ul>
-<p><strong>Grade</strong>: .</p>
+<p>Bayesian statistics offers a very different path for sample-size determination: Planning for evidence.</p>
+<p>One especially compelling version of this approach is called open-ended Sequential Bayes Factor (SBF) design, in which the researcher collects data until compelling evidence emerges for their hypothesis or the null.</p>
+<p>Despite the best-laid plans, a module on planning for evidence is not ready for release yet. Please stay tuned. In the meantime, the most authoritative and accessible resources for this approach is <span class="citation" data-cites="schönbrodt2017">(<a href="#ref-schönbrodt2017" role="doc-biblioref">Schönbrodt and Wagenmakers 2017</a>)</span>.</p>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-schönbrodt2017" class="csl-entry" role="listitem">
+Schönbrodt, Felix D., and Eric-Jan Wagenmakers. 2017. <span>“Bayes Factor Design Analysis: Planning for Compelling Evidence.”</span> <em>Psychonomic Bulletin &amp; Review</em>, 1–16. <a href="https://doi.org/10.3758/s13423-017-1230-y">https://doi.org/10.3758/s13423-017-1230-y</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script>
 
 /* update total correct if #webex-total_correct exists */

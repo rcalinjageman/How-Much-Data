@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -228,11 +248,18 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/TTsvTyUeFrc" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Model Sample-Size Plans</p>
+<p>The video above walks through model sample size plans when planning for power and for precision.</p>
+<p>If this workshop helps inform your own sample-size plan, please share it with our community! Submit your sample size plans to the GitHub discussion page for this course, here: <a href="https://github.com/rcalinjageman/How-Much-Data/discussions" class="uri">https://github.com/rcalinjageman/How-Much-Data/discussions</a>. When you do, please indicated if you are willing for your sample-size plan to be linked/featured/discussed from this page as well.</p>
+<p>While working on your sample-size plan,it can also be helpful to reflect on what <strong>not</strong> to do. You may find this commentary on sample-size reporting in <em>Nature Neuroscience</em> useful <span class="citation" data-cites="goodhill2017">(<a href="#ref-goodhill2017" role="doc-biblioref">Goodhill 2017</a>)</span>. Sadly, <em>Nature Neuroscience</em> did not seem to feel it was worth alerting its readers to these issues.</p>
 
 
 
-</main> <!-- /main -->
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-goodhill2017" class="csl-entry" role="listitem">
+Goodhill, Geoffrey J. 2017. <span>“Is Neuroscience Facing up to Statistical Power?”</span> <em>arXiv Preprint</em>, January, 1–5. <a href="http://arxiv.org/abs/1701.01219">http://arxiv.org/abs/1701.01219</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script>
 
 /* update total correct if #webex-total_correct exists */

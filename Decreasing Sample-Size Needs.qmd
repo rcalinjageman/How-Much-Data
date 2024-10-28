@@ -1,7 +1,224 @@
 ---
 title: "Decreasing Sample-Size Needs"
+bibliography: references.bib
 ---
 
 {{< video https://youtu.be/erwvvKqZsYw >}}
 
-How can you decrease your sample-size needs?
+When you get serious about sample-size planning, you can often find that it takes much larger samples than you'd like to get clear answers to your scientific questions. While there is no doubt that many fields have settled on demonstrably inadequate sample sizes, the answer doesn't have to be solely focused on collecting more data: we can also design better studies!
+
+The video above gives an example of **optimization** - the art of coaxing more out of your data. There are three basic approaches:
+
+-   Maximizing impact – the biggers, stronger, and more conisstent the experimental manipulation, the larger the effect size and the less resources needed to characterize the effect.
+
+-   Minimizing noise - the more consistent and reliable your measures, the smaller your margin of error and the higher your power.
+
+-   Experimental design - a basic two-group design is the least efficient in science. You can achieve more bang for your sample-size buck by using within-subjects designs, matched control designs, and/or carefully selecting covariates. These all decrease expected sampling variation and therefore shrink your expected margin of error and increase your power.
+
+## Reducing Variation is Gold
+
+Imagine you are characterizing neurogenesis in animals raised in stressed vs. standard conditions. From prevous studies, you know expect control animals to have about 3500 new neurons labelled 1 hour after BRDU injection, with a standard deviation of 500. You expect stress to have a pretty notable effect, say a 20% reduction to 2,800 labelled neurons, a difference of 3,500 - 2,800 = 700 neurons. This example is inspired by [@mirescu2004] (note that we'll analyze this scenario with t-tests, as the original authors did, even though count data is typically not normally distributed and therefore not suitable for analysis in this way).
+
+Let's say the typical study in your field uses *n* = 6/group. Is that adequate? Let's find out with statpsych:
+
+What's alpha = 0.05, what sample size do you need for 90% power? Let's find out with statpsych:
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# Estimate power for a 2-group design
+statpsych::power.mean2(
+  alpha = 0.05,
+  n1 = 6,
+  n2 = 6,
+  var1 = 500^2,
+  var2 = 500^2,
+  es = 3500-2800
+)
+
+```
+
+Uh oh, power is only 60%. That means we have a high risk of missing true effects **and that statistically significant effects are likely to be inflated** (see [What Not To Do](What%20Not%20To%20Do.qmd)).
+
+We *could* throw more data at the problem. But first, what would happen if we could reduce our sampling variability? Imagine, for example, that we might better-standardize our cell counts, perhaps by having two trainees count them independently and use the average. We could also refine what to do with borderline cases, and maybe standardize our injection and dissection protocols a little better. Suppose through these steps we could reduce within-group variation by just 20%. What would that do to our power?
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# Same scenario, within group sd reduced by 20% through optimization
+statpsych::power.mean2(
+  alpha = 0.05,
+  n1 = 6,
+  n2 = 6,
+  var1 = (500 * .8) ^2,   # Imagine reducing the sd to 80% of what your lab typically obtains
+  var2 = (500 * .8) ^2,   # same reduction in both groups
+  es = 3500-2800
+)
+```
+
+That's a big jump in power! We're now getting close to a reasonable power with the same number of samples.\
+\
+Would a 20% increase in sample size have the same impact?
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# Same scenario but increase sample-size by 20%... not the same impact!
+statpsych::power.mean2(
+  alpha = 0.05,
+  n1 = 6 * 1.2,
+  n2 = 6 * 1.2,
+  var1 = 500^2,
+  var2 = 500^2,
+  es = 3500-2800
+)
+```
+
+No! Why not? Well, recall that formula for the standard error of the mean:
+
+\$\$
+
+```         
+sigma_{M} = frac{sigma}{sqrt(N)}
+```
+
+\$\$
+
+This shows us that changes in within-group variation is directly related to expected sampling error, whiles sample-size is only related by its square root. That means that reducing noise (when possible) can be much more impactful than increasing sample size. If takes a 56% increase in sample-size to obtain the same benefit of a 20% reduction in within-group standard deviation!
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# To get the same impact through sample-size, we need ~50% increase
+statpsych::power.mean2(
+  alpha = 0.05,
+  n1 = 6 * 1.5,
+  n2 = 6 * 1.5,
+  var1 = 500^2,
+  var2 = 500^2,
+  es = 3500-2800
+)
+```
+
+## More Gold: Optimizing for Larger Effects
+
+In addition to reducing noise, we can work on maximizing signal. We might extend our treatement (longer stress), increase the magnitude of treatment (stronger stress), and/or focus in on measures which are especially susceptible to the treatment. For example, we might find that only some layers of the hippocampus undergo significant neurogenesis. If we could restrict our labelling to these layers, we could avoid having our effect diluted by unaffected measures.
+
+As with reducing noise, increasing signal gets us a lot more bang for the buck. Let's continue the previous example (2-group design, 6 per group, reduction of neurogenesis by 700 neurons, within-group standard deviaiton of 500 neurons).
+
+Again, here is our 'standard scenario', in which we learn we have an inadequate sample size:
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# Estimate power for a 2-group design
+statpsych::power.mean2(
+  alpha = 0.05,
+  n1 = 6,
+  n2 = 6,
+  var1 = 500^2,
+  var2 = 500^2,
+  es = 3500-2800
+)
+```
+
+And now let's check our power if we can increase the effect size by just 20%
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# Estimate power for a 2-group design
+statpsych::power.mean2(
+  alpha = 0.05,
+  n1 = 6,
+  n2 = 6,
+  var1 = 500^2,
+  var2 = 500^2,
+  es = (3500-2800) * 1.2   # increase effect size
+)
+```
+
+Wow! We've get to nearly reasonable power without needing more resources.
+
+Certainly there are limits to what optimization can do, but working diligently to increase signal and decrease noise can help you get clearer answers with the same resources! That's the type of thing that can make a huge difference over the course of your career.
+
+## Design Matters, Too
+
+Our experimental design can also influence the efficiency of our experiment. In general, the simple two-group design is the *least* efficient design. Within-subjects designs typically have much more bang for the buck.
+
+Let's take a look at the benefits, this time using an precision approach. Here we'll use statpsych to simulate converting a between-subjects study to within-subjects. For each set of simulations we'll focus on the typical confidence interval width.
+
+First, the between-subjects scenario. We'll again work with 6 animals per group. We'll assume the groups have equal variation (sd.ratio = 1) and that both come from normal distributions (dist1 = 1; dist2 = 1; where 1 tells statpsych to simulate draws from a normal distribution). We'll conduct 1000 studies and report the average 95% confidence-interval width in standard deviation units:
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# Base scenario - 6 animals/group, between subjects, equal variance
+statpsych::sim.ci.mean2(
+  alpha = 0.05,
+  n1 = 6,
+  n2 = 6,
+  sd.ratio = 1,
+  dist1 = 1,
+  dist2 = 1,
+  rep = 1000
+)
+```
+
+Wow! Our typical confidence interval will be \~2.5 standard deviations wide! That's a lot of uncertainty, showing that our sample-size is appropriate only for assays in which we are justified in expecting truly massive effects.
+
+What if we ran the same study as a within-subject design? We'll keep everything the same, but will also specifiy the correlation between pre/post measures. We'll use 0.70, which is a reasonable estimate for a measure that has reasonable reliability.
+
+While within-subjects designs may not be feasible for studies in which the measurement requires destruction of the sample, matched-control designs can offer some of the same benefits.
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# Switch to within-subjects, just n = 6, correlation of .7 between repeated measures
+statpsych::sim.ci.mean.ps(
+  alpha = 0.05,
+  n = 6,
+  sd.ratio = 1,
+  cor = 0.7,
+  dist1 = 1,
+  dist2 = 1,
+  rep = 1000
+)
+```
+
+Holy cow! We are now using 1/2 the animals (1 group of 6 rather than 2 groups of 6), but our confidence interval is now much reduced, to about 1.5 standard deviations in length. That's still quite long, and only acceptable for assays where we expect pretty large effects... but *much* despite using 1/2 the resources. And what if we kept with 12 animals, but all in the within-subjects design?
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# Switch to within-subjects, n = 12
+statpsych::sim.ci.mean.ps(
+  alpha = 0.05,
+  n = 12,
+  sd.ratio = 1,
+  cor = 0.7,
+  dist1 = 1,
+  dist2 = 1,
+  rep = 1000
+)
+```
+
+Nice - we've got our precision down to \~1 standard deviation without increasing our sample-size. Of course, we need to think critically about if a control/untreated design is needed – but we might be able to show no effect in control once and leverage that finding for repeated mechanistic studies with within-subjects designs–getting a lot more out of each experiment without much more in resources!
+
+For many studies, within-subjects measurement is simply not feasible. With neurogenesis, for example, counting new neurons requires sacrificing the animal subjects, so additional measures are no longer feasible. In those cases, though, matched control designs and/or rigorous selection of covariates can provide many of the same benefits. For example, we could conduct a matched-control design by pre-testing stress-reactivity in all animals prior to the stress manipulation, making matched pairs of similar reactivity, and conducting random assignment to treatment within each pair. Depending on how linked scores are across match pairs, we can obtain many of the same benefits of a within-subjects design.
+
+## Further Resources
+
+It's surprisingly difficult to find good practical advice on optimization. Here are some papers I've found helpful:
+
+-   Written for marking and consumer researchers, this paper nevertheless has vital tips for maximizing effect size [@meyvis2018].
+
+-   Focused on animal research, this paper explains the 3R principles and how you can maximize the information you gain from each study [@lazic2018].
+
+-   Here's a primer focused on clinical trials, but again with lots of good advice that is broadly applicable [@kraemer1991]
+
+-   A blog post from the OSF with good advice [@mackinnon2013]
+
+-   A broader focus on reducing waste in research [@ioannidis2014]
+
+-   And finally, a blog post from Andrew Gelman that has some great advice [@hereare]

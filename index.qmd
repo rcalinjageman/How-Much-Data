@@ -18,4 +18,4 @@ This course was developed by [Bob Calin-Jageman](https://calin-jageman.net/lab/)
 
 This course has been a long time in the making and is still under active development. Expect addition of new topics (e.g. Simulation for Sample-Size Planning), additional simulations, and more.
 
-The development of this course was supported by NIH.
+The development of this course was supported by the NIGMS division of the National Institute of Health through grant 5R25GM132784-02. You can find other training modules focused on Rigor and Reproducibility here: <https://www.nigms.nih.gov/training/pages/clearinghouse-for-training-modules-to-enhance-data-reproducibility.aspx>
