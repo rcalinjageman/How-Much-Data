@@ -1,6 +1,8 @@
 ---
 title: "How *Not* to Get Your Sample Size"
 bibliography: references.bib
+execute: 
+  freeze: auto
 ---
 
 {{< video https://youtu.be/dwyYmGmdFHA >}}
