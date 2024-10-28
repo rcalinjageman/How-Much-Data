@@ -2,4 +2,142 @@
 title: "Resources"
 ---
 
-Resources
+Here are some resources I found useful for developing this workshop. I'll do my best to keep it updated. If you come across a resource you feel is helpful, submit it on the GitHub discussion board for this workshop (<https://github.com/rcalinjageman/esci/discussions>) and I'll add it to this list and feature it in a blog post.
+
+### Guidelines and Regulations Related to Sample-Size Planning
+
+On important reason to plan your sample-size in advance is stakeholders in the life sciences are increasingly requiring evidence that sample-sizes are adequate
+
+-   NIH
+
+    -   As of 2016, NIH has adopted a new initiative on [Rigor and Reproducibility](https://grants.nih.gov/reproducibility/index.htm) that stress evaluation of project proposals for their ability to produce robust and unbiased results.
+
+    -   In explaining this new policy, sample-size planning was listed as a way to help meet this new evaluation criterion. See the NIH blog post [here](https://nexus.od.nih.gov/all/2016/01/28/scientific-rigor-in-nih-grant-applications/):
+
+-   Reporting Guidelines - NIH also helped organize a set of principles for the reporting of pre-clinical research; these guidelines were endorsed by a wide variety of journals and professional societies.
+
+    -   Here are the [NIH guidelines](https://www.nih.gov/research-training/rigor-reproducibility/principles-guidelines-reporting-preclinical-research). The guidelines related to transparency stipulates that authors should explain their sample-size determinations.
+
+    -   Many journals either already enforced these guidelines are have updated their author instructions to do so.
+
+        -   *Nature Neuroscience* announced updated standards in [2013 editorial](https://www.nature.com/articles/nn.3391) and released a [reporting checklist](http://www.nature.com/neuro/pdf/sm_checklist.pdf) authors should complete on submission that requires sample-size planning.
+
+        -   *Journal of Neuroscience* has issued [updated author guidelines](http://www.jneurosci.org/sites/default/files/JN_Information_for_Authors.pdf) as of March of 2017 that asks for sample-size justification. The updated guidelines are here.
+
+-   Ethical guidelines - the American Stasitical Association has put forth ethical guidelines for those who regularly use statistics. These enjoin statisticians to collect neither too much nor too little data (as both are ethically problematic). The guidelines are online [here](http://www.amstat.org/ASA/Your-Career/Ethical-Guidelines-for-Statistical-Practice.aspx).
+
+### Background Reading
+
+-   For neuroscientists, the most lucid explanation of the importance of sample-size planning is a recent commentary by Yarkoni (2009). This paper explains why small sample sizes are problematic **even if results are statistically significant**.
+
+    -   Yarkoni, T. (2009). Big Correlations in Little Studies. Perspectives on Psychological Science, 4(3), 294–298. <https://doi.org/10.1111/j.1745-6924.2009.01127.x>
+
+-   The fact that sample sizes are too small in the neurosciences is now well-documented. Here are three eye-opening readings:
+
+    -   Button, K. S., Ioannidis, J. P. a., Mokrysz, C., Nosek, B. a., Flint, J., Robinson, E. S. J., & Munafò, M. R. (2013). Power failure: why small sample size undermines the reliability of neuroscience. Nature Reviews. Neuroscience, 14(5), 365–76. [https://doi.org/10.1038/nrn3475](http://Button,%20K.%20S.,%20Ioannidis,%20J.%20P.%20a.,%20Mokrysz,%20C.,%20Nosek,%20B.%20a.,%20Flint,%20J.,%20Robinson,%20E.%20S.%20J.,%20&%20Munaf%C3%B2,%20M.%20R.%20%282013%29.%20Power%20failure:%20why%20small%20sample%20size%20undermines%20the%20reliability%20of%20neuroscience.%20Nature%20Reviews.%20Neuroscience,%2014%285%29,%20365%E2%80%9376.%20https://doi.org/10.1038/nrn3475)
+
+    -   Szucs, D., & Ioannidis, J. P. A. (2017). When Null Hypothesis Significance Testing Is Unsuitable for Research: A Reassessment. Frontiers in Human Neuroscience, 11. <https://doi.org/10.3389/fnhum.2017.00390>
+
+    -   Carniero et al. (currently a pre-print). Effect sizes and statistical power in the rodent fear conditioning liturature: A systematic review. <http://dx.doi.org/10.1101/116202>
+
+-   Run-and-check is a common practice, but not a good one. Here's a modern source and a classic source:
+
+    -   Simmons, J. P., Nelson, L. D., & Simonsohn, U. (2011). False-positive psychology: undisclosed flexibility in data collection and analysis allows presenting anything as significant. Psychological Science, 22(11), 1359–66. <https://doi.org/10.1177/0956797611417632>
+
+    -   Anscombe, F. J. (1954). Fixed-Sample-Size Analysis of Sequential Observations. Biometrics, 10(1), 89. [https://doi.org/10.2307/3001665](http://Anscombe,%20F.%20J.%20%281954%29.%20Fixed-Sample-Size%20Analysis%20of%20Sequential%20Observations.%20Biometrics,%2010%281%29,%2089.%20https://doi.org/10.2307/3001665)
+
+-   Understanding effect sizes can be challenging. Here's an excellent source that makes everything clear:
+
+    -   Lakens, D. (2013). Calculating and reporting effect sizes to facilitate cumulative science: A practical primer for t-tests and ANOVAs. Frontiers in Psychology, 4(NOV), 1–12. <https://doi.org/10.3389/fpsyg.2013.00863>
+
+-   Finally, here are some other sources that are well-worth checking out:
+
+    -   Ioannidis, J. P. A. (2005). Why Most Published Research Findings Are False. PLoS Medicine, 2(8), e124. <https://doi.org/10.1371/journal.pmed.0020124>
+
+    -   Cumming, G. (2008). Replication and p intervals. Perspectives on Psychological Science, 3(4), 286–300. <https://doi.org/10.1111/j.1745-6924.2008.00079.x>
+
+### Planning for Power
+
+#### Dealing with Uncertainty and Publication Bias
+
+There are already lots of sources and tools for planning for power. Although the approach is easy to adopt, it is important to remember that:
+
+-   Effect sizes in the published literature may be biased, and
+
+-   Effect sizes estimated from small samples are often uncertain.
+
+Therefore, it is a good idea to hedge your sample-size estimatesagainst both bias and uncertainty.
+
+Ken Kelley's group has an approach that does this:
+
+-   The R package of tools is called BUCSS-- Bias and Unertainty Corrected Sample Sizes: <https://cran.r-project.org/web/packages/BUCSS/index.html>
+
+-   The website [designingexperiments.com](https://designingexperiments.com/shiny-r-web-apps/) has web apps that allow you to plan for power in this careful way without having to learn R. Scroll to the bottom of the page of webapps to select your design and load the appropriate web app.
+
+-   A paper describing this approach is here: Anderson, S. F., Kelley, K., & Maxwell, S. E. (2017). Sample-Size Planning for More Accurate Statistical Power: A Method Adjusting Sample Effect Sizes for Publication Bias and Uncertainty. Psychological Science, 95679761772372. <https://doi.org/10.1177/0956797617723724>
+
+#### Sequential Testing
+
+If you are going to use planning for power, sequential testing can be more efficient, especially in the exploratory phase of research. Lakens offers an excellent tutorial:
+
+-   Lakens, D. (2014). Performing high-powered studies efficiently with sequential analyses. European Journal of Social Psychology, 44(7), 701–710. <https://doi.org/10.1002/ejsp.2023>
+
+### Planning for Precision
+
+Planning for precision is also known as Accuracy in Parameter Estimatation (AIPE). In this approach, the researcher's goal is to control the noise/error in the result--a sample size is selected that will give a reasonable margin of error relative to the research question and the scale of measurement.
+
+One set of readings and tools are from Geoff Cumming and his collaborators:
+
+-   esci - Is a free set of online tools for understanding as well as an R package for data analysis. Here is a link to planning-for-precision functions in the online tools included in esci: <https://esci.thenewstatistics.com/esci-precision.html#tab-1>
+
+-   Cumming has two books which have coverage on planning for precision. Both are readable and accessible to a general scientific audience.
+
+    -   This book is for those already well-versed in p values: Cumming, G. (2011). [Understanding the new statistics: Effect sizes, confidence intervals, and meta-analysis](https://www.amazon.com/Understanding-New-Statistics-Meta-Analysis-Multivariate/dp/041587968X). New York: Routledge.
+
+    -   This book is for undergraduates learning stats, but has a bit more updated material on planning for precision: Cumming, G., & Calin-Jageman, R. J. (2024, 2nd edition). [Introduction to the new statistics: Estimation, open science, and beyond](https://www.routledge.com/Introduction-to-the-New-Statistics-Estimation-Open-Science-and-Beyond/Cumming-Calin-Jageman/p/book/9781138825529). New York: Routledge.
+
+Another set of readings and tools are from Ken Kelley and his collaborators.
+
+-   [MBESS](https://cran.r-project.org/web/packages/MBESS/index.html)  - Is a free R package that contains many different useful functions. Among those are functions for planning for precision (which Kelley terms AIPE). The functions in MBESS are complex, but they can be used for a wide variety of experimental designs. <https://cran.r-project.org/web/packages/MBESS/index.html>
+
+-   [DesigningExperiments.com](https://designingexperiments.com/shiny-r-web-apps/) has free web applications that allow planning for precision with the functions embedded into MBESS. This makes them easier to use. Given that they can handle complex designs, it is not surprising that the learning curve is a bit steep even for the web application.
+
+-   Kelley and his colleagues have a number of papers and sources on the AIPE approach. Also reccomended is his excellent book [*Designing Experiments and Analyzing Data*](https://www.crcpress.com/Designing-Experiments-and-Analyzing-Data-A-Model-Comparison-Perspective/Maxwell-Delaney-Kelley/p/book/9781138892286).
+
+    -   Maxwell, S. E., Delaney, H. D., & Kelley, K. (2018). [Designing Experiments and Analyzing Data](https://www.crcpress.com/Designing-Experiments-and-Analyzing-Data-A-Model-Comparison-Perspective/Maxwell-Delaney-Kelley/p/book/9781138892286): A Model Comparison Perspective (3rd ed.). New York: Routledge.
+
+    -   Maxwell, S. E., Kelley, K., & Rausch, J. R. (2008). Sample Size Planning for Statistical Power and Accuracy in Parameter Estimation. Annual Review of Psychology, 59(1), 537–563. <https://doi.org/10.1146/annurev.psych.59.103006.093735>
+
+    -   Kelley, K. (2007). Sample size planning for the coefficient of variation from the accuracy in parameter estimation approach. Behav Res Meth, 39(4), 755–766. <https://doi.org/10.3758/BF03192966>
+
+    -   Kelley, K., & Maxwell, S. E. (2003). Sample Size for Multiple Regression: Obtaining Regression Coefficients That Are Accurate, Not Simply Significant. Psychological Methods, 8(3), 305–321. <https://doi.org/10.1037/1082-989X.8.3.305>
+
+    -   Kelley, K., & Maxwell, S. E. (2003). Sample Size for Multiple Regression: Obtaining Regression Coefficients That Are Accurate, Not Simply Significant. Psychological Methods, 8(3), 305–321. <https://doi.org/10.1037/1082-989X.8.3.305>
+
+SAS has tools that enable planning for precision:
+
+-   The usage guide is [here](http://support.sas.com/documentation/cdl/en/statug/63347/HTML/default/viewer.htm#statug_power_a0000001008.htm).
+
+-   SAS also provides some sample cases, [such as this one](http://support.sas.com/documentation/cdl/en/statug/67523/HTML/default/viewer.htm#statug_power_examples07.htm).
+
+Planning for precision is also perfect for Bayesians. John Kruschke has written a book and provides excellent tools for what her terms the Bayesian New Statistics:
+
+-   Kruschke, J (2014). Doing Bayesian Data Analysis. Eslevier. <https://www.elsevier.com/books/doing-bayesian-data-analysis/kruschke/978-0-12-405888-0>
+
+-   Kruschke, J. K., & Liddell, T. M. (2017). The Bayesian New Statistics: Hypothesis testing, estimation, meta-analysis, and power analysis from a Bayesian perspective. Psychonomic Bulletin & Review. <https://doi.org/10.3758/s13423-016-1221-4>
+
+### Other Approaches to Planning
+
+There are lots of other good ways to plan your studies..I couldn't cover them all. Here are three noteworthy papers and approaches.
+
+-   Planning for Evidence - If you like Bayesian hypothesis testing, a very good approach is to plan for evidence rather than sample size. That is, you can commit to collecting data until you achieve clear evidence for your hypothesis or for the null hypothesis. It sounds scary because data collection is therefore open-ended, yet simulations show this can actually be a very efficient approach.
+
+    -   Schönbrodt, F. D., & Wagenmakers, E.-J. (2017). Bayes factor design analysis: Planning for compelling evidence. Psychonomic Bulletin & Review, 1–16. <https://doi.org/10.3758/s13423-017-1230-y>
+
+Planning for Stability - not too different from planning for precision, this approach is to select a sample-size that will provide enough information that subsequent replications will achieve similar results within a set level of similarity.
+
+-   Lakens, D., & Evers, E. R. K. (2014). Sailing From the Seas of Chaos Into the Corridor of Stability: Practical Recommendations to Increase the Informational Value of Studies. Perspectives on Psychological Science, 9(3), 278–292. <https://doi.org/10.1177/1745691614528520>
+
+-   Gelman's approach:
+
+    -   Gelman, A., & Carlin, J. (2014). Beyond power calculations: Assessing Type S (sign) and Type M (magnitude) errors. <https://doi.org/10.1177/1745691614551642>

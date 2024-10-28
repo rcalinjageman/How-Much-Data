@@ -76,13 +76,9 @@ statpsych::power.mean2(
 
 No! Why not? Well, recall that formula for the standard error of the mean:
 
-\$\$
-
-```         
+$$
 sigma_{M} = frac{sigma}{sqrt(N)}
-```
-
-\$\$
+$$
 
 This shows us that changes in within-group variation is directly related to expected sampling error, whiles sample-size is only related by its square root. That means that reducing noise (when possible) can be much more impactful than increasing sample size. If takes a 56% increase in sample-size to obtain the same benefit of a 20% reduction in within-group standard deviation!
 

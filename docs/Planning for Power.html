@@ -20,7 +20,61 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -228,11 +282,194 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/nyvswy8jBlU" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Planning for Power</p>
+<p>The video above gives a quick overview of planning for power. Once you’ve viewed it, this page helps you dig into some details.</p>
+<section id="the-inputs-you-need-for-planning-for-power" class="level2">
+<h2 class="anchored" data-anchor-id="the-inputs-you-need-for-planning-for-power">The Inputs You Need for Planning for Power</h2>
+<p>Suppose you are in a lab that studies neurogenesis. You believe that early-life stress impairs neurogenesis. You will test your theory by exposing lab mice to stress or to standard living conditions. You will then use BRDU to label new neurons in the hippocampus. How can you make a good sampling plan for your study? (This example is inspired by <span class="citation" data-cites="mirescu2004">(<a href="#ref-mirescu2004" role="doc-biblioref">Mirescu, Peters, and Gould 2004</a>)</span>).</p>
+<p>To start, you’ll need some inputs. Specifically, you need to know:</p>
+<ul>
+<li><p>The stringency of your hypothesis test you will conduct (alpha = .05 is typical)</p></li>
+<li><p>The level of power you want (80%? 90%? 95%?). The lower the power the lower your sample-size need. But the lower the power, the higher your chance of missing an effect if it is there. Just as bad, low-power samples that yield significant results often do so by inflating the true effect (see <a href="What Not to Do.qmd">What Not to Do</a>)</p></li>
+<li><p>You also need to know the exact type of test you want to use. Will you use a t-test to compare means with the assumption of equal variance? Or, do you want to use a t-test to compare means without assuming equal variance (often called a Welch’s t-test)? Or, because you are dealing with count data, do you want to compare medians using a non-parametric test (e.g.&nbsp;the Mann-Whitny U test).</p></li>
+<li><p>You <em>also</em> need a predicted effect: By how much do you believe stress will impact neurogenesis?</p>
+<ul>
+<li><p>Ideally you would have a prediction in <em>raw units</em>. Meaning, for example, you have a good sense of the typical level of neurogenesis under control conditions and you have a prediction of how much less neurogenesis you expect with stress (500 less neurons? 700 less neurons?). Ideally, this prediction is <strong>directional</strong> (predicting either a decrease or an increase over controls). You can, however, make a non-directional prediction (a change of at least 500 neurons)… though if you don’t know the direction, it’s hard to imagine the prediction being very well-founded.</p>
+<ul>
+<li>If you go this route (which is best), you <em>also</em> need to provide a good estimate of the standard deviation in both groups.</li>
+</ul></li>
+<li><p>You could also make your prediction in standard deviation units (1 standard deviation reduction, 2 standard deviation reduction, etc.).</p>
+<ul>
+<li>If you go this route, you don’t need a predicted standard deviation for each group. That sounds attractive – you can get by with less guesswork. But on the other hand, what’s the basis of your prediction? If it is a well-founded prediction, it would usually come from familiarity with the assay and some knowledge of both typical scores and their variety. If you don’t know anything about the variety to expect in your assay, it’s hard to imagine your prediction in standard deviation units will be that informed.</li>
+</ul></li>
+</ul></li>
+</ul>
+<p>When asked for these inputs, many researchers become frustrated: <em>How am I supposed to know all this before I do the study!?</em> It’s true the inputs required for planning for power are extensive. But that’s because we plan for power to conduct a hypothesis test, and a hypothesis test <em>is meant to test a hypothesis</em>. If you don’t have a clear, quantitative hypothesis, then you aren’t really ready to conduct a hypothesis test, and if you’re not ready for a hypothesis test, you will definitely have difficulty planing one!</p>
+<p>So: if you find the inputs for planning for power daunting you may want to consider: Am I ready to conduct a hypothesis test? Perhaps you want to start with some descriptive research to accurately characterize the system you are studying. In that case, you might want to plan for precision (for accurate description), and <em>then</em>, once you’ve described the system well you might formulate clear hypotheses that are worth testing.</p>
+<p>This warning that you may not be ready for a hypothesis test may sound absurd. Just look at any journal and you’ll see hypothesis test after hypothesis test… clearly those researchers didn’t always have clear quantitative hypotheses and all this background knowledge. True – current norms are to use hypothesis tests willy nilly, in circumstances where the researcher has no clear hypotheses and little forethought. The regularity with which hypothesis testing is abused, however, does not make it wise, sensible, or sound. You can find more details on why hypothesis testing should be reserved for testing hypotheses in these sources <span class="citation" data-cites="calin-jageman2022 scheel2020">(<a href="#ref-calin-jageman2022" role="doc-biblioref">Calin-Jageman 2022</a>; <a href="#ref-scheel2020" role="doc-biblioref">Scheel et al. 2020</a>)</span>.</p>
+</section>
+<section id="planning-for-power-with-statpsych" class="level2">
+<h2 class="anchored" data-anchor-id="planning-for-power-with-statpsych">Planning for Power with statpsych</h2>
+<p>What if you really are ready for a hypothesis test? Well there are <em>tons</em> of tools you can use to help you plan for power. In this workshop we’ll demonstrate the use of statpsych, a package for R by Doug Bonett. Why? Because statpsych is easy to use, comprehensive, has a consistent and well-documented set of functions, and has been extensively validated.</p>
+<p>Let’s continue our neurogenesis example. Suppose from previous research you <em>do</em> know a good bit about neurogenesis under control conditions: your lab has typically found about 3,500 neurons labelled within 2 hours of BRDU injection, with a standard deviation of 500. Furthermore, from previous research on neurogenesis you believe that stress will alter neurogenesis by a substantial amount, at least 700 neurons –that’s more than 1 standard deviation. Note that, for now we said “a change of at least”… that’s a non-directional hypothesis; we’ll start with this vague hypothesis and then switch to a directional hypothesis in a moment.</p>
+<p>We need two additional inputs: stringency (alpha) and desired power. We’ll pick a traditional stringency (.05) and we’ll shoot for 90% power. You’ll often see 80% used as a convention, but who wants to let 20% of their true hypotheses fail to garner support? If the experiment will require considerable time and resources <em>and</em> is worth doing, then it is probably worth doing with a relatively high rate of power.)</p>
+<p>We can put all this together and find our needed sample-size using the <code>size.test.mean2</code> function in statpsych. This function, along with all other functions in statpsych, is documented here: <a href="https://dgbonett.github.io/statpsych/reference/index.html" class="uri">https://dgbonett.github.io/statpsych/reference/index.html</a></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: statpsych</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Get sample size for 90% power for a two-group hypothesis test of at least 700-neuron change </span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co">#  with an assay with typical standard deviaiton of 500 neurons.  The test will be conducted</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="co">#  with an alpha of .05.  We'll plan for equal sample-sizes in both groups.</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">size.test.mean2</span>(</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">pow =</span> <span class="fl">0.90</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,     <span class="co"># Typical sd in our lab is 500 neurons; here we input variance (sd^2)</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">es =</span> <span class="dv">700</span>,</span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">R =</span> <span class="dv">1</span>            <span class="co"># ratio of n1/n2; here we entered 1 for equal group sizes</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> n1 n2
+ 12 12</code></pre>
+</div>
+</div>
+<p>According to these calculations, we need n = 12 per group (24 animals in total) to conduct a well-powered test of our hypothesis. This is a good bit more than is typically used in neurogenesis research… but that’s a reflection of poor prior practice, not bad planning on our part.</p>
+<p>If you are really ready for a hypothesis test then you almost certainly have a <strong>directional</strong> hypothesis. That’s a good thing, because that will reduce our sample-size needs relative to a non-direcitonal hypothesis. There is a cost, though: by making a directional hypothesis you are calling your shot. That is, you are committing to conducting the test <strong>only if the effect is in the predicted direction</strong> – otherwise it is a non-significant finding <em>even if it would have been significant in the other direction</em>. By making that commitment, you can get your desired power with less resources. Clearly, though, it would be best to document that commitment; a public pre-registration would be ideal. Unfortunately, abuse of directional tests has led to suspicion that they reflect <em>p</em> hacking–that’s a shame because if we used hypothesis testing for testing actual hypotheses we would almost always be conducting direcitonal effects–it is actually non-directional hypotheses that clue us to the fact that the researcher doesn’t seem to have any clear idea of what they’re predicing.</p>
+<p>Anyway, how do we plan for a directional hypothesis? Some tools have this as a specific option, but in general what you do is <strong>double the alpha used in your input</strong>. That is, for a .05 directional test, you can use .10 in a non-directional tool. Here’s what we’d get with statpsych:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Get sample size for 90% power for a two-group hypothesis test of at least 700-neuron change </span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">#  with an assay with typical standard deviaiton of 500 neurons.  The test will be conducted</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="co">#  with an alpha of .05.  We'll plan for equal sample-sizes in both groups.</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">size.test.mean2</span>(</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="fl">0.05</span> <span class="sc">*</span> <span class="dv">2</span>,  <span class="co"># Double alpha for directional test</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">pow =</span> <span class="fl">0.90</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,     <span class="co"># Typical sd in our lab is 500 neurons; here we input variance (sd^2)</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">es =</span> <span class="dv">700</span>,</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>  <span class="at">R =</span> <span class="dv">1</span>            <span class="co"># ratio of n1/n2; here we entered 1 for equal group sizes</span></span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> n1 n2
+ 10 10</code></pre>
+</div>
+</div>
+<p>Nice! With a directional effect we can get by with <em>n</em> = 10/group or 20 animals overall. That’s a resource saving of 20%!</p>
+</section>
+<section id="important-considerations-when-planning-for-power" class="level2">
+<h2 class="anchored" data-anchor-id="important-considerations-when-planning-for-power">Important Considerations When Planning for Power</h2>
+<ul>
+<li><p><strong>What if your inputs are off?</strong> That, is what if variation is 20% higher than you expected? What if the effect is 20% weaker than you expected? Or 50%? The best practice is to explore a variety of inputs and judiciously choose a sample size. Sample-size needs can be much larger than you might be used to. Be sure to check out the section on optimization for some tips on how to deal with this.</p></li>
+<li><p><strong>Does your sample-size plan matches your research question.</strong> It sounds obvious, but you need to make sure you are planning for power for the analysis that answers your research quesiton. Note that with hypothesis tests that can sometimes be confusing. For example, suppose you test the effects of both stress (high/low) and sex (male/female) on neurogensis. You will probably want to test if stress affects neurogenesis in male mice. And you will probably want ot test if stress affects neurogenesis in female mice. But most importantly, you will probably want to know if there is a sex difference in the impact of stress (an interaction). In that case, you need to make sure your sample-size plan is for this interaction, which typically has considerably higher sample-size needs than either simple effect.</p></li>
+<li><p><strong>Will you conduct multiple tests?</strong> When you will conduct multiple tests your risk of including a false-positive. You thus need to make a sample size plan that includes the increase needs for when adjusting for multiple comparisons. This can become complicated, and sometimes can only be solved through simulation. On the other hand, if you are using hypothesis testing only to test well-formed, quantitative hypotheses you may find yourself with only a few focal hypotheses to test in any given study.</p></li>
+<li><p><strong>Do you have non-independent/hierarchical data?</strong> Hierarchical data (e.g.&nbsp;multiple cells recorded from the each animal in each condition) violates the non-independence assumed in most statistical tests. You will need to make sure you have a porper analysis strategy (e.g.&nbsp;sufficient summary statistics approach) and a power plan that matches.</p></li>
+</ul>
+</section>
+<section id="planning-for-power-for-other-designs" class="level2">
+<h2 class="anchored" data-anchor-id="planning-for-power-for-other-designs">Planning for Power for Other Designs</h2>
+<p>statpsych has a wide range of functions for planning for power for simple designs (<a href="https://dgbonett.github.io/statpsych/reference/index.html" class="uri">https://dgbonett.github.io/statpsych/reference/index.html</a>). These include:</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.cor.html"><code>size.test.cor()</code></a></td>
+<td></td>
+<td>Sample size for a test of a Pearson or partial correlation</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.cor2.html"><code>size.test.cor2()</code></a></td>
+<td></td>
+<td>Sample size for a test of equal Pearson or partial correlation in a 2-group design</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.lc.ancova.html"><code>size.test.lc.ancova()</code></a></td>
+<td></td>
+<td>Sample size for a mean linear contrast test in an ANCOVA</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.bs.html"><code>size.test.lc.mean.bs()</code></a></td>
+<td></td>
+<td>Sample size for a test of a between-subjects mean linear contrast</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.ws.html"><code>size.test.lc.mean.ws()</code></a></td>
+<td></td>
+<td>Sample size for a test of a within-subjects mean linear contrast</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.lc.prop.bs.html"><code>size.test.lc.prop.bs()</code></a></td>
+<td></td>
+<td>Sample size for a test of between-subjects proportion linear contrast</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.mann.html"><code>size.test.mann()</code></a></td>
+<td></td>
+<td>Sample size for a Mann-Whitney test</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.mean.ps.html"><code>size.test.mean.ps()</code></a></td>
+<td></td>
+<td>Sample size for a test of a paired-samples mean difference</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.mean.html"><code>size.test.mean()</code></a></td>
+<td></td>
+<td>Sample size for a test of a mean</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.mean2.html"><code>size.test.mean2()</code></a></td>
+<td></td>
+<td>Sample size for a test of a 2-group mean difference</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.prop.ps.html"><code>size.test.prop.ps()</code></a></td>
+<td></td>
+<td>Sample size for a test of a paired-samples proportion difference</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.prop.html"><code>size.test.prop()</code></a></td>
+<td></td>
+<td>Sample size for a test of a single proportion</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.test.prop2.html"><code>size.test.prop2()</code></a></td>
+<td></td>
+<td>Sample size for a test of a 2-group proportion difference</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>One thing you’ll notice that’s missing is interactions for complex designs – these are currently not available in statpsych. There are a number of good tools for more complex designs; one of <a href="http://www.intxpower.com/" class="uri">http://www.intxpower.com/</a> and this companion paper <span class="citation" data-cites="sommet2023">(<a href="#ref-sommet2023" role="doc-biblioref">Sommet et al. 2023</a>)</span>.</p>
 
 
 
-</main> <!-- /main -->
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-calin-jageman2022" class="csl-entry" role="listitem">
+Calin-Jageman, Robert J. 2022. <span>“Better Inference in Neuroscience: Test Less, Estimate More.”</span> <em>Journal of Neuroscience</em> 42 (45): 8427–31. <a href="https://doi.org/10.1523/JNEUROSCI.1133-22.2022">https://doi.org/10.1523/JNEUROSCI.1133-22.2022</a>.
+</div>
+<div id="ref-mirescu2004" class="csl-entry" role="listitem">
+Mirescu, Christian, Jennifer D. Peters, and Elizabeth Gould. 2004. <span>“Early Life Experience Alters Response of Adult Neurogenesis to Stress.”</span> <em>Nature Neuroscience</em> 7 (8): 841–46. <a href="https://doi.org/10.1038/nn1290">https://doi.org/10.1038/nn1290</a>.
+</div>
+<div id="ref-scheel2020" class="csl-entry" role="listitem">
+Scheel, Anne M., Leonid Tiokhin, Peder M. Isager, and Daniël Lakens. 2020. <span>“Why Hypothesis Testers Should Spend Less Time Testing Hypotheses.”</span> <em>Perspectives on Psychological Science</em>, December, 174569162096679. <a href="https://doi.org/10.1177/1745691620966795">https://doi.org/10.1177/1745691620966795</a>.
+</div>
+<div id="ref-sommet2023" class="csl-entry" role="listitem">
+Sommet, Nicolas, David L. Weissman, Nicolas Cheutin, and Andrew J. Elliot. 2023. <span>“How Many Participants Do I Need to Test an Interaction? Conducting an Appropriate Power Analysis and Achieving Sufficient Power to Detect an Interaction.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 6 (3): 25152459231178728. <a href="https://doi.org/10.1177/25152459231178728">https://doi.org/10.1177/25152459231178728</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script>
 
 

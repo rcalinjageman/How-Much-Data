@@ -1,7 +1,132 @@
 ---
 title: "Planning for Power"
+bibliography: references.bib
 ---
 
 {{< video https://youtu.be/nyvswy8jBlU >}}
 
-Planning for Power
+The video above gives a quick overview of planning for power. Once you've viewed it, this page helps you dig into some details.
+
+## The Inputs You Need for Planning for Power
+
+Suppose you are in a lab that studies neurogenesis. You believe that early-life stress impairs neurogenesis. You will test your theory by exposing lab mice to stress or to standard living conditions. You will then use BRDU to label new neurons in the hippocampus. How can you make a good sampling plan for your study? (This example is inspired by [@mirescu2004]).
+
+To start, you'll need some inputs. Specifically, you need to know:
+
+-   The stringency of your hypothesis test you will conduct (alpha = .05 is typical)
+
+-   The level of power you want (80%? 90%? 95%?). The lower the power the lower your sample-size need. But the lower the power, the higher your chance of missing an effect if it is there. Just as bad, low-power samples that yield significant results often do so by inflating the true effect (see [What Not to Do](What%20Not%20to%20Do.qmd))
+
+-   You also need to know the exact type of test you want to use. Will you use a t-test to compare means with the assumption of equal variance? Or, do you want to use a t-test to compare means without assuming equal variance (often called a Welch's t-test)? Or, because you are dealing with count data, do you want to compare medians using a non-parametric test (e.g. the Mann-Whitny U test).
+
+-   You *also* need a predicted effect: By how much do you believe stress will impact neurogenesis?
+
+    -   Ideally you would have a prediction in *raw units*. Meaning, for example, you have a good sense of the typical level of neurogenesis under control conditions and you have a prediction of how much less neurogenesis you expect with stress (500 less neurons? 700 less neurons?). Ideally, this prediction is **directional** (predicting either a decrease or an increase over controls). You can, however, make a non-directional prediction (a change of at least 500 neurons)... though if you don't know the direction, it's hard to imagine the prediction being very well-founded.
+
+        -   If you go this route (which is best), you *also* need to provide a good estimate of the standard deviation in both groups.
+
+    -   You could also make your prediction in standard deviation units (1 standard deviation reduction, 2 standard deviation reduction, etc.).
+
+        -   If you go this route, you don't need a predicted standard deviation for each group. That sounds attractive – you can get by with less guesswork. But on the other hand, what's the basis of your prediction? If it is a well-founded prediction, it would usually come from familiarity with the assay and some knowledge of both typical scores and their variety. If you don't know anything about the variety to expect in your assay, it's hard to imagine your prediction in standard deviation units will be that informed.
+
+When asked for these inputs, many researchers become frustrated: *How am I supposed to know all this before I do the study!?* It's true the inputs required for planning for power are extensive. But that's because we plan for power to conduct a hypothesis test, and a hypothesis test *is meant to test a hypothesis*. If you don't have a clear, quantitative hypothesis, then you aren't really ready to conduct a hypothesis test, and if you're not ready for a hypothesis test, you will definitely have difficulty planing one!
+
+So: if you find the inputs for planning for power daunting you may want to consider: Am I ready to conduct a hypothesis test? Perhaps you want to start with some descriptive research to accurately characterize the system you are studying. In that case, you might want to plan for precision (for accurate description), and *then*, once you've described the system well you might formulate clear hypotheses that are worth testing.
+
+This warning that you may not be ready for a hypothesis test may sound absurd. Just look at any journal and you'll see hypothesis test after hypothesis test... clearly those researchers didn't always have clear quantitative hypotheses and all this background knowledge. True – current norms are to use hypothesis tests willy nilly, in circumstances where the researcher has no clear hypotheses and little forethought. The regularity with which hypothesis testing is abused, however, does not make it wise, sensible, or sound. You can find more details on why hypothesis testing should be reserved for testing hypotheses in these sources [@calin-jageman2022; @scheel2020].
+
+## Planning for Power with statpsych
+
+What if you really are ready for a hypothesis test? Well there are *tons* of tools you can use to help you plan for power. In this workshop we'll demonstrate the use of statpsych, a package for R by Doug Bonett. Why? Because statpsych is easy to use, comprehensive, has a consistent and well-documented set of functions, and has been extensively validated.
+
+Let's continue our neurogenesis example. Suppose from previous research you *do* know a good bit about neurogenesis under control conditions: your lab has typically found about 3,500 neurons labelled within 2 hours of BRDU injection, with a standard deviation of 500. Furthermore, from previous research on neurogenesis you believe that stress will alter neurogenesis by a substantial amount, at least 700 neurons –that's more than 1 standard deviation. Note that, for now we said "a change of at least"... that's a non-directional hypothesis; we'll start with this vague hypothesis and then switch to a directional hypothesis in a moment.
+
+We need two additional inputs: stringency (alpha) and desired power. We'll pick a traditional stringency (.05) and we'll shoot for 90% power. You'll often see 80% used as a convention, but who wants to let 20% of their true hypotheses fail to garner support? If the experiment will require considerable time and resources *and* is worth doing, then it is probably worth doing with a relatively high rate of power.)
+
+We can put all this together and find our needed sample-size using the `size.test.mean2` function in statpsych. This function, along with all other functions in statpsych, is documented here: <https://dgbonett.github.io/statpsych/reference/index.html>
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# Get sample size for 90% power for a two-group hypothesis test of at least 700-neuron change 
+#  with an assay with typical standard deviaiton of 500 neurons.  The test will be conducted
+#  with an alpha of .05.  We'll plan for equal sample-sizes in both groups.
+statpsych::size.test.mean2(
+  alpha = 0.05,
+  pow = 0.90,
+  var = 500^2,     # Typical sd in our lab is 500 neurons; here we input variance (sd^2)
+  es = 700,
+  R = 1            # ratio of n1/n2; here we entered 1 for equal group sizes
+)
+
+
+```
+
+According to these calculations, we need n = 12 per group (24 animals in total) to conduct a well-powered test of our hypothesis. This is a good bit more than is typically used in neurogenesis research... but that's a reflection of poor prior practice, not bad planning on our part.
+
+If you are really ready for a hypothesis test then you almost certainly have a **directional** hypothesis. That's a good thing, because that will reduce our sample-size needs relative to a non-direcitonal hypothesis. There is a cost, though: by making a directional hypothesis you are calling your shot. That is, you are committing to conducting the test **only if the effect is in the predicted direction** – otherwise it is a non-significant finding *even if it would have been significant in the other direction*. By making that commitment, you can get your desired power with less resources. Clearly, though, it would be best to document that commitment; a public pre-registration would be ideal. Unfortunately, abuse of directional tests has led to suspicion that they reflect *p* hacking–that's a shame because if we used hypothesis testing for testing actual hypotheses we would almost always be conducting direcitonal effects–it is actually non-directional hypotheses that clue us to the fact that the researcher doesn't seem to have any clear idea of what they're predicing.
+
+Anyway, how do we plan for a directional hypothesis? Some tools have this as a specific option, but in general what you do is **double the alpha used in your input**. That is, for a .05 directional test, you can use .10 in a non-directional tool. Here's what we'd get with statpsych:
+
+```{r}
+if (!require("statpsych")) install.packages("statpsych")
+
+# Get sample size for 90% power for a two-group hypothesis test of at least 700-neuron change 
+#  with an assay with typical standard deviaiton of 500 neurons.  The test will be conducted
+#  with an alpha of .05.  We'll plan for equal sample-sizes in both groups.
+statpsych::size.test.mean2(
+  alpha = 0.05 * 2,  # Double alpha for directional test
+  pow = 0.90,
+  var = 500^2,     # Typical sd in our lab is 500 neurons; here we input variance (sd^2)
+  es = 700,
+  R = 1            # ratio of n1/n2; here we entered 1 for equal group sizes
+)
+
+
+```
+
+Nice! With a directional effect we can get by with *n* = 10/group or 20 animals overall. That's a resource saving of 20%!
+
+## Important Considerations When Planning for Power
+
+-   **What if your inputs are off?** That, is what if variation is 20% higher than you expected? What if the effect is 20% weaker than you expected? Or 50%? The best practice is to explore a variety of inputs and judiciously choose a sample size. Sample-size needs can be much larger than you might be used to. Be sure to check out the section on optimization for some tips on how to deal with this.
+
+-   **Does your sample-size plan matches your research question.** It sounds obvious, but you need to make sure you are planning for power for the analysis that answers your research quesiton. Note that with hypothesis tests that can sometimes be confusing. For example, suppose you test the effects of both stress (high/low) and sex (male/female) on neurogensis. You will probably want to test if stress affects neurogenesis in male mice. And you will probably want ot test if stress affects neurogenesis in female mice. But most importantly, you will probably want to know if there is a sex difference in the impact of stress (an interaction). In that case, you need to make sure your sample-size plan is for this interaction, which typically has considerably higher sample-size needs than either simple effect.
+
+-   **Will you conduct multiple tests?** When you will conduct multiple tests your risk of including a false-positive. You thus need to make a sample size plan that includes the increase needs for when adjusting for multiple comparisons. This can become complicated, and sometimes can only be solved through simulation. On the other hand, if you are using hypothesis testing only to test well-formed, quantitative hypotheses you may find yourself with only a few focal hypotheses to test in any given study.
+
+-   **Do you have non-independent/hierarchical data?** Hierarchical data (e.g. multiple cells recorded from the each animal in each condition) violates the non-independence assumed in most statistical tests. You will need to make sure you have a porper analysis strategy (e.g. sufficient summary statistics approach) and a power plan that matches.
+
+## Planning for Power for Other Designs
+
+statpsych has a wide range of functions for planning for power for simple designs (<https://dgbonett.github.io/statpsych/reference/index.html>). These include:
+
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.cor()`](https://dgbonett.github.io/statpsych/reference/size.test.cor.html)                |           | Sample size for a test of a Pearson or partial correlation                         |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.cor2()`](https://dgbonett.github.io/statpsych/reference/size.test.cor2.html)              |           | Sample size for a test of equal Pearson or partial correlation in a 2-group design |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.lc.ancova()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.ancova.html)    |           | Sample size for a mean linear contrast test in an ANCOVA                           |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.lc.mean.bs()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.bs.html)  |           | Sample size for a test of a between-subjects mean linear contrast                  |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.lc.mean.ws()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.ws.html)  |           | Sample size for a test of a within-subjects mean linear contrast                   |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.lc.prop.bs()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.prop.bs.html)  |           | Sample size for a test of between-subjects proportion linear contrast              |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.mann()`](https://dgbonett.github.io/statpsych/reference/size.test.mann.html)              |           | Sample size for a Mann-Whitney test                                                |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.mean.ps()`](https://dgbonett.github.io/statpsych/reference/size.test.mean.ps.html)        |           | Sample size for a test of a paired-samples mean difference                         |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.mean()`](https://dgbonett.github.io/statpsych/reference/size.test.mean.html)              |           | Sample size for a test of a mean                                                   |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.mean2()`](https://dgbonett.github.io/statpsych/reference/size.test.mean2.html)            |           | Sample size for a test of a 2-group mean difference                                |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.prop.ps()`](https://dgbonett.github.io/statpsych/reference/size.test.prop.ps.html)        |           | Sample size for a test of a paired-samples proportion difference                   |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.prop()`](https://dgbonett.github.io/statpsych/reference/size.test.prop.html)              |           | Sample size for a test of a single proportion                                      |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+| [`size.test.prop2()`](https://dgbonett.github.io/statpsych/reference/size.test.prop2.html)            |           | Sample size for a test of a 2-group proportion difference                          |         |
++-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+
+One thing you'll notice that's missing is interactions for complex designs – these are currently not available in statpsych. There are a number of good tools for more complex designs; one of <http://www.intxpower.com/> and this companion paper [@sommet2023].

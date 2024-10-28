@@ -20,27 +20,7 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-  margin-bottom: 0em;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -248,32 +228,11 @@ div.csl-indent {
 
 
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/MwFbt8Qx0Rk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>The video above provides an introduction to <strong>effect sizes</strong>. An effect size is a quantitative answer to a research question. Any research question you can obtain a <em>p</em> value for has a corresponding effect size and confidence interval (or, if you use Bayesian statistics, a credible interval). Although the word “effect” is in the phrase “effect size”, these are not just for experimental studies (e.g.&nbsp;in a correlational study, Pearson’s r is an effect size).</p>
-<section id="tools-for-obtaining-effect-sizes" class="level2">
-<h2 class="anchored" data-anchor-id="tools-for-obtaining-effect-sizes">Tools for Obtaining Effect Sizes</h2>
-<p>Most statistical software will report effect sizes.</p>
-<p>If you want a graphical interface, the esci module <span class="citation" data-cites="cumming2024 calin-jageman2024">(<a href="#ref-cumming2024" role="doc-biblioref">Cumming and Calin-Jageman 2024</a>; <a href="#ref-calin-jageman2024" role="doc-biblioref">Calin-Jageman and Cumming 2024</a>)</span> for jamovi is a great option . jamovi is a free, open-source, cross-platform analysis program (like GraphPad prism or SPSS, but free). jamovi has library of free modules that extend its base functionality. The esci package (Estimation Statistics with Confidence Intervals) provides effect sizes, confidence intervals, and lovely visualizations for lots of basic research designs. A guide to getting started is here: <a href="https://thenewstatistics.com/itns/esci/jesci/" class="uri">https://thenewstatistics.com/itns/esci/jesci/</a></p>
-<p>If you’re using R or Python for analysis, most packages natively provide effect sizes. For R, a special resource is <a href="https://cran.r-project.org/package=statpsych">statpsych</a> <span class="citation" data-cites="bonett2023">(<a href="#ref-bonett2023" role="doc-biblioref">Bonett 2023</a>)</span>. statpsych has functions for effect sizes for lots of designs. The functions all maintain a consistent API. Each has good documentation linked to authoritative references on the calculation of the effect size and its confidence interval. statpsych is well worth learning as a way of bringing a bit of order to what can otherwise feel a bit like the wild west in the command-line analysis world.</p>
-<p>For Python (and R), the <a href="https://acclab.github.io/DABEST-python/">dabest package</a> and webtools provide effect sizes with lovely visualizations <span class="citation" data-cites="ho2019">(<a href="#ref-ho2019" role="doc-biblioref">Ho et al. 2019</a>)</span>. This package takes a bootstrap approach to calculating confidence intervals. This is often a very strong approach, as it makes fewer underlying assumptions about the structure of the data – but it may only be appropriate when you have <em>n</em> &gt; 30/cell.</p>
+<p>What is an effect size?</p>
 
 
 
-</section>
-
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
-<div id="ref-bonett2023" class="csl-entry" role="listitem">
-Bonett, Douglas G. 2023. <em>Statpsych: Statistical Methods for Psychologists</em>. <a href="https://cran.r-project.org/web/packages/statpsych/index.html">https://cran.r-project.org/web/packages/statpsych/index.html</a>.
-</div>
-<div id="ref-calin-jageman2024" class="csl-entry" role="listitem">
-Calin-Jageman, Robert, and Geoff Cumming. 2024. <span>“From Significance Testing to Estimation and Open Science: How Esci Can Help.”</span> <em>International Journal of Psychology</em>, April, ijop.13132. <a href="https://doi.org/10.1002/ijop.13132">https://doi.org/10.1002/ijop.13132</a>.
-</div>
-<div id="ref-cumming2024" class="csl-entry" role="listitem">
-Cumming, Geoff, and Robert Calin-Jageman. 2024. <em>Introduction to the New Statistics: Estimation, Open Science, and Beyond</em>. Second edition. New York: Routledge, Taylor &amp; Francis Group.
-</div>
-<div id="ref-ho2019" class="csl-entry" role="listitem">
-Ho, Joses, Tayfun Tumkaya, Sameer Aryal, Hyungwon Choi, and Adam Claridge-Chang. 2019. <span>“Moving Beyond P Values: Data Analysis with Estimation Graphics.”</span> <em>Nature Methods</em> 16 (7): 565–66. <a href="https://doi.org/10.1038/s41592-019-0470-3">https://doi.org/10.1038/s41592-019-0470-3</a>.
-</div>
-</div></section></div></main> <!-- /main -->
+</main> <!-- /main -->
 <script>
 
 
