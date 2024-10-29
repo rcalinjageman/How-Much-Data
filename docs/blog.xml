@@ -10,7 +10,44 @@
 <atom:link href="http://www.howmuchdata.net/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Sun, 20 Oct 2024 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Tue, 29 Oct 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Stop Fooling Yourself - paper by Richard Born</title>
+  <dc:creator>Bob Calin-Jageman</dc:creator>
+  <link>http://www.howmuchdata.net/posts/confirmation-bias-paper/confirmation-bias-paper.html</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Just as important as a reasonable sample is good study design that mitigates the risks of bias.</p>
+<p>To that end, <em>eNeuro</em> has a great new paper by Richard Born (Harvard) about how to diagnose and avoid confirmation bias <span class="citation" data-cites="born2024">(Born 2024)</span>. The full text is here: <a href="https://www.eneuro.org/content/11/10/ENEURO.0415-24.2024" class="uri">https://www.eneuro.org/content/11/10/ENEURO.0415-24.2024</a></p>
+<p>This paper is part of a series on <em>Improving Your Neuroscience</em> that I (R.C-J.) am helping to organize <span class="citation" data-cites="calin-jageman2024">(Calin-Jageman 2024)</span>. You can find a list of all papers as they appear in this series here: <a href="https://www.eneuro.org/collection/improving-your-neuroscience" class="uri">https://www.eneuro.org/collection/improving-your-neuroscience</a></p>
+<p>I strongly recommend this lovely paper – it is full of fascinating examples and references; it is the type of paper you’ll want to assign to all your incoming trainees.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><a href="https://www.eneuro.org/content/11/10/ENEURO.0415-24.2024"><img src="http://www.howmuchdata.net/posts/confirmation-bias-paper/image.png" class="img-fluid figure-img" alt="Banner of Stop Fooling Yourself paper by Richard T. Born" width="600"></a></p>
+<figcaption>Stop Fooling Yourself paper by Richard T. Born</figcaption>
+</figure>
+</div>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-born2024" class="csl-entry">
+Born, Richard T. 2024. <span>“Stop Fooling Yourself! (Diagnosing and Treating Confirmation Bias).”</span> <em>eNeuro</em> 11 (10). <a href="https://doi.org/10.1523/ENEURO.0415-24.2024">https://doi.org/10.1523/ENEURO.0415-24.2024</a>.
+</div>
+<div id="ref-calin-jageman2024" class="csl-entry">
+Calin-Jageman, Robert J. 2024. <span>“New eNeuro Series: Improving Your Neuroscience.”</span> <em>eNeuro</em> 11 (3). <a href="https://doi.org/10.1523/ENEURO.0048-24.2024">https://doi.org/10.1523/ENEURO.0048-24.2024</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>news</category>
+  <category>papers</category>
+  <guid>http://www.howmuchdata.net/posts/confirmation-bias-paper/confirmation-bias-paper.html</guid>
+  <pubDate>Tue, 29 Oct 2024 05:00:00 GMT</pubDate>
+</item>
 <item>
   <title>statpsych for Sample-Size Planning</title>
   <dc:creator>Bob Calin-Jageman</dc:creator>

@@ -1,0 +1,17 @@
+---
+bibliography: references.bib
+title: "Stop Fooling Yourself - paper by Richard Born"
+author: "Bob Calin-Jageman"
+date: "2024-10-29"
+categories: [news, papers]
+---
+
+Just as important as a reasonable sample is good study design that mitigates the risks of bias.
+
+To that end, *eNeuro* has a great new paper by Richard Born (Harvard) about how to diagnose and avoid confirmation bias [@born2024]. The full text is here: <https://www.eneuro.org/content/11/10/ENEURO.0415-24.2024>
+
+This paper is part of a series on *Improving Your Neuroscience* that I (R.C-J.) am helping to organize [@calin-jageman2024]. You can find a list of all papers as they appear in this series here: <https://www.eneuro.org/collection/improving-your-neuroscience>
+
+I strongly recommend this lovely paper – it is full of fascinating examples and references; it is the type of paper you'll want to assign to all your incoming trainees.
+
+[![Stop Fooling Yourself paper by Richard T. Born](image.png){fig-alt="Banner of Stop Fooling Yourself paper by Richard T. Born" width="600"}](https://www.eneuro.org/content/11/10/ENEURO.0415-24.2024)
