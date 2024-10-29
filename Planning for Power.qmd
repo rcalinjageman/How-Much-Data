@@ -91,7 +91,7 @@ Nice! With a directional effect we can get by with *n* = 10/group or 20 animals 
 
 -   **What if your inputs are off?** That, is what if variation is 20% higher than you expected? What if the effect is 20% weaker than you expected? Or 50%? The best practice is to explore a variety of inputs and judiciously choose a sample size. Sample-size needs can be much larger than you might be used to. Be sure to check out the section on optimization for some tips on how to deal with this.
 
--   **Does your sample-size plan matches your research question.** It sounds obvious, but you need to make sure you are planning for power for the analysis that answers your research quesiton. Note that with hypothesis tests that can sometimes be confusing. For example, suppose you test the effects of both stress (high/low) and sex (male/female) on neurogensis. You will probably want to test if stress affects neurogenesis in male mice. And you will probably want ot test if stress affects neurogenesis in female mice. But most importantly, you will probably want to know if there is a sex difference in the impact of stress (an interaction). In that case, you need to make sure your sample-size plan is for this interaction, which typically has considerably higher sample-size needs than either simple effect.
+-   **Does your sample-size plan matches your research question?** It sounds obvious, but you need to make sure you are planning for power for the analysis that answers your research quesiton. Note that with hypothesis tests that can sometimes be confusing. For example, suppose you test the effects of both stress (high/low) and sex (male/female) on neurogensis. You will probably want to test if stress affects neurogenesis in male mice. And you will probably want ot test if stress affects neurogenesis in female mice. But most importantly, you will probably want to know if there is a sex difference in the impact of stress (an interaction). In that case, you need to make sure your sample-size plan is for this interaction, which typically has considerably higher sample-size needs than either simple effect.
 
 -   **Will you conduct multiple tests?** When you will conduct multiple tests your risk of including a false-positive. You thus need to make a sample size plan that includes the increase needs for when adjusting for multiple comparisons. This can become complicated, and sometimes can only be solved through simulation. On the other hand, if you are using hypothesis testing only to test well-formed, quantitative hypotheses you may find yourself with only a few focal hypotheses to test in any given study.
 
@@ -101,32 +101,20 @@ Nice! With a directional effect we can get by with *n* = 10/group or 20 animals 
 
 statpsych has a wide range of functions for planning for power for simple designs (<https://dgbonett.github.io/statpsych/reference/index.html>). These include:
 
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.cor()`](https://dgbonett.github.io/statpsych/reference/size.test.cor.html)                |           | Sample size for a test of a Pearson or partial correlation                         |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.cor2()`](https://dgbonett.github.io/statpsych/reference/size.test.cor2.html)              |           | Sample size for a test of equal Pearson or partial correlation in a 2-group design |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.lc.ancova()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.ancova.html)    |           | Sample size for a mean linear contrast test in an ANCOVA                           |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.lc.mean.bs()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.bs.html)  |           | Sample size for a test of a between-subjects mean linear contrast                  |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.lc.mean.ws()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.ws.html)  |           | Sample size for a test of a within-subjects mean linear contrast                   |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.lc.prop.bs()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.prop.bs.html)  |           | Sample size for a test of between-subjects proportion linear contrast              |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.mann()`](https://dgbonett.github.io/statpsych/reference/size.test.mann.html)              |           | Sample size for a Mann-Whitney test                                                |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.mean.ps()`](https://dgbonett.github.io/statpsych/reference/size.test.mean.ps.html)        |           | Sample size for a test of a paired-samples mean difference                         |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.mean()`](https://dgbonett.github.io/statpsych/reference/size.test.mean.html)              |           | Sample size for a test of a mean                                                   |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.mean2()`](https://dgbonett.github.io/statpsych/reference/size.test.mean2.html)            |           | Sample size for a test of a 2-group mean difference                                |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.prop.ps()`](https://dgbonett.github.io/statpsych/reference/size.test.prop.ps.html)        |           | Sample size for a test of a paired-samples proportion difference                   |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.prop()`](https://dgbonett.github.io/statpsych/reference/size.test.prop.html)              |           | Sample size for a test of a single proportion                                      |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
-| [`size.test.prop2()`](https://dgbonett.github.io/statpsych/reference/size.test.prop2.html)            |           | Sample size for a test of a 2-group proportion difference                          |         |
-+-------------------------------------------------------------------------------------------------------+-----------+------------------------------------------------------------------------------------+---------+
+|  |  |  |  |
+|---------------------------|------------|----------------------|------------|
+| [`size.test.cor()`](https://dgbonett.github.io/statpsych/reference/size.test.cor.html) |  | Sample size for a test of a Pearson or partial correlation |  |
+| [`size.test.cor2()`](https://dgbonett.github.io/statpsych/reference/size.test.cor2.html) |  | Sample size for a test of equal Pearson or partial correlation in a 2-group design |  |
+| [`size.test.lc.ancova()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.ancova.html) |  | Sample size for a mean linear contrast test in an ANCOVA |  |
+| [`size.test.lc.mean.bs()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.bs.html) |  | Sample size for a test of a between-subjects mean linear contrast |  |
+| [`size.test.lc.mean.ws()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.mean.ws.html) |  | Sample size for a test of a within-subjects mean linear contrast |  |
+| [`size.test.lc.prop.bs()`](https://dgbonett.github.io/statpsych/reference/size.test.lc.prop.bs.html) |  | Sample size for a test of between-subjects proportion linear contrast |  |
+| [`size.test.mann()`](https://dgbonett.github.io/statpsych/reference/size.test.mann.html) |  | Sample size for a Mann-Whitney test |  |
+| [`size.test.mean.ps()`](https://dgbonett.github.io/statpsych/reference/size.test.mean.ps.html) |  | Sample size for a test of a paired-samples mean difference |  |
+| [`size.test.mean()`](https://dgbonett.github.io/statpsych/reference/size.test.mean.html) |  | Sample size for a test of a mean |  |
+| [`size.test.mean2()`](https://dgbonett.github.io/statpsych/reference/size.test.mean2.html) |  | Sample size for a test of a 2-group mean difference |  |
+| [`size.test.prop.ps()`](https://dgbonett.github.io/statpsych/reference/size.test.prop.ps.html) |  | Sample size for a test of a paired-samples proportion difference |  |
+| [`size.test.prop()`](https://dgbonett.github.io/statpsych/reference/size.test.prop.html) |  | Sample size for a test of a single proportion |  |
+| [`size.test.prop2()`](https://dgbonett.github.io/statpsych/reference/size.test.prop2.html) |  | Sample size for a test of a 2-group proportion difference |  |
 
 One thing you'll notice that's missing is interactions for complex designs – these are currently not available in statpsych. There are a number of good tools for more complex designs; one of <http://www.intxpower.com/> and this companion paper [@sommet2023].

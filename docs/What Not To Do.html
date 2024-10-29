@@ -373,7 +373,7 @@ div.csl-indent {
 <section id="simulation-results-false-positive-rate" class="level3">
 <h3 class="anchored" data-anchor-id="simulation-results-false-positive-rate">Simulation Results: False-Positive Rate</h3>
 <p>The code simulated 1000 two-group studies with a true mean difference 0 where sample sizes started off with 3/group and if not significant added 1/group up to significance or a max sample size of 30.</p>
-<p>Under this scenario, the proportion of false positives is: 23.8%.</p>
+<p>Under this scenario, the proportion of false positives is: 25.2%.</p>
 <p>This scenario is a bit extreme, but it makes it clear that run-and-check is not a good method for determining sample size.</p>
 </section>
 <section id="simulation-results-the-deceptive-dance-of-the-p-value" class="level3">
@@ -495,14 +495,14 @@ Figure&nbsp;1: Evolution of p values as samples are added but no true effect
 <section id="simulation-results-power" class="level3">
 <h3 class="anchored" data-anchor-id="simulation-results-power">Simulation Results: Power</h3>
 <p>The code above simulates 10000 2-group experiments with n = 6 and a true effect of 1 standard deviations.</p>
-<p>Under this scenario, where there is a large effect, only 33.5% of samples yield statistically significant results (p &lt; .05).</p>
-<p>This sample-size is inadequate because the typical margin of error is 1.37</p>
+<p>Under this scenario, where there is a large effect, only 33.2% of samples yield statistically significant results (p &lt; .05).</p>
+<p>This sample-size is inadequate because the typical margin of error is 1.38</p>
 <p>As you can see, only about 33% of experiments yield <em>p</em> &lt; .05 <em>even though there is a real and substantial effect to be observed!</em> Why so low? Well, consider that statistical tests examine if the difference observed (signal) is substantially greater than expected sampling error (noise). With the sample-size we selected, though, expected sampling error is large: in fact, the margin of error in these studies is typically ~1.37 standard deviations, far larger than the signal it would be reasonable to expect!</p>
 <p>If the noise in this type of study is bigger than the signal, how do any of the experiments still turn out to be statistically significant? This occurs when sampling error breaks in just the right way to <em>distort</em> the effect–to make it seem much bigger than it really is, so that, for that misleading sample at least, the effect observed is substantially larger than the real truth. Uh oh! That’s right, in these cases <em>p</em> &lt; .05 can only occur <em>by mis-characterizing the actual truth</em>.</p>
 </section>
 <section id="simulation-results-observed-effect-sizes" class="level3">
 <h3 class="anchored" data-anchor-id="simulation-results-observed-effect-sizes">Simulation Results: Observed Effect Sizes</h3>
-<p>Let’s see this in more detail. <strong>?@fig-effect_size_inlfation</strong> plots the effect observed in each study. The line at 1 standard deviation represents the true effect. Because of sampling error, studies “dance” around this truth – some get a bit too large of an effect, others a bit too small. Notice, though, the coloring, which represents statistical significance of each simulated experiment. Most of the dots are blue, not significant – that’s the low power of the experiment. But note that the statistically significant findings (the red dots) all studies that radically <em>over-estimated</em> the real truth:</p>
+<p>Let’s see this in more detail. <a href="#fig-effect_size_inflation" class="quarto-xref">Figure&nbsp;2</a> plots the effect observed in each study. The line at 1 standard deviation represents the true effect. Because of sampling error, studies “dance” around this truth – some get a bit too large of an effect, others a bit too small. Notice, though, the coloring, which represents statistical significance of each simulated experiment. Most of the dots are blue, not significant – that’s the low power of the experiment. But note that the statistically significant findings (the red dots) all studies that radically <em>over-estimated</em> the real truth:</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Code</summary>
@@ -542,7 +542,7 @@ Figure&nbsp;2: Observed effect sizes by stat significance status.
 </div>
 <ul>
 <li><p>In this scenario, the true effect size is: 1 standard deviations</p></li>
-<li><p>Across all stimulated studies, the average effect size observed is: 1.00</p></li>
+<li><p>Across all stimulated studies, the average effect size observed is: 1.01</p></li>
 <li><p>But for the studies that reached statistical significance, the average effect size observed is: 1.71</p></li>
 </ul>
 <p>Wow! The statistically-significant effects over-state the truth by over 70%. Below is a representation of the true effect and the effect that would be reported through the statistical-significance filter:</p>

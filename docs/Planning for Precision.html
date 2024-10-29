@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -228,9 +262,221 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/1SG8-XgYp7c" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>Planning for Precision</p>
+<p>The video above gives an overview of planning for precision. Now let’s dig in with an example.</p>
+<p>In the power for planning section, we imagined conducting a study of the effect of stress on neurogenesis in the hippocampus. The plan is to raise mice under stressful or standard conditions and then, as adults, characterize neurogenesis by injecting BRDU and counting labelled cells 2 hours after injection (This example is inspired by <span class="citation" data-cites="mirescu2004">[@mirescu2004]</span>).</p>
+<p>To plan for power, we need a lot of inputs: we’d need to know the type of test we’ll use, its stringency, the power level desired, the typical level of neurogenesis in the control group, a quantitative prediction about the degree to which stress will change neurogenesis, <strong>and</strong> the expected standard deviation within each group. This long list of inputs can feel frustrating – that’s because planning for power is for testing a hypothesis, and until you have a well-developed hypothesis it is simply not possible to make a good sample plan.</p>
+<p>Planning for precision can help – the goal of planning for precision is to conduct a <strong>decriptive</strong> study, one where we simply want to provide a quality measurement. That is, we’re not trying to confirm a specific theory about neurogenesis (stress halts neurogenesis); we’re trying to accurately measure the impact of stress on neurogenesis. Planning for precision lets us weigh our expected sampling error against resources: how close to the truth can you afford to get?</p>
+<p>Planning for precision requires fewer inputs than planning for power. You need:</p>
+<ul>
+<li><p>The confidence level you want for your confidence interval (95% is typical, but good thought and judgement is needed for selecting a confidence level),</p></li>
+<li><p>The within-group variety you expect (variance or standard deviation); this can come from the prior literature, previous studies in your lab using this assay, and/or a pilot study.</p></li>
+<li><p>The desired confidence interval width (how much uncertainty are you willing to live with?).</p></li>
+</ul>
+<p>Setting the confidence level is pretty easy. Knowing the variety of scores to expect within a group can present some challenges, but is not too hard to develop some good guesses. Critically, standard deviations in the published literature are likely <em>not</em> very biased because they are not a major point of selection/filtering. So, perhaps you find previous BRDU experiments in the same strain of mice and find a typical standard deviation is 500 neurons.</p>
+<p>The last input can is the most difficult: how much uncertainty can you tolerate? We need a number: are you ok with an answer within 100 neurons of the truth? 500 neurons of the truth? 1,000 neurons of the truth? The answer will be informed by what you can afford and also by your expectations of the magnitude of the effect. In political polling, pollsters want to get small margins of error in races expected to be close; they can tolerate large margins of error in non-competitive races. Similarly, if you have reason to believe that stress will make an enormous impact on neurogenesis, then you might be comfortable with a fairly long confidence interval. If you believe the effect will be subtle, you’d rather have a short confidence interval. Remember, the goal is to get a reasonable reading on the effect; to describe it well to inform your theories and hypotheses – you don’t yet need to be so precise as to test a hypothesis, but you still want to generate useful knowledge.</p>
+<p>If you have expectations about the control group, you might be able to think in terms of percentages. For example, if you know that typical neurogenesis is 3,500 new neurons, you could think about getting a confidence interval that spans 10% (350 neurons), 20% (750 neurons), etc.</p>
+<p>Most likely you will do some exploration and iteration – you might initially want a very short confidence interval, but then scale back to find a reasonable compromise between precision and cost.</p>
+<p>For this example, let’s check out confidence interval lengths of 250 neurons (1/2 a standard deviation long), 500 (1 standard deviation long), and 1,000 (2 standard deviations long) and we can then think about the costs and pick a precision level.</p>
+<p>To get our sample-size needs we will again turn to statpsych in R. For this two-group design we will use the <code>size.ci.mean2</code>. This function along with all other functions in statpsych are documented here: <a href="https://dgbonett.github.io/statpsych/reference/index.html" class="uri">https://dgbonett.github.io/statpsych/reference/index.html</a>. The parameters for this function are:</p>
+<ul>
+<li><p>alpha - instead of confidence level, statpsych asks for alpha level. So for a 95% confidence interval you input .05, for 99% the input is .01, etc.</p></li>
+<li><p>var - statpsych asks for the within-group diversity to be expressed as variance, the squared standard deviation</p></li>
+<li><p>w - confidence-interval width</p></li>
+<li><p>R - n2/n1 ratio; typically we would use 1 to indicate equal groups</p></li>
+</ul>
+<p>Here’s our code, starting with a desired CI width of 250 neurons (entire CI length is just half the standard deviation of 500 neurons).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: statpsych</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">size.ci.mean2</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.95</span>,    <span class="co"># alpha of .05 for 95% CI</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,         <span class="co"># sd is 500, so we enter 500^2 for variance</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">w =</span> <span class="dv">250</span>,             <span class="co"># we'll start with a CI length of 250</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">R =</span> <span class="dv">1</span>                <span class="co"># R = 1 indicates equal sample sizes</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  n1  n2
+ 124 124</code></pre>
+</div>
+</div>
+<p>Whoa! Getting that much prevision is expensive. Let’s consider something a bit less ambitious:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">size.ci.mean2</span>(</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.95</span>,    </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,         </span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">w =</span> <span class="dv">500</span>,             <span class="co"># update CI length to 500</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">R =</span> <span class="dv">1</span>                </span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> n1 n2
+ 32 32</code></pre>
+</div>
+</div>
+<p>Much better! That’s a lot less animals, though we will also be a lot less certain about the effects of stress. Let’s see what happens if we’re willing to be even more uncertain:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">size.ci.mean2</span>(</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.95</span>,    </span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">var =</span> <span class="dv">500</span><span class="sc">^</span><span class="dv">2</span>,         </span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">w =</span> <span class="dv">1000</span>,             <span class="co"># update CI length to 500</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">R =</span> <span class="dv">1</span>                </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> n1 n2
+  9  9</code></pre>
+</div>
+</div>
+<p>That’s a somewhat large, but not atypical sample size for these types of studies. But it is also not especially precise: we should expect our typical confidence interval to be 1,000 neurons wide. Given that within-group variability is 500, that’s a pretty long interval, something only suitable if we believe stress will have a pretty enormous impact on neurogenesis.</p>
+<p>While planning for precision takes fewer inputs, it still often reveals that more resources are needed than have been typical in a field. Part of that is just the sad truth: many assays are regularly conducted with sample-sizes that are indefensibly small, and we need to change that. But there are other ways to deal with this sticker-shock; see the section on <a href="./Decreasing Sample-Size Needs.html">Decreasing Sample-Size Needs</a>.</p>
+<section id="important-considerations-when-planning-for-precision" class="level2">
+<h2 class="anchored" data-anchor-id="important-considerations-when-planning-for-precision">Important Considerations When Planning for Precision</h2>
+<ul>
+<li><p><strong>What if your inputs are off?</strong> That, is what if variation is 20% higher than you expected? Or 50%? The best practice is to explore a variety of inputs and judiciously choose a sample size.</p></li>
+<li><p><strong>Does your sample-size plan matches your research question?</strong> It sounds obvious, but you need to make sure you are planning for power for the analysis that answers your research quesiton. For example, suppose you describe the effects of both stress (high/low) and sex (male/female) on neurogensis. You will probably want to describe how much stress affects neurogenesis in male mice. And you will probably want to describe how much stress affects neurogenesis in female mice. But most importantly, you will probably want to describe the difference between these simple effects, the extent to which stress effects differ between the sexes. In that case, you need to make sure your sample-size plan is for the confidence interval for the difference between the simple effects (the interaction), and effect size that has much higher sampling error than either simple effect.</p></li>
+<li><p><strong>Will you estimate multiple parameters?</strong> When you want to estimate multiple parameters you increase the overall risk of providing a confidence interval that doesn’t capture the true parameter for the population. You thus need to make a sample size plan that includes the increased needs that occur when you make multiple estimates. This can become complicated, and sometimes can only be solved through simulation.</p></li>
+<li><p><strong>Do you have non-independent/hierarchical data?</strong> Hierarchical data (e.g.&nbsp;multiple cells recorded from the each animal in each condition) violates the non-independence assumed in most statistical tests. You will need to make sure you have a porper analysis strategy (e.g.&nbsp;sufficient summary statistics approach) and a power plan that matches.</p></li>
+</ul>
+</section>
+<section id="planning-for-power-for-other-designs" class="level2">
+<h2 class="anchored" data-anchor-id="planning-for-power-for-other-designs">Planning for Power for Other Designs</h2>
+<p>statpsych has a wide range of functions for planning for precision for simple designs (<a href="https://dgbonett.github.io/statpsych/reference/index.html" class="uri">https://dgbonett.github.io/statpsych/reference/index.html</a>). These include:</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.condmean.html"><code>size.ci.condmean()</code></a></td>
+<td>Sample size for a conditional mean confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.cor2.html"><code>size.ci.cor2()</code></a></td>
+<td>Sample size for a 2-group Pearson correlation difference confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.cronbach2.html"><code>size.ci.cronbach2()</code></a></td>
+<td>Sample size for a 2-group Cronbach reliability difference confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.etasqr.html"><code>size.ci.etasqr()</code></a></td>
+<td>Sample size for an eta-squared confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.indirect.html"><code>size.ci.indirect()</code></a></td>
+<td>Sample size for an indirect effect confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.lc.ancova.html"><code>size.ci.lc.ancova()</code></a></td>
+<td>Sample size for a linear contrast confidence interval in an ANCOVA</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.lc.mean.bs.html"><code>size.ci.lc.mean.bs()</code></a></td>
+<td>Sample size for a between-subjects mean linear contrast confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.lc.mean.ws.html"><code>size.ci.lc.mean.ws()</code></a></td>
+<td>Sample size for a within-subjects mean linear contrast confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.lc.prop.bs.html"><code>size.ci.lc.prop.bs()</code></a></td>
+<td>Sample size for a between-subjects proportion linear contrast confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.lc.stdmean.bs.html"><code>size.ci.lc.stdmean.bs()</code></a></td>
+<td>Sample size for a between-subjects standardized linear contrast of means confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.lc.stdmean.ws.html"><code>size.ci.lc.stdmean.ws()</code></a></td>
+<td>Sample size for a within-subjects standardized linear contrast of means confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.mape.html"><code>size.ci.mape()</code></a></td>
+<td>Sample size for a mean absolute prediction error confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.mean.prior.html"><code>size.ci.mean.prior()</code></a></td>
+<td>Sample size for a mean confidence interval using a planning value from a prior study</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.mean.ps.html"><code>size.ci.mean.ps()</code></a></td>
+<td>Sample size for a paired-samples mean difference confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.mean.html"><code>size.ci.mean()</code></a></td>
+<td>Sample size for a mean confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.mean2.html"><code>size.ci.mean2()</code></a></td>
+<td>Sample size for a 2-group mean difference confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.pbcor.html"><code>size.ci.pbcor()</code></a></td>
+<td>Sample size for a point-biserial correlation confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.prop.prior.html"><code>size.ci.prop.prior()</code></a></td>
+<td>Sample size for a proportion confidence interval using a planning value from a prior study</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.prop.ps.html"><code>size.ci.prop.ps()</code></a></td>
+<td>Sample size for a paired-sample proportion difference confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.prop.html"><code>size.ci.prop()</code></a></td>
+<td>Sample size for a proportion confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.prop2.html"><code>size.ci.prop2()</code></a></td>
+<td>Sample size for a 2-group proportion difference confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.ratio.mean.ps.html"><code>size.ci.ratio.mean.ps()</code></a></td>
+<td>Sample size for a paired-samples mean ratio confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.ratio.mean2.html"><code>size.ci.ratio.mean2()</code></a></td>
+<td>Sample size for a 2-group mean ratio confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.ratio.prop.ps.html"><code>size.ci.ratio.prop.ps()</code></a></td>
+<td>Sample size for a paired-samples proportion ratio confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.ratio.prop2.html"><code>size.ci.ratio.prop2()</code></a></td>
+<td>Sample size for a 2-group proportion ratio confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.rsqr.html"><code>size.ci.rsqr()</code></a></td>
+<td>Sample size for a squared multiple correlation confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.slope.html"><code>size.ci.slope()</code></a></td>
+<td>Sample size for a slope confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.spear.html"><code>size.ci.spear()</code></a></td>
+<td>Sample size for a Spearman correlation confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.spear2.html"><code>size.ci.spear2()</code></a></td>
+<td>Sample size for a 2-group Spearman correlation difference confidence interval</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.stdmean.ps.html"><code>size.ci.stdmean.ps()</code></a></td>
+<td>Sample size for a paired-samples standardized mean difference confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/size.ci.stdmean2.html"><code>size.ci.stdmean2()</code></a></td>
+<td>Sample size for a 2-group standardized mean difference confidence interval</td>
+</tr>
+</tbody>
+</table>
+<p>One thing you’ll notice that’s missing is interactions for complex designs – these are currently not available in statpsych. Stay tuned!</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script>

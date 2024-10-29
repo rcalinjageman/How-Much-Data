@@ -246,7 +246,7 @@ If the noise in this type of study is bigger than the signal, how do any of the 
 
 ### Simulation Results: Observed Effect Sizes
 
-Let's see this in more detail. @fig-effect_size_inlfation plots the effect observed in each study. The line at 1 standard deviation represents the true effect. Because of sampling error, studies "dance" around this truth – some get a bit too large of an effect, others a bit too small. Notice, though, the coloring, which represents statistical significance of each simulated experiment. Most of the dots are blue, not significant – that's the low power of the experiment. But note that the statistically significant findings (the red dots) all studies that radically *over-estimated* the real truth:
+Let's see this in more detail. @fig-effect_size_inflation plots the effect observed in each study. The line at 1 standard deviation represents the true effect. Because of sampling error, studies "dance" around this truth – some get a bit too large of an effect, others a bit too small. Notice, though, the coloring, which represents statistical significance of each simulated experiment. Most of the dots are blue, not significant – that's the low power of the experiment. But note that the statistically significant findings (the red dots) all studies that radically *over-estimated* the real truth:
 
 ```{r}
 #| label: fig-effect_size_inflation
