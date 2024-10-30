@@ -4,4 +4,46 @@ title: "Effect Sizes"
 
 {{< video https://youtu.be/MwFbt8Qx0Rk >}}
 
-What is an effect size?
+An effect size is a quantitative answer to your research question.
+
+# More About Effect Sizes
+
+## Effect Sizes Can Be Simple or Complex
+
+-   If you want to know the degree of neurogenesis in the hippocampus of the adult mouse, then the mean number of new neurons (*M*) observed would be an effect size for your study. Alternatively, you might choose the median number of neurons (*Mdn*).
+
+-   If you wanted to know how much stress impacts nuerogenesis, then your effect size of interest would likely be the mean difference in neurogenesis between control and stressed mice: *M*~diff~ =*M*~stressed~ - *M*~control~. This effect-size is a **contrast**, representing the difference between groups. While mean differences are typical, you might also consider the median difference: *Mdn*~diff~ =*Mdn*~stressed~ - *Mdn*~control.~
+
+-   If you wanted to know how much sex influences the effect of stress on neurogenesis, then your effect size of interest would likely be the mean difference on the difference. That is, you'd be interested in the simple effect of stress on males, the simple effect of stress on females, and the difference between those differences:
+
+    -   *M*~Stress\ In\ Males~ =*M*~males_stressed~ - *M*~males_control~ . This is the simple effect for males
+
+    -   *M*~Stress\ In\ Females~ =*M*~females_stressed~ - *M*~females_control~ . This is the simple effect for females
+
+    -   *M*~interaction~ aka *M*~⍙⍙~ =*M*~Stress\ In\ Females\ -~ *M*~Stress\ In\ Males~. This is the **difference** between these simple effects (how different the stress effect is in females relative to males). This is a quantitative expression of a 2x2 interaction. You'll sometimes see the symbol delta-delta or the phrase "difference on the difference" because this effect size represents the difference between two effects (the difference between two differences).
+
+Again, you could be focused on means, but you can also use medians as your measure of what's typical, finding the difference: *Mdn*~interaction~ aka *Mdn*~⍙⍙~ =*Mdn*~Stress\ In\ Females\ -~ *Mdn*~Stress\ In\ Males~
+
+## Categorical Outcomes Have Effect Sizes, Too
+
+We've focused here on an experiment with a quantitative outcome (number of neurons), but we may instead have a categorical outcome (e.g. depressed or not). In this case, our effect size is typically a proportion (*P*~depressed~ = *N*~Depressed~ / *N*~Total~). From there, we have the same progression from simple to more and more complex contrasts:
+
+-   Depression in a single group, say a random-sample of women living in the USA: *P*~Women_Depressed~ *N*~Women_Depressed~ / *N*~Women_Total~
+
+-   A simple difference or contrast, say the difference in rates of depression for women who have received an intervention vs. controls: *P*~diff~ =*P*~Women_Depressed_Treated~ - *P*~Women_Depressed_Control~. This would express the difference in depression rates in the treated group relative to the control group.
+
+-   A complex contrast, say the degree to which men and women differ in response to a treatment for depression:
+
+    -   *P*~Treatment_Effect_Women~ =*P*~Women_Depressed_Treated~ - *P*~Women_Depressed_Control~.. This is the simple effect for females
+
+    -   *P*~Treatment_Effect_Men~ =*P*~Men_Depressed_Treated~ - *P*~Men_Depressed_Control~.. This is the simple effect for males
+
+    -   *M*~interaction~ aka *M*~⍙⍙~ =*M*~Treatment_Effect_Women\ -~ *M*~Treatment_Effect_Men~. Again, this is a quantitative expression of an interaction, representing the difference in response rate in women relative to controls.
+
+## Lots of Other Simple and Complex Effect Sizes
+
+An effect sizes is the quantitative answer to a research question. Given the diversity of research questions, it should come as no surprise that there are lots of other effect sizes.
+
+Pearson's *r* is an effect size – it answer the question: to what degree are these variables linearly related to each other? And, again, you can have a simple effect size (How much are hippocampal volume and spatial reasoning related) and contrasts that involved differences in effect sizes (How much do men and women differ in the relationship between hippocampal volume and spatial reasoning – this question is about the *difference* in R values between these groups).
+
+Variance is also an effect size! You might be interested, for example, in diversity in brain volume-- in which case the effect size of interest might be the variance in brain volume observed across a set of scans. And, again, simple effects often lead to questions comparing effects (To what extent is diversity in brain size altered in autism? This would be a question about the difference in variance observed between a population with autism and normal controls).
