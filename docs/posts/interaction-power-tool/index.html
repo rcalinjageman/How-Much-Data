@@ -6,8 +6,10 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
+<meta name="author" content="Bob Calin-Jageman">
+<meta name="dcterms.date" content="2024-10-31">
 
-<title>Webexercises – How Much Data?</title>
+<title>Interaction Power Planning Tool: Intxpower.com – How Much Data?</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -20,59 +22,45 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for syntax highlighting */
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
 }
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
 }
-pre.numberSource code
-  { counter-reset: source-line 0; }
-pre.numberSource code > span
-  { position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-  { content: counter(source-line);
-    position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; display: inline-block;
-    -webkit-touch-callout: none; -webkit-user-select: none;
-    -khtml-user-select: none; -moz-user-select: none;
-    -ms-user-select: none; user-select: none;
-    padding: 0 4px; width: 4em;
-  }
-pre.numberSource { margin-left: 3em;  padding-left: 4px; }
-div.sourceCode
-  {   }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
 }
-</style>
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<script src="site_libs/quarto-html/quarto.js"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -102,17 +90,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 }</script>
 
 
-<link rel="stylesheet" href="include/webex.css">
+<link rel="stylesheet" href="../../include/webex.css">
 </head>
 
 <body class="nav-sidebar docked nav-fixed fullcontent">
 
 <div id="quarto-search-results"></div>
-  <header id="quarto-header" class="headroom fixed-top">
+  <header id="quarto-header" class="headroom fixed-top quarto-banner">
     <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
       <div class="navbar-brand-container mx-auto">
-    <a class="navbar-brand" href="./index.html">
+    <a class="navbar-brand" href="../../index.html">
     <span class="navbar-title">How Much Data?</span>
     </a>
   </div>
@@ -123,19 +111,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./Introduction.html" aria-current="page"> 
+    <a class="nav-link active" href="../../Introduction.html" aria-current="page"> 
 <span class="menu-text">Course</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html"> 
+    <a class="nav-link" href="../../blog.html"> 
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./News.html"> 
+    <a class="nav-link" href="../../News.html"> 
 <span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./LICENSE-CC-BY-NC-4.0.html"> 
+    <a class="nav-link" href="../../LICENSE-CC-BY-NC-4.0.html"> 
 <span class="menu-text">License</span></a>
   </li>  
   <li class="nav-item compact">
@@ -154,39 +142,71 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Webexercises</li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">Interaction Power Planning Tool: Intxpower.com</li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
   </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Interaction Power Planning Tool: Intxpower.com</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">news</div>
+                <div class="quarto-category">tools</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Bob Calin-Jageman </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">October 31, 2024</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
     <div class="sidebar-menu-container"> 
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Introduction.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Introduction.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Introduction</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Why You Need Sample-Size Planning.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Why You Need Sample-Size Planning.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Why You Need Sample-Size Planning</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./What Not To Do.html" class="sidebar-item-text sidebar-link">
+  <a href="../../What Not To Do.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">What Not To Do</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Effect Sizes.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Effect Sizes.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Effect Sizes</span></a>
   </div>
 </li>
@@ -201,19 +221,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Planning for Power.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Planning for Power.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Planning for Power</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Planning for Precision.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Planning for Precision.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Planning for Precision</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Planning for Evidence.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Planning for Evidence.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Planning for Evidence</span></a>
   </div>
 </li>
@@ -221,19 +241,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Model Sample-Size Plans.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Model Sample-Size Plans.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Model Sample-Size Plans</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Decreasing Sample-Size Needs.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Decreasing Sample-Size Needs.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Decreasing Sample-Size Needs</span></a>
   </div>
 </li>
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./Resources.html" class="sidebar-item-text sidebar-link">
+  <a href="../../Resources.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Resources</span></a>
   </div>
 </li>
@@ -244,130 +264,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content quarto-banner-title-block" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Webexercises</h1>
+
+
+
+
+<p>Planning for complex designs is tough! Interactions can often be smaller than simple effects, and uncertainty for interactions is generally higher than for simple effects.</p>
+<p>One useful tool to explore is <a href="https://intxpower.com/" class="uri">https://intxpower.com/</a>. The website and lots of useful information about planning for complex designs is described by the creators in this paper: <span class="citation" data-cites="sommet2023">(<a href="#ref-sommet2023" role="doc-biblioref">Sommet et al. 2023</a>)</span>.</p>
+<p><img src="image.png" class="img-fluid"><br>
+</p>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-sommet2023" class="csl-entry" role="listitem">
+Sommet, Nicolas, David L. Weissman, Nicolas Cheutin, and Andrew J. Elliot. 2023. <span>“How Many Participants Do I Need to Test an Interaction? Conducting an Appropriate Power Analysis and Achieving Sufficient Power to Detect an Interaction.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 6 (3): 25152459231178728. <a href="https://doi.org/10.1177/25152459231178728">https://doi.org/10.1177/25152459231178728</a>.
 </div>
-
-
-
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>This is a Web Exercise template created by the <a href="http://www.psy.gla.ac.uk">psychology teaching team at the University of Glasgow</a>, based on ideas from <a href="https://software-carpentry.org/lessons/">Software Carpentry</a>. This template shows how instructors can easily create interactive web documents that students can use in self-guided learning.</p>
-<p>The <code>{webexercises}</code> package provides a number of functions that you use in <a href="https://github.com/rstudio/cheatsheets/raw/master/rmarkdown-2.0.pdf">inline R code</a> or through code chunk options to create HTML widgets (text boxes, pull down menus, buttons that reveal hidden content). Examples are given below. Render this file to HTML to see how it works.</p>
-<p><strong>NOTE: To use the widgets in the compiled HTML file, you need to have a JavaScript-enabled browser.</strong></p>
-<section id="example-questions" class="level2">
-<h2 class="anchored" data-anchor-id="example-questions">Example Questions</h2>
-<section id="fill-in-the-blanks-fitb" class="level3">
-<h3 class="anchored" data-anchor-id="fill-in-the-blanks-fitb">Fill-In-The-Blanks (<code>fitb()</code>)</h3>
-<p>Create fill-in-the-blank questions using <code>fitb()</code>, providing the answer as the first argument.</p>
-<ul>
-<li>2 + 2 is <input class="webex-solveme nospaces" size="1" data-answer="[&quot;4&quot;]"></li>
-</ul>
-<p>You can also create these questions dynamically, using variables from your R session.</p>
-<ul>
-<li>The square root of 4 is: <input class="webex-solveme nospaces" size="1" data-answer="[&quot;2&quot;]"></li>
-</ul>
-<p>The blanks are case-sensitive; if you don’t care about case, use the argument <code>ignore_case = TRUE</code>.</p>
-<ul>
-<li>What is the letter after D? <input class="webex-solveme nospaces ignorecase" size="1" data-answer="[&quot;E&quot;]"></li>
-</ul>
-<p>If you want to ignore differences in whitespace use, use the argument <code>ignore_ws = TRUE</code> (which is the default) and include spaces in your answer anywhere they could be acceptable.</p>
-<ul>
-<li>How do you load the tidyverse package? <input class="webex-solveme nospaces" size="20" data-answer="[&quot;library( tidyverse )&quot;,&quot;library( \&quot;tidyverse\&quot; )&quot;,&quot;library( 'tidyverse' )&quot;]"></li>
-</ul>
-<p>You can set more than one possible correct answer by setting the answers as a vector.</p>
-<ul>
-<li>Type a vowel: <input class="webex-solveme nospaces ignorecase" size="1" data-answer="[&quot;A&quot;,&quot;E&quot;,&quot;I&quot;,&quot;O&quot;,&quot;U&quot;]"></li>
-</ul>
-<p>You can use regular expressions to test answers against more complex rules.</p>
-<ul>
-<li>Type any 3 letters: <input class="webex-solveme nospaces regex" size="3" data-answer="[&quot;^[a-zA-Z]{3}$&quot;]"></li>
-</ul>
-</section>
-<section id="multiple-choice-mcq" class="level3">
-<h3 class="anchored" data-anchor-id="multiple-choice-mcq">Multiple Choice (<code>mcq()</code>)</h3>
-<ul>
-<li>“Never gonna give you up, never gonna: <select class="webex-select"><option value="blank"></option><option value="">let you go</option><option value="">turn you down</option><option value="">run away</option><option value="answer">let you down</option></select>”</li>
-<li>“I <select class="webex-select"><option value="blank"></option><option value="answer">bless the rains</option><option value="">guess it rains</option><option value="">sense the rain</option></select> down in Africa” -Toto</li>
-</ul>
-</section>
-<section id="true-or-false-torf" class="level3">
-<h3 class="anchored" data-anchor-id="true-or-false-torf">True or False (<code>torf()</code>)</h3>
-<ul>
-<li>True or False? You can permute values in a vector using <code>sample()</code>. <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></li>
-</ul>
-</section>
-<section id="longer-mcqs-longmcq" class="level3">
-<h3 class="anchored" data-anchor-id="longer-mcqs-longmcq">Longer MCQs (<code>longmcq()</code>)</h3>
-<p>When your answers are very long, sometimes a drop-down select box gets formatted oddly. You can use <code>longmcq()</code> to deal with this. Since the answers are long, It’s probably best to set up the options inside an R chunk with <code>echo=FALSE</code>.</p>
-<p><strong>What is a p-value?</strong></p>
-<div id="radio_HBCBITLKAM" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_HBCBITLKAM" value=""> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_HBCBITLKAM" value="answer"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_HBCBITLKAM" value=""> <span>the probability of making an error in your conclusion</span></label>
-</div>
-<p><strong>What is true about a 95% confidence interval of the mean?</strong></p>
-<div id="radio_VRWEBPLOMU" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_VRWEBPLOMU" value="answer"> <span>if you repeated the process many times, 95% of intervals calculated in this way contain the true mean</span></label><label><input type="radio" autocomplete="off" name="radio_VRWEBPLOMU" value=""> <span>95% of the data fall within this range</span></label><label><input type="radio" autocomplete="off" name="radio_VRWEBPLOMU" value=""> <span>there is a 95% probability that the true mean lies within this range</span></label>
-</div>
-</section>
-</section>
-<section id="checked-sections" class="level2">
-<h2 class="anchored" data-anchor-id="checked-sections">Checked sections</h2>
-<p>Create sections with the class <code>webex-check</code> to add a button that hides feedback until it is pressed. Add the class <code>webex-box</code> to draw a box around the section (or use your own styles).</p>
-<div class="webex-check webex-box">
-<p>I am going to learn a lot: <select class="webex-select"><option value="blank"></option><option value="answer">TRUE</option><option value="">FALSE</option></select></p>
-What is a p-value?
-<div id="radio_ASFXUGPPKZ" class="webex-radiogroup">
-<label><input type="radio" autocomplete="off" name="radio_ASFXUGPPKZ" value=""> <span>the probability that the null hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_ASFXUGPPKZ" value="answer"> <span>the probability of the observed, or more extreme, data, under the assumption that the null-hypothesis is true</span></label><label><input type="radio" autocomplete="off" name="radio_ASFXUGPPKZ" value=""> <span>the probability of making an error in your conclusion</span></label>
-</div>
-</div>
-</section>
-<section id="hidden-solutions-and-hints" class="level2">
-<h2 class="anchored" data-anchor-id="hidden-solutions-and-hints">Hidden solutions and hints</h2>
-<p>You can fence off a solution area that will be hidden behind a button using <code>hide()</code> before the solution and <code>unhide()</code> after, each as inline R code. Pass the text you want to appear on the button to the <code>hide()</code> function.</p>
-<p>If the solution is a code chunk, instead of using <code>hide()</code> and <code>unhide()</code>, simply set the <code>webex.hide</code> chunk option to TRUE, or set it to the string you wish to display on the button.</p>
-<p><strong>Recreate the scatterplot below, using the built-in <code>cars</code> dataset.</strong></p>
-<div class="cell">
-<div class="cell-output-display">
-<div>
-<figure class="figure">
-<p><img src="webexercises_files/figure-html/unnamed-chunk-6-1.png" class="img-fluid figure-img" width="672"></p>
-</figure>
-</div>
-</div>
-</div>
-<div class="webex-solution">
-<button>
-I need a hint
-</button>
-<p>See the documentation for <code>plot()</code> (<code>?plot</code>)</p>
-</div>
-<!-- note: you could also just set webex.hide to TRUE -->
-<div class="cell" data-webex.hide="Click here to see the solution">
-<div class="webex-solution">
-<button>
-Click here to see the solution
-</button>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(cars<span class="sc">$</span>speed, cars<span class="sc">$</span>dist)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</div>
-
-
-</section>
-
-</main> <!-- /main -->
+</div></section></div></main> <!-- /main -->
 <script>
 
 /* update total correct if #webex-total_correct exists */

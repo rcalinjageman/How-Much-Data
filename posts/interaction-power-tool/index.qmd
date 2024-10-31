@@ -1,0 +1,14 @@
+---
+title: "Interaction Power Planning Tool: Intxpower.com"
+author: "Bob Calin-Jageman"
+date: "2024-10-31"
+categories: [news, tools]
+image: "image.png"
+bibliography: references.bib
+---
+
+Planning for complex designs is tough! Interactions can often be smaller than simple effects, and uncertainty for interactions is generally higher than for simple effects.
+
+One useful tool to explore is <https://intxpower.com/>. The website and lots of useful information about planning for complex designs is described by the creators in this paper: [@sommet2023].
+
+![](image.png)\

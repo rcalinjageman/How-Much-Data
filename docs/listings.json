@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/interaction-power-tool/index.html",
       "/posts/confirmation-bias-paper/confirmation-bias-paper.html",
       "/posts/statpsych-for-sample-size-planning/index.html",
       "/posts/welcome/index.html"

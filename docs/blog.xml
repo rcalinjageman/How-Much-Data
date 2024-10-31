@@ -10,7 +10,36 @@
 <atom:link href="http://www.howmuchdata.net/blog.xml" rel="self" type="application/rss+xml"/>
 <description></description>
 <generator>quarto-1.5.57</generator>
-<lastBuildDate>Tue, 29 Oct 2024 05:00:00 GMT</lastBuildDate>
+<lastBuildDate>Thu, 31 Oct 2024 05:00:00 GMT</lastBuildDate>
+<item>
+  <title>Interaction Power Planning Tool: Intxpower.com</title>
+  <dc:creator>Bob Calin-Jageman</dc:creator>
+  <link>http://www.howmuchdata.net/posts/interaction-power-tool/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<p>Planning for complex designs is tough! Interactions can often be smaller than simple effects, and uncertainty for interactions is generally higher than for simple effects.</p>
+<p>One useful tool to explore is <a href="https://intxpower.com/" class="uri">https://intxpower.com/</a>. The website and lots of useful information about planning for complex designs is described by the creators in this paper: <span class="citation" data-cites="sommet2023">(Sommet et al. 2023)</span>.</p>
+<p><img src="http://www.howmuchdata.net/posts/interaction-power-tool/image.png" class="img-fluid"><br>
+</p>
+
+
+
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0">
+<div id="ref-sommet2023" class="csl-entry">
+Sommet, Nicolas, David L. Weissman, Nicolas Cheutin, and Andrew J. Elliot. 2023. <span>“How Many Participants Do I Need to Test an Interaction? Conducting an Appropriate Power Analysis and Achieving Sufficient Power to Detect an Interaction.”</span> <em>Advances in Methods and Practices in Psychological Science</em> 6 (3): 25152459231178728. <a href="https://doi.org/10.1177/25152459231178728">https://doi.org/10.1177/25152459231178728</a>.
+</div>
+</div></section></div> ]]></description>
+  <category>news</category>
+  <category>tools</category>
+  <guid>http://www.howmuchdata.net/posts/interaction-power-tool/</guid>
+  <pubDate>Thu, 31 Oct 2024 05:00:00 GMT</pubDate>
+  <media:content url="http://www.howmuchdata.net/posts/interaction-power-tool/image.png" medium="image" type="image/png" height="84" width="144"/>
+</item>
 <item>
   <title>Stop Fooling Yourself - paper by Richard Born</title>
   <dc:creator>Bob Calin-Jageman</dc:creator>
