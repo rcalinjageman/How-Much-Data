@@ -471,8 +471,8 @@ sigma_{M} = frac{sigma}{sqrt(N)}
 <span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                             Coverage Lower Error Upper Error Ave CI Width
-Equal Variances Assumed:        0.948       0.029       0.023     2.503216
-Equal Variances Not Assumed:    0.951       0.029       0.020     2.556332</code></pre>
+Equal Variances Assumed:        0.947       0.025       0.028     2.459634
+Equal Variances Not Assumed:    0.951       0.023       0.026     2.518953</code></pre>
 </div>
 </div>
 <p>Wow! Our typical confidence interval will be ~2.5 standard deviations wide! That’s a lot of uncertainty, showing that our sample-size is appropriate only for assays in which we are justified in expecting truly massive effects.</p>
@@ -493,7 +493,7 @@ Equal Variances Not Assumed:    0.951       0.029       0.020     2.556332</code
 <span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Coverage Lower Error Upper Error Ave CI Width
-     0.95       0.026       0.024     1.549645</code></pre>
+    0.945       0.023       0.032     1.551975</code></pre>
 </div>
 </div>
 <p>Holy cow! We are now using 1/2 the animals (1 group of 6 rather than 2 groups of 6), but our confidence interval is now much reduced, to about 1.5 standard deviations in length. That’s still quite long, and only acceptable for assays where we expect pretty large effects… but <em>much</em> despite using 1/2 the resources. And what if we kept with 12 animals, but all in the within-subjects design?</p>
@@ -512,7 +512,7 @@ Equal Variances Not Assumed:    0.951       0.029       0.020     2.556332</code
 <span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Coverage Lower Error Upper Error Ave CI Width
-    0.951       0.027       0.022    0.9700421</code></pre>
+    0.951       0.024       0.025    0.9578313</code></pre>
 </div>
 </div>
 <p>Nice - we’ve got our precision down to ~1 standard deviation without increasing our sample-size. Of course, we need to think critically about if a control/untreated design is needed – but we might be able to show no effect in control once and leverage that finding for repeated mechanistic studies with within-subjects designs–getting a lot more out of each experiment without much more in resources!</p>

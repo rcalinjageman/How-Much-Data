@@ -3,10 +3,6 @@ title: "Effect Sizes"
 bibliography: references.bib
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-library(webexercises)
-```
 
 {{< video https://youtu.be/MwFbt8Qx0Rk >}}
 
@@ -357,8 +353,3 @@ The [statpsych](https://dgbonett.github.io/statpsych/reference/index.html) packa
 | [`ci.tukey()`](https://dgbonett.github.io/statpsych/reference/ci.tukey.html) | Tukey-Kramer confidence intervals for all pairwise mean differences in a between-subjects design |
 | [`ci.var.upper()`](https://dgbonett.github.io/statpsych/reference/ci.var.upper.html) | Upper confidence limit of a variance |
 | [`ci.yule()`](https://dgbonett.github.io/statpsych/reference/ci.yule.html) | Confidence intervals for generalized Yule coefficients |
-
-## Exercises
-
--   Anush will compare expression of *egr1* between control animals and those with a conditonal knockout of *creb1.* He will conduct a simple two-group experiment and his primary outcome (gene expression) is quantitative. What effect sizes would be appropriate for his design? `{r} longmcq(c("All of these", answer= "The mean difference between groups", "The median difference between groups"))`
--   Anisha wants to run a single-cell transcriptomics experiment. She finds a paper that runs 3 biological replicates. She decides to use the same sample size. What should we make of this approach? `{r} longmcq(c("Sadly, the published literature is not always a good guide -- many fields regularly use inadquate sample sizes; Anisha needs more information to know if this is reasonable", answer= "Sweet; as long as you have a citation to back you up, you're fine!"))`

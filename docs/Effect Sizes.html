@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 /* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
@@ -335,9 +369,19 @@ div.csl-indent {
 <p>Let’s start with a simple two-group design with a continuous variable. Sticking with my obsession with neurogenesis, let’s imagine you have measured adult neurogenesis in adult mice raised under either stressful or normal conditions. You find a mean of 3,500 neurons in the 6 control animals with a standard deviation of 500. In the 6 animals in the stressed group you find a mean of 2,700 neurons with a standard deviation of 550.</p>
 <p>You would often reach for a t-test for this analysis. But we can also compute the mean difference between the groups and its confidence interval. Here’s how we would proceed with the statpsych pacakge for R:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Loading required package: statpsych</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">ci.mean2</span>(</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.95</span>,     <span class="co"># For 95% CI, we specify alpha = 0.05</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">m1 =</span> <span class="dv">2700</span>,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">m2 =</span> <span class="dv">3500</span>,        </span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd1 =</span> <span class="dv">550</span>,</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd2 =</span> <span class="dv">500</span>,</span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> <span class="dv">6</span>,</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> <span class="dv">6</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                             Estimate       SE         t        df          p
 Equal Variances Assumed:         -800 303.4524 -2.636328 10.000000 0.02489034
@@ -356,6 +400,17 @@ Equal Variances Not Assumed: -1476.962 -123.0376</code></pre>
 <p>Neurogenesis experiments yield neuron counts, and counts are typically skewed, violating the assumptions for a <em>t</em>-test. In these cases, researchers often reach for a non-parametric test. We can do that, too, comparing the <em>medians</em> between both groups (there’s even a good argument that we should almost always do this… but set that aside for now).</p>
 <p>To compare medians with statpsych we need the raw data. In the example below I’ve generated fake raw data for a typical neurogenesis experiment and then used statpsych to estimate the median difference betwen groups:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fake data!</span></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>control_data <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">3676</span>, <span class="dv">2796</span>, <span class="dv">3322</span>, <span class="dv">3257</span>, <span class="dv">2976</span>, <span class="dv">2895</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>stressed_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2734</span>, <span class="dv">2094</span>, <span class="dv">3766</span>, <span class="dv">2884</span>, <span class="dv">2047</span>, <span class="dv">2778</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">ci.median2</span>(</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.95</span>,</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">y1 =</span> stressed_data,</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y2 =</span> control_data</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Median1 Median2 Median1-Median2      SE        LL       UL
     2756  3116.5          -360.5 448.298 -1239.148 518.1479</code></pre>
@@ -369,6 +424,17 @@ Equal Variances Not Assumed: -1476.962 -123.0376</code></pre>
 <p>Effect sizes are quantitative. It is not surprising that quantities can be re-expressed in different units (e.g.&nbsp;length can be expressed in feet, inches, meters, etc.). The same is true for effect sizes: we normally express them in the same units as measured (number of neurons, in our example), but can re-express them in different units.</p>
 <p>For example, we can express a mean difference as a mean <em>ratio</em>– quantifying the ratio between the control and treated groups. Ditto for median differences. Here’s the code for median differences in statpsych (using the same fake data as in the difference of medians example above):</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fake data!</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>control_data <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">3676</span>, <span class="dv">2796</span>, <span class="dv">3322</span>, <span class="dv">3257</span>, <span class="dv">2976</span>, <span class="dv">2895</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>stressed_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2734</span>, <span class="dv">2094</span>, <span class="dv">3766</span>, <span class="dv">2884</span>, <span class="dv">2047</span>, <span class="dv">2778</span>)</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">ci.ratio.median2</span>(</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.95</span>,</span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">y1 =</span> stressed_data,</span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">y2 =</span> control_data</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code> Median1 Median2 Median1/Median2        LL       UL
     2756  3116.5       0.8843254 0.6524854 1.198542</code></pre>
@@ -378,6 +444,17 @@ Equal Variances Not Assumed: -1476.962 -123.0376</code></pre>
 <p>Note that even if we change the units, our interpration shouldn’t change (someone who is unusually tall in meters should still be considered unusually tall measured in feet). So, just as we obseved ambiguous results when thinking about the difference in medians, we have the same reaction to the ratio: this data is compatible with large reductions in neurogenesis, small reductions, no change, and even a modest increase.</p>
 <p>One of the most popular transformations is to express mean differences as standardized mean differences, dividing them by the standard deviation to put them in standard deviation units (Cohen’s <em>d).</em> Here’s the code in statpsych for the mean difference example above:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">ci.stdmean2</span>(</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.95</span>,     <span class="co"># For 95% CI, we specify alpha = 0.05</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">m1 =</span> <span class="dv">2700</span>,</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">m2 =</span> <span class="dv">3500</span>,        </span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd1 =</span> <span class="dv">550</span>,</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a>  <span class="at">sd2 =</span> <span class="dv">500</span>,</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a>  <span class="at">n1 =</span> <span class="dv">6</span>,</span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a>  <span class="at">n2 =</span> <span class="dv">6</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                          Estimate adj Estimate        SE        LL          UL
 Unweighted standardizer: -1.522085    -1.405001 0.7189458 -2.931193 -0.11297695
@@ -395,18 +472,39 @@ Group 2 standardizer:    -1.600000    -1.347368 0.8354639 -3.237479  0.03747924<
 <p>Continuing with our neurogenesis example, imagine you completed a factorial study to determine the role of cortisol in mediating the effects of stress on neurogenesis. You will raise mice under stressful conditions or normal conditions. In addition, 1/2 the mice in each rearing condition will have their adrenal glands removed at a young age; the other 1/2 will undergo a sham surgery. You’ll run 6 animals per cell in this 2x2 factorial design.</p>
 <p>Below is some fake data and how we can estimate effect sizes for mean differences with statpsych:</p>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="co"># Fake data!</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a>control_sham_data <span class="ot">&lt;-</span> <span class="fu">c</span>( <span class="dv">3676</span>, <span class="dv">2796</span>, <span class="dv">3322</span>, <span class="dv">3257</span>, <span class="dv">2976</span>, <span class="dv">2895</span>)</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a>stressed_sham_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2734</span>, <span class="dv">2094</span>, <span class="dv">3766</span>, <span class="dv">2884</span>, <span class="dv">2047</span>, <span class="dv">2778</span>)</span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a>control_adrenelectomy_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3522</span>, <span class="dv">2050</span>, <span class="dv">2970</span>, <span class="dv">2626</span>, <span class="dv">2697</span>, <span class="dv">3276</span>)</span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a>stressed_adrenelectomy_data <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2990</span>, <span class="dv">4198</span>, <span class="dv">3275</span>, <span class="dv">2892</span>, <span class="dv">3681</span>, <span class="dv">2865</span>)</span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co"># Print cell means</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(control_sham_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3153.667</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(stressed_sham_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2717.167</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(control_adrenelectomy_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 2856.833</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(stressed_adrenelectomy_data)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 3316.833</code></pre>
 </div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Effect sizes</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>statpsych<span class="sc">::</span><span class="fu">ci.2x2.mean.bs</span>(</span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">alpha =</span> <span class="dv">1</span> <span class="sc">-</span> <span class="fl">0.95</span>,</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">y11 =</span> stressed_sham_data,</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">y12 =</span> stressed_adrenelectomy_data,</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a>  <span class="at">y21 =</span> control_sham_data,</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>  <span class="at">y22 =</span> control_adrenelectomy_data</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          Estimate       SE           t        df          p         LL
 AB:      -896.5000 419.1506 -2.13884916 17.392502 0.04691144 -1779.3127
@@ -833,13 +931,6 @@ B at a2:  872.01109</code></pre>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="exercises" class="level2">
-<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
-<ul>
-<li><p>Anush will compare expression of <em>egr1</em> between control animals and those with a conditonal knockout of <em>creb1.</em> He will conduct a simple two-group experiment and his primary outcome (gene expression) is quantitative. &lt;div class=‘webex-radiogroup’ id=‘radio_RTSDXCHXFG’&gt;&lt;label&gt;&lt;input type=“radio” autocomplete=“off” name=“radio_RTSDXCHXFG” value=““&gt;&lt;/input&gt; &lt;span&gt;This is a biased approach that capitilizes on chance&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type=”radio” autocomplete=“off” name=“radio_RTSDXCHXFG” value=“answer”&gt;&lt;/input&gt; &lt;span&gt;Smart work, Joe, no wonder you always confirm your hypotheses!&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;</p></li>
-<li><p>Anisha wants to run a single-cell transcriptomics experiment. She finds a paper that runs 3 biological replicates. She decides to use the same sample size. What should we make of this approach? &lt;div class=‘webex-radiogroup’ id=‘radio_WZMSQSHDJO’&gt;&lt;label&gt;&lt;input type=“radio” autocomplete=“off” name=“radio_WZMSQSHDJO” value=““&gt;&lt;/input&gt; &lt;span&gt;Sadly, the published literature is not always a good guide -- many fields regularly use inadquate sample sizes; Anisha needs more information to know if this is reasonable&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type=”radio” autocomplete=“off” name=“radio_WZMSQSHDJO” value=“answer”&gt;&lt;/input&gt; &lt;span&gt;Sweet; as long as you have a citation to back you up, you're fine!&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;</p></li>
-</ul>
 
 
 
