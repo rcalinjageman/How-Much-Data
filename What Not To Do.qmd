@@ -5,6 +5,11 @@ execute:
   freeze: false
 ---
 
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(webexercises)
+```
+
 {{< video https://youtu.be/dwyYmGmdFHA >}}
 
 The video above walks through some common but poor sample-size planning practices: run-and-check (backing into a sample-size by chasing statistical significance) and uncritically adopting previous sample sizes.
@@ -141,7 +146,7 @@ pdance_plot <- pdance_plot + transition_reveal(animate_frame, keep_last = FALSE)
 animate(pdance_plot, fps = 2, renderer = gifski_renderer("run_and_check.gif"))
 ```
 
-Thus, it's not just the instinsic false-positive rate of run-and-check that is dangerous but also the false impression it can give that might license analytic flexibility towards erroneous results.
+Thus, it's not just the instinsic false-positive rate of run-and-check that is dangerous but also the false impression it can give that might license analytic flexibility towards erroneous results. For more on the perils of run-and-check see [@anscombe1954; @simmons2011].
 
 # Exploration: The Perils of Inadequate Samples, Even When *p* \< .05
 
@@ -301,3 +306,9 @@ That's a big distortion, and it really matters. It means:
 -   Follow-up studies done at the same sample-size are more likely than not to fail!
 
 This is the difficult truth about inadequate sample-sizes: it's not just about the waste of not detecting true effects. Inadequate samples are problematic because the significant findings they generate are likely to be distorted and misleading. It's very difficult to do fruitful, generative science if what you publish is a distorted view of reality.
+
+## Questions
+
+-   Joe doesn't think he needs this course. He just runs a small batch of animals for each study, and then if results look interesting he adds samples to get to p \< .05. What should we make of this approach? `{r} longmcq(c("This is a biased approach that capitilizes on chance", answer= "Smart work, Joe, no wonder you always confirm your hypotheses!"))`
+
+-   Anisha wants to run a single-cell transcriptomics experiment. She finds a paper that runs 3 biological replicates. She decides to use the same sample size. What should we make of this approach? `{r} longmcq(c("Sadly, the published literature is not always a good guide -- many fields regularly use inadquate sample sizes; Anisha needs more information to know if this is reasonable", answer= "Sweet; as long as you have a citation to back you up, you're fine!"))`

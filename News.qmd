@@ -1,0 +1,15 @@
+---
+title: "News"
+---
+
+Changelog
+
+-   2024-10-31 - Launched!
+
+Roadmap
+
+-   Provide more model sample-size plans
+
+-   Provide a flow-chart and discussion of how to choose between planning for power and planning for precision
+
+-   Add more extensive and detailed exercises

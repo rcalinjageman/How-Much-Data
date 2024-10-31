@@ -13,6 +13,8 @@ website:
       href: Introduction.qmd
     - text: Blog
       href: blog.qmd
+    - text: Changelog
+      href: News.qmd
     - text: License
       href: LICENSE-CC-BY-NC-4.0.qmd
     - icon: github

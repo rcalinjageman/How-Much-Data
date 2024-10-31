@@ -151,6 +151,10 @@ div.csl-indent {
 <span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
+    <a class="nav-link" href="./News.html"> 
+<span class="menu-text">Changelog</span></a>
+  </li>  
+  <li class="nav-item">
     <a class="nav-link" href="./LICENSE-CC-BY-NC-4.0.html"> 
 <span class="menu-text">License</span></a>
   </li>  
@@ -373,31 +377,13 @@ div.csl-indent {
 <section id="simulation-results-false-positive-rate" class="level3">
 <h3 class="anchored" data-anchor-id="simulation-results-false-positive-rate">Simulation Results: False-Positive Rate</h3>
 <p>The code simulated 1000 two-group studies with a true mean difference 0 where sample sizes started off with 3/group and if not significant added 1/group up to significance or a max sample size of 30.</p>
-<p>Under this scenario, the proportion of false positives is: 21.5%.</p>
+<p>Under this scenario, the proportion of false positives is: 22.1%.</p>
 <p>This scenario is a bit extreme, but it makes it clear that run-and-check is not a good method for determining sample size.</p>
 </section>
 <section id="simulation-results-the-deceptive-dance-of-the-p-value" class="level3">
 <h3 class="anchored" data-anchor-id="simulation-results-the-deceptive-dance-of-the-p-value">Simulation Results: The Deceptive Dance of the p Value</h3>
 <p>To make this even more clear, we’re going to plot the p values as sample sizes are added, cycling through the first 10 simulations(<a href="#fig-run_and_check" class="quarto-xref">Figure&nbsp;1</a>). What you’ll notice is that the p values “feel” like they are following trajectories, swining higher or lower. This can give the researcher using run-and-check the feeling that they’re on to something, and that they are justified adding more samples, or worse, adjusting their analyses to coax the p value below .05.</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>randc_res<span class="sc">$</span>animate_frame <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="fu">nrow</span>(randc_res)</span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>randc_res<span class="sc">$</span>eventually_significant <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(randc_res<span class="sc">$</span>eventually_significant)</span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>randc_res<span class="sc">$</span>sample_as_factor <span class="ot">&lt;-</span> <span class="fu">as.factor</span>(randc_res<span class="sc">$</span>sample)</span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>pdance_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> randc_res[randc_res<span class="sc">$</span>sample <span class="sc">&lt;</span> <span class="dv">5</span> , ], <span class="fu">aes</span>(<span class="at">x =</span> n, <span class="at">y =</span> p, <span class="at">group =</span> sample, <span class="at">colour =</span> eventually_significant))</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>pdance_plot <span class="ot">&lt;-</span> pdance_plot <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Obtained p value"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>pdance_plot <span class="ot">&lt;-</span> pdance_plot <span class="sc">+</span> <span class="fu">xlab</span>(<span class="st">"Sample size"</span>)</span>
-<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>pdance_plot <span class="ot">&lt;-</span> pdance_plot <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="at">size =</span> <span class="dv">3</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>pdance_plot <span class="ot">&lt;-</span> pdance_plot <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>pdance_plot <span class="ot">&lt;-</span> pdance_plot <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="fl">0.05</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>)</span>
-<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>pdance_plot <span class="ot">&lt;-</span> pdance_plot <span class="sc">+</span> <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"1"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"0"</span> <span class="ot">=</span> <span class="st">"dodgerblue1"</span>))</span>
-<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>pdance_plot <span class="ot">&lt;-</span> pdance_plot <span class="sc">+</span> <span class="fu">ylim</span>(<span class="fu">c</span>(<span class="dv">0</span>, <span class="dv">1</span>))</span>
-<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>pdance_plot <span class="ot">&lt;-</span> pdance_plot <span class="sc">+</span> <span class="fu">xlim</span>(<span class="fu">c</span>(n_initial, n_to_give_up))</span>
-<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>pdance_plot <span class="ot">&lt;-</span> pdance_plot <span class="sc">+</span> <span class="fu">transition_reveal</span>(animate_frame, <span class="at">keep_last =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="fu">animate</span>(pdance_plot, <span class="at">fps =</span> <span class="dv">2</span>, <span class="at">renderer =</span> <span class="fu">gifski_renderer</span>(<span class="st">"run_and_check.gif"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div id="fig-run_and_check" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -411,7 +397,7 @@ Figure&nbsp;1: Evolution of p values as samples are added but no true effect
 </div>
 </div>
 </div>
-<p>Thus, it’s not just the instinsic false-positive rate of run-and-check that is dangerous but also the false impression it can give that might license analytic flexibility towards erroneous results.</p>
+<p>Thus, it’s not just the instinsic false-positive rate of run-and-check that is dangerous but also the false impression it can give that might license analytic flexibility towards erroneous results. For more on the perils of run-and-check see <span class="citation" data-cites="anscombe1954 simmons2011">(<a href="#ref-anscombe1954" role="doc-biblioref">Anscombe 1954</a>; <a href="#ref-simmons2011" role="doc-biblioref">Simmons, Nelson, and Simonsohn 2011</a>)</span>.</p>
 </section>
 </section>
 <section id="exploration-the-perils-of-inadequate-samples-even-when-p-.05" class="level1">
@@ -430,72 +416,72 @@ Figure&nbsp;1: Evolution of p values as samples are added but no true effect
 <h3 class="anchored" data-anchor-id="simulation">Simulation</h3>
 <p>In the simulation below, we randomly generate gene-expression data for the Control and Separated groups, drawing the data from distributions that are 1 standard deviation apart. With each draw we then run a t-test and check to see if it is statistically significant or not. Given that the researcher’s hypothesis is true, we might expect this experiment to always “work”, regularly producing <em>p</em> &lt; .05. In fact, though, it does not.!</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If needed, install needed libraries</span></span>
-<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
-<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"ggplot2"</span>)) <span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
-<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"gganimate"</span>)) <span class="fu">install.packages</span>(<span class="st">"gganimate"</span>)</span>
-<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"gifski"</span>)) <span class="fu">install.packages</span>(<span class="st">"gifski"</span>)</span>
-<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load needed libraries</span></span>
-<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statpsych)</span>
-<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span>
-<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulation parameters</span></span>
-<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>effect_size_in_sds <span class="ot">&lt;-</span> <span class="dv">1</span></span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>samples_per_group <span class="ot">&lt;-</span> <span class="dv">6</span></span>
-<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
-<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a>simcount <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
-<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize variables for results</span></span>
-<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a>sigfindings <span class="ot">&lt;-</span> <span class="dv">0</span></span>
-<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a>all_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">d =</span> <span class="cn">NA</span>, <span class="at">p =</span> <span class="cn">NA</span>, <span class="at">distortion =</span> <span class="cn">NA</span>, <span class="at">sample =</span> <span class="cn">NA</span>, <span class="at">CIlength =</span> <span class="cn">NA</span>)</span>
-<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Now do the simulations</span></span>
-<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>simcount) {</span>
-<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Control group </span></span>
-<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a>  control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(samples_per_group, <span class="dv">0</span>, <span class="dv">1</span>)</span>
-<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Experimental group</span></span>
-<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>  experimental <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(samples_per_group, <span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span> effect_size_in_sds</span>
-<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Analyze with a t-test</span></span>
-<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>  myres <span class="ot">&lt;-</span> <span class="fu">t.test</span>(control, experimental)</span>
-<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Increase counter if a significant finding</span></span>
-<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (myres<span class="sc">$</span>p.value <span class="sc">&lt;</span> alpha) sigfindings <span class="ot">&lt;-</span> sigfindings <span class="sc">+</span> <span class="dv">1</span></span>
-<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Express this finding in Cohen's d</span></span>
-<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>  myd <span class="ot">&lt;-</span> statpsych<span class="sc">::</span><span class="fu">ci.stdmean2</span>(</span>
-<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
-<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">m2 =</span> <span class="fu">mean</span>(control),</span>
-<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">m1 =</span> <span class="fu">mean</span>(experimental),</span>
-<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd2 =</span> <span class="fu">sd</span>(control),</span>
-<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd1 =</span> <span class="fu">sd</span>(experimental),</span>
-<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">n2 =</span> <span class="fu">length</span>(control),</span>
-<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">n1 =</span> <span class="fu">length</span>(experimental)</span>
-<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Store the result of this sample</span></span>
-<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>  all_res[i, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
-<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>    myd[<span class="dv">1</span>, <span class="dv">2</span>],</span>
-<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a>    myres<span class="sc">$</span>p.value,</span>
-<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a>    myd[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">/</span> effect_size_in_sds,</span>
-<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a>    i,</span>
-<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a>    myd[<span class="dv">1</span>, <span class="dv">5</span>] <span class="sc">-</span> myd[<span class="dv">1</span>, <span class="dv">4</span>]</span>
-<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>}</span>
-<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Simulated"</span>, simcount, <span class="st">"2-group experiments with n ="</span>, samples_per_group, <span class="st">"/group and a true effect of"</span>, effect_size_in_sds, <span class="st">"standard deviations."</span>))</span>
-<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Proportion of statistically significant findings (p &lt; .05):"</span>)</span>
-<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sigfindings<span class="sc">/</span>simcount)</span>
-<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Typical margin of error:"</span>)</span>
-<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(all_res<span class="sc">$</span>CIlength<span class="sc">/</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># If needed, install needed libraries</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"statpsych"</span>)) <span class="fu">install.packages</span>(<span class="st">"statpsych"</span>)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"ggplot2"</span>)) <span class="fu">install.packages</span>(<span class="st">"ggplot2"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"gganimate"</span>)) <span class="fu">install.packages</span>(<span class="st">"gganimate"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> (<span class="sc">!</span><span class="fu">require</span>(<span class="st">"gifski"</span>)) <span class="fu">install.packages</span>(<span class="st">"gifski"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Load needed libraries</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(statpsych)</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gganimate)</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Simulation parameters</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>effect_size_in_sds <span class="ot">&lt;-</span> <span class="dv">1</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>samples_per_group <span class="ot">&lt;-</span> <span class="dv">6</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>alpha <span class="ot">&lt;-</span> <span class="fl">0.05</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>simcount <span class="ot">&lt;-</span> <span class="dv">10000</span></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a><span class="co"># Initialize variables for results</span></span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>sigfindings <span class="ot">&lt;-</span> <span class="dv">0</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>all_res <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">d =</span> <span class="cn">NA</span>, <span class="at">p =</span> <span class="cn">NA</span>, <span class="at">distortion =</span> <span class="cn">NA</span>, <span class="at">sample =</span> <span class="cn">NA</span>, <span class="at">CIlength =</span> <span class="cn">NA</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a><span class="co"># Now do the simulations</span></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span>simcount) {</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Control group </span></span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>  control <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(samples_per_group, <span class="dv">0</span>, <span class="dv">1</span>)</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Experimental group</span></span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>  experimental <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(samples_per_group, <span class="dv">0</span>, <span class="dv">1</span>) <span class="sc">+</span> effect_size_in_sds</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Analyze with a t-test</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>  myres <span class="ot">&lt;-</span> <span class="fu">t.test</span>(control, experimental)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Increase counter if a significant finding</span></span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (myres<span class="sc">$</span>p.value <span class="sc">&lt;</span> alpha) sigfindings <span class="ot">&lt;-</span> sigfindings <span class="sc">+</span> <span class="dv">1</span></span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Express this finding in Cohen's d</span></span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>  myd <span class="ot">&lt;-</span> statpsych<span class="sc">::</span><span class="fu">ci.stdmean2</span>(</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a>    <span class="at">alpha =</span> alpha,</span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a>    <span class="at">m2 =</span> <span class="fu">mean</span>(control),</span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>    <span class="at">m1 =</span> <span class="fu">mean</span>(experimental),</span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd2 =</span> <span class="fu">sd</span>(control),</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    <span class="at">sd1 =</span> <span class="fu">sd</span>(experimental),</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    <span class="at">n2 =</span> <span class="fu">length</span>(control),</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    <span class="at">n1 =</span> <span class="fu">length</span>(experimental)</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Store the result of this sample</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>  all_res[i, ] <span class="ot">&lt;-</span> <span class="fu">c</span>(</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>    myd[<span class="dv">1</span>, <span class="dv">2</span>],</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>    myres<span class="sc">$</span>p.value,</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>    myd[<span class="dv">1</span>, <span class="dv">2</span>] <span class="sc">/</span> effect_size_in_sds,</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a>    i,</span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a>    myd[<span class="dv">1</span>, <span class="dv">5</span>] <span class="sc">-</span> myd[<span class="dv">1</span>, <span class="dv">4</span>]</span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">paste</span>(<span class="st">"Simulated"</span>, simcount, <span class="st">"2-group experiments with n ="</span>, samples_per_group, <span class="st">"/group and a true effect of"</span>, effect_size_in_sds, <span class="st">"standard deviations."</span>))</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Proportion of statistically significant findings (p &lt; .05):"</span>)</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(sigfindings<span class="sc">/</span>simcount)</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Typical margin of error:"</span>)</span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="fu">mean</span>(all_res<span class="sc">$</span>CIlength<span class="sc">/</span><span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="simulation-results-power" class="level3">
 <h3 class="anchored" data-anchor-id="simulation-results-power">Simulation Results: Power</h3>
 <p>The code above simulates 10000 2-group experiments with n = 6 and a true effect of 1 standard deviations.</p>
-<p>Under this scenario, where there is a large effect, only 34.5% of samples yield statistically significant results (p &lt; .05).</p>
+<p>Under this scenario, where there is a large effect, only 33.6% of samples yield statistically significant results (p &lt; .05).</p>
 <p>This sample-size is inadequate because the typical margin of error is 1.38</p>
 <p>As you can see, only about 33% of experiments yield <em>p</em> &lt; .05 <em>even though there is a real and substantial effect to be observed!</em> Why so low? Well, consider that statistical tests examine if the difference observed (signal) is substantially greater than expected sampling error (noise). With the sample-size we selected, though, expected sampling error is large: in fact, the margin of error in these studies is typically ~1.37 standard deviations, far larger than the signal it would be reasonable to expect!</p>
 <p>If the noise in this type of study is bigger than the signal, how do any of the experiments still turn out to be statistically significant? This occurs when sampling error breaks in just the right way to <em>distort</em> the effect–to make it seem much bigger than it really is, so that, for that misleading sample at least, the effect observed is substantially larger than the real truth. Uh oh! That’s right, in these cases <em>p</em> &lt; .05 can only occur <em>by mis-characterizing the actual truth</em>.</p>
@@ -504,18 +490,6 @@ Figure&nbsp;1: Evolution of p values as samples are added but no true effect
 <h3 class="anchored" data-anchor-id="simulation-results-observed-effect-sizes">Simulation Results: Observed Effect Sizes</h3>
 <p>Let’s see this in more detail. <a href="#fig-effect_size_inflation" class="quarto-xref">Figure&nbsp;2</a> plots the effect observed in each study. The line at 1 standard deviation represents the true effect. Because of sampling error, studies “dance” around this truth – some get a bit too large of an effect, others a bit too small. Notice, though, the coloring, which represents statistical significance of each simulated experiment. Most of the dots are blue, not significant – that’s the low power of the experiment. But note that the statistically significant findings (the red dots) all studies that radically <em>over-estimated</em> the real truth:</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>time_plot <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data =</span> all_res[all_res<span class="sc">$</span>sample <span class="sc">&lt;</span> <span class="dv">200</span>, ], <span class="fu">aes</span>(<span class="at">x=</span>sample, <span class="at">y =</span> d, <span class="at">colour =</span> (p <span class="sc">&lt;</span> alpha)))</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>time_plot <span class="ot">&lt;-</span> time_plot <span class="sc">+</span> <span class="fu">ylab</span>(<span class="st">"Standardized Mean Difference in egr Expression (Experimental vs. Control)"</span>)</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>time_plot <span class="ot">&lt;-</span> time_plot <span class="sc">+</span> <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">group =</span> sample))</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>time_plot <span class="ot">&lt;-</span> time_plot <span class="sc">+</span> <span class="fu">theme_classic</span>() <span class="sc">+</span> <span class="fu">theme</span>(<span class="at">legend.position =</span> <span class="st">"none"</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>time_plot <span class="ot">&lt;-</span> time_plot <span class="sc">+</span> <span class="fu">scale_colour_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">"TRUE"</span> <span class="ot">=</span> <span class="st">"red"</span>, <span class="st">"FALSE"</span> <span class="ot">=</span> <span class="st">"dodgerblue1"</span>))</span>
-<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>time_plot <span class="ot">&lt;-</span> time_plot <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">0</span>, <span class="at">linetype =</span> <span class="st">"dotted"</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>time_plot <span class="ot">&lt;-</span> time_plot <span class="sc">+</span> <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> <span class="dv">1</span>)</span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>time_plot <span class="ot">&lt;-</span> time_plot <span class="sc">+</span> <span class="fu">transition_reveal</span>(sample)</span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="fu">animate</span>(time_plot, <span class="at">fps =</span> <span class="dv">6</span>, <span class="at">renderer =</span> <span class="fu">gifski_renderer</span>(<span class="st">"d_over_time_updated.gif"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
 <div class="cell-output-display">
 <div id="fig-effect_size_inflation" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
@@ -534,16 +508,16 @@ Figure&nbsp;2: Observed effect sizes by stat significance status.
 <h3 class="anchored" data-anchor-id="simulation-results-effect-size-inflation-among-significant-results">Simulation Results: Effect-Size Inflation Among Significant Results</h3>
 <p>How bad is this over-estimation? Let’s find out:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"In this scenario, the true effect size is 1 standard deviations"</span>)</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Across all stimulated studies, the average effect size observed is:"</span>)</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(all_res<span class="sc">$</span>d)</span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"But for the studies that reached statistical significance, the average effect size observed is:"</span>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(all_res[all_res<span class="sc">$</span>p <span class="sc">&lt;</span> .<span class="dv">05</span>, ]<span class="sc">$</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"In this scenario, the true effect size is 1 standard deviations"</span>)</span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"Across all stimulated studies, the average effect size observed is:"</span>)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(all_res<span class="sc">$</span>d)</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"But for the studies that reached statistical significance, the average effect size observed is:"</span>)</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(all_res[all_res<span class="sc">$</span>p <span class="sc">&lt;</span> .<span class="dv">05</span>, ]<span class="sc">$</span>d)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li><p>In this scenario, the true effect size is: 1 standard deviations</p></li>
 <li><p>Across all stimulated studies, the average effect size observed is: 1.01</p></li>
-<li><p>But for the studies that reached statistical significance, the average effect size observed is: 1.70</p></li>
+<li><p>But for the studies that reached statistical significance, the average effect size observed is: 1.71</p></li>
 </ul>
 <p>Wow! The statistically-significant effects over-state the truth by over 70%. Below is a representation of the true effect and the effect that would be reported through the statistical-significance filter:</p>
 <div class="quarto-figure quarto-figure-center">
@@ -565,6 +539,13 @@ Figure&nbsp;2: Observed effect sizes by stat significance status.
 <li><p>Follow-up studies done at the same sample-size are more likely than not to fail!</p></li>
 </ul>
 <p>This is the difficult truth about inadequate sample-sizes: it’s not just about the waste of not detecting true effects. Inadequate samples are problematic because the significant findings they generate are likely to be distorted and misleading. It’s very difficult to do fruitful, generative science if what you publish is a distorted view of reality.</p>
+</section>
+<section id="questions" class="level2">
+<h2 class="anchored" data-anchor-id="questions">Questions</h2>
+<ul>
+<li><p>Joe doesn’t think he needs this course. He just runs a small batch of animals for each study, and then if results look interesting he adds samples to get to p &lt; .05. What should we make of this approach? &lt;div class=‘webex-radiogroup’ id=‘radio_HUEMDYLVBK’&gt;&lt;label&gt;&lt;input type=“radio” autocomplete=“off” name=“radio_HUEMDYLVBK” value=““&gt;&lt;/input&gt; &lt;span&gt;This is a biased approach that capitilizes on chance&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type=”radio” autocomplete=“off” name=“radio_HUEMDYLVBK” value=“answer”&gt;&lt;/input&gt; &lt;span&gt;Smart work, Joe, no wonder you always confirm your hypotheses!&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;</p></li>
+<li><p>Anisha wants to run a single-cell transcriptomics experiment. She finds a paper that runs 3 biological replicates. She decides to use the same sample size. What should we make of this approach? &lt;div class=‘webex-radiogroup’ id=‘radio_UMDKQDHBFO’&gt;&lt;label&gt;&lt;input type=“radio” autocomplete=“off” name=“radio_UMDKQDHBFO” value=““&gt;&lt;/input&gt; &lt;span&gt;Sadly, the published literature is not always a good guide -- many fields regularly use inadquate sample sizes; Anisha needs more information to know if this is reasonable&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type=”radio” autocomplete=“off” name=“radio_UMDKQDHBFO” value=“answer”&gt;&lt;/input&gt; &lt;span&gt;Sweet; as long as you have a citation to back you up, you're fine!&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;</p></li>
+</ul>
 
 
 
@@ -572,425 +553,225 @@ Figure&nbsp;2: Observed effect sizes by stat significance status.
 </section>
 
 <div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-anscombe1954" class="csl-entry" role="listitem">
+Anscombe, F. J. 1954. <span>“Fixed-Sample-Size Analysis of Sequential Observations.”</span> <em>Biometrics</em> 10 (1): 89–100. <a href="https://doi.org/10.2307/3001665">https://doi.org/10.2307/3001665</a>.
+</div>
 <div id="ref-mole2017" class="csl-entry" role="listitem">
 Mole. 2017. <span>“Peerless i.”</span> <em>Journal of Cell Science</em> 130: 2079–80. <a href="https://doi.org/10.1242/jcs.206375">https://doi.org/10.1242/jcs.206375</a>.
 </div>
 <div id="ref-mole2018" class="csl-entry" role="listitem">
 ———. 2018. <span>“Mea Culpa , Mea Powerful Culpa.”</span> <em>Journal of Cell Biology</em> 131: 215707. <a href="https://doi.org/10.1242/jcs.215707">https://doi.org/10.1242/jcs.215707</a>.
 </div>
+<div id="ref-simmons2011" class="csl-entry" role="listitem">
+Simmons, Joseph P., Leif D. Nelson, and Uri Simonsohn. 2011. <span>“False-Positive Psychology: Undisclosed Flexibility in Data Collection and Analysis Allows Presenting Anything as Significant.”</span> <em>Psychological Science</em> 22 (11): 1359–66. <a href="https://doi.org/10.1177/0956797611417632">https://doi.org/10.1177/0956797611417632</a>.
+</div>
 </div></section></div></main> <!-- /main -->
 <script>
 
-
-
 /* update total correct if #webex-total_correct exists */
-
 update_total_correct = function() {
-
   console.log("webex: update total_correct");
 
-
-
   var t = document.getElementsByClassName("webex-total_correct");
-
   for (var i = 0; i < t.length; i++) {
-
     p = t[i].parentElement;
-
     var correct = p.getElementsByClassName("webex-correct").length;
-
     var solvemes = p.getElementsByClassName("webex-solveme").length;
-
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-
     var selects = p.getElementsByClassName("webex-select").length;
 
-
-
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
-
   }
-
 }
-
-
 
 /* webex-solution button toggling function */
-
 b_func = function() {
-
   console.log("webex: toggle hide");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('open')) {
-
     cl.remove("open");
-
   } else {
-
     cl.add("open");
-
   }
-
 }
-
-
 
 /* check answers */
-
 check_func = function() {
-
   console.log("webex: check answers");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('unchecked')) {
-
     cl.remove("unchecked");
-
     this.innerHTML = "Hide Answers";
-
   } else {
-
     cl.add("unchecked");
-
     this.innerHTML = "Show Answers";
-
   }
-
 }
-
-
 
 /* function for checking solveme answers */
-
 solveme_func = function(e) {
-
   console.log("webex: check solveme");
 
-
-
   var real_answers = JSON.parse(this.dataset.answer);
-
   var my_answer = this.value;
-
   var cl = this.classList;
-
   if (cl.contains("ignorecase")) {
-
     my_answer = my_answer.toLowerCase();
-
   }
-
   if (cl.contains("nospaces")) {
-
     my_answer = my_answer.replace(/ /g, "")
-
   }
-
-
 
   if (my_answer == "") {
-
     cl.remove("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else if (real_answers.includes(my_answer)) {
-
     cl.add("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else {
-
     cl.add("webex-incorrect");
-
     cl.remove("webex-correct");
-
   }
-
-
 
   // match numeric answers within a specified tolerance
-
   if(this.dataset.tol > 0){
-
     var tol = JSON.parse(this.dataset.tol);
-
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
-
     if (matches.reduce((a, b) => a + b, 0) > 0) {
-
       cl.add("webex-correct");
-
     } else {
-
       cl.remove("webex-correct");
-
     }
-
   }
-
-
 
   // added regex bit
-
   if (cl.contains("regex")){
-
     answer_regex = RegExp(real_answers.join("|"))
-
     if (answer_regex.test(my_answer)) {
-
       cl.add("webex-correct");
-
     }
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 /* function for checking select answers */
-
 select_func = function(e) {
-
   console.log("webex: check select");
-
-
 
   var cl = this.classList
 
-
-
   /* add style */
-
   cl.remove("webex-incorrect");
-
   cl.remove("webex-correct");
-
   if (this.value == "answer") {
-
     cl.add("webex-correct");
-
   } else if (this.value != "blank") {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 /* function for checking radiogroups answers */
-
 radiogroups_func = function(e) {
-
   console.log("webex: check radiogroups");
 
-
-
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
-
   var cl = checked_button.parentElement.classList;
-
   var labels = checked_button.parentElement.parentElement.children;
 
-
-
   /* get rid of styles */
-
   for (i = 0; i < labels.length; i++) {
-
     labels[i].classList.remove("webex-incorrect");
-
     labels[i].classList.remove("webex-correct");
-
   }
-
-
 
   /* add style */
-
   if (checked_button.value == "answer") {
-
     cl.add("webex-correct");
-
   } else {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 window.onload = function() {
-
   console.log("webex onload");
-
   /* set up solution buttons */
-
   var buttons = document.getElementsByTagName("button");
 
-
-
   for (var i = 0; i < buttons.length; i++) {
-
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
-
       buttons[i].onclick = b_func;
-
     }
-
   }
-
-
 
   var check_sections = document.getElementsByClassName("webex-check");
-
   console.log("check:", check_sections.length);
-
   for (var i = 0; i < check_sections.length; i++) {
-
     check_sections[i].classList.add("unchecked");
 
-
-
     let btn = document.createElement("button");
-
     btn.innerHTML = "Show Answers";
-
     btn.classList.add("webex-check-button");
-
     btn.onclick = check_func;
-
     check_sections[i].appendChild(btn);
 
-
-
     let spn = document.createElement("span");
-
     spn.classList.add("webex-total_correct");
-
     check_sections[i].appendChild(spn);
-
   }
-
-
 
   /* set up webex-solveme inputs */
-
   var solveme = document.getElementsByClassName("webex-solveme");
 
-
-
   for (var i = 0; i < solveme.length; i++) {
-
     /* make sure input boxes don't auto-anything */
-
     solveme[i].setAttribute("autocomplete","off");
-
     solveme[i].setAttribute("autocorrect", "off");
-
     solveme[i].setAttribute("autocapitalize", "off");
-
     solveme[i].setAttribute("spellcheck", "false");
-
     solveme[i].value = "";
 
-
-
     /* adjust answer for ignorecase or nospaces */
-
     var cl = solveme[i].classList;
-
     var real_answer = solveme[i].dataset.answer;
-
     if (cl.contains("ignorecase")) {
-
       real_answer = real_answer.toLowerCase();
-
     }
-
     if (cl.contains("nospaces")) {
-
       real_answer = real_answer.replace(/ /g, "");
-
     }
-
     solveme[i].dataset.answer = real_answer;
 
-
-
     /* attach checking function */
-
     solveme[i].onkeyup = solveme_func;
-
     solveme[i].onchange = solveme_func;
 
-
-
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
-
-
 
   /* set up radiogroups */
-
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
-
   for (var i = 0; i < radiogroups.length; i++) {
-
     radiogroups[i].onchange = radiogroups_func;
-
   }
-
-
 
   /* set up selects */
-
   var selects = document.getElementsByClassName("webex-select");
-
   for (var i = 0; i < selects.length; i++) {
-
     selects[i].onchange = select_func;
-
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 </script>
-
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {

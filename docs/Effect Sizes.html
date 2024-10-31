@@ -20,7 +20,27 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-</style>
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
 
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
@@ -95,6 +115,10 @@ ul.task-list li input[type="checkbox"] {
   <li class="nav-item">
     <a class="nav-link" href="./blog.html"> 
 <span class="menu-text">Blog</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./News.html"> 
+<span class="menu-text">Changelog</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./LICENSE-CC-BY-NC-4.0.html"> 
@@ -228,423 +252,817 @@ ul.task-list li input[type="checkbox"] {
 
 
 <div class="quarto-video ratio ratio-16x9"><iframe data-external="1" src="https://www.youtube.com/embed/MwFbt8Qx0Rk" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe></div>
-<p>What is an effect size?</p>
+<p>An effect size is a quantitative answer to your research question.</p>
+<section id="more-about-effect-sizes" class="level1">
+<h1>More About Effect Sizes</h1>
+<section id="effect-sizes-can-be-simple-or-complex" class="level2">
+<h2 class="anchored" data-anchor-id="effect-sizes-can-be-simple-or-complex">Effect Sizes Can Be Simple or Complex</h2>
+<ul>
+<li><p>If you want to know the degree of neurogenesis in the hippocampus of the adult mouse, then the mean number of new neurons (<em>M</em>) observed would be an effect size for your study. Alternatively, you might choose the median number of neurons (<em>Mdn</em>).</p></li>
+<li><p>If you wanted to know how much stress impacts nuerogenesis, then your effect size of interest would likely be the mean difference in neurogenesis between control and stressed mice: <em>M</em><sub>diff</sub> =<em>M</em><sub>stressed</sub> - <em>M</em><sub>control</sub>. This effect-size is a <strong>contrast</strong>, representing the difference between groups. While mean differences are typical, you might also consider the median difference: <em>Mdn</em><sub>diff</sub> =<em>Mdn</em><sub>stressed</sub> - <em>Mdn</em><sub>control.</sub></p></li>
+<li><p>If you wanted to know how much sex influences the effect of stress on neurogenesis, then your effect size of interest would likely be the mean difference on the difference. That is, you’d be interested in the simple effect of stress on males, the simple effect of stress on females, and the difference between those differences:</p>
+<ul>
+<li><p><em>M</em><sub>Stress&nbsp;In&nbsp;Males</sub> =<em>M</em><sub>males_stressed</sub> - <em>M</em><sub>males_control</sub> . This is the simple effect for males</p></li>
+<li><p><em>M</em><sub>Stress&nbsp;In&nbsp;Females</sub> =<em>M</em><sub>females_stressed</sub> - <em>M</em><sub>females_control</sub> . This is the simple effect for females</p></li>
+<li><p><em>M</em><sub>interaction</sub> aka <em>M</em><sub>⍙⍙</sub> =<em>M</em><sub>Stress&nbsp;In&nbsp;Females&nbsp;-</sub> <em>M</em><sub>Stress&nbsp;In&nbsp;Males</sub>. This is the <strong>difference</strong> between these simple effects (how different the stress effect is in females relative to males). This is a quantitative expression of a 2x2 interaction. You’ll sometimes see the symbol delta-delta or the phrase “difference on the difference” because this effect size represents the difference between two effects (the difference between two differences).</p></li>
+</ul></li>
+</ul>
+<p>Again, you could be focused on means, but you can also use medians as your measure of what’s typical, finding the difference: <em>Mdn</em><sub>interaction</sub> aka <em>Mdn</em><sub>⍙⍙</sub> =<em>Mdn</em><sub>Stress&nbsp;In&nbsp;Females&nbsp;-</sub> <em>Mdn</em><sub>Stress&nbsp;In&nbsp;Males</sub></p>
+</section>
+<section id="categorical-outcomes-have-effect-sizes-too" class="level2">
+<h2 class="anchored" data-anchor-id="categorical-outcomes-have-effect-sizes-too">Categorical Outcomes Have Effect Sizes, Too</h2>
+<p>We’ve focused here on an experiment with a quantitative outcome (number of neurons), but we may instead have a categorical outcome (e.g.&nbsp;depressed or not). In this case, our effect size is typically a proportion (<em>P</em><sub>depressed</sub> = <em>N</em><sub>Depressed</sub> / <em>N</em><sub>Total</sub>). From there, we have the same progression from simple to more and more complex contrasts:</p>
+<ul>
+<li><p>Depression in a single group, say a random-sample of women living in the USA: <em>P</em><sub>Women_Depressed</sub> <em>N</em><sub>Women_Depressed</sub> / <em>N</em><sub>Women_Total</sub></p></li>
+<li><p>A simple difference or contrast, say the difference in rates of depression for women who have received an intervention vs.&nbsp;controls: <em>P</em><sub>diff</sub> =<em>P</em><sub>Women_Depressed_Treated</sub> - <em>P</em><sub>Women_Depressed_Control</sub>. This would express the difference in depression rates in the treated group relative to the control group.</p></li>
+<li><p>A complex contrast, say the degree to which men and women differ in response to a treatment for depression:</p>
+<ul>
+<li><p><em>P</em><sub>Treatment_Effect_Women</sub> =<em>P</em><sub>Women_Depressed_Treated</sub> - <em>P</em><sub>Women_Depressed_Control</sub>.. This is the simple effect for females</p></li>
+<li><p><em>P</em><sub>Treatment_Effect_Men</sub> =<em>P</em><sub>Men_Depressed_Treated</sub> - <em>P</em><sub>Men_Depressed_Control</sub>.. This is the simple effect for males</p></li>
+<li><p><em>M</em><sub>interaction</sub> aka <em>M</em><sub>⍙⍙</sub> =<em>M</em><sub>Treatment_Effect_Women&nbsp;-</sub> <em>M</em><sub>Treatment_Effect_Men</sub>. Again, this is a quantitative expression of an interaction, representing the difference in response rate in women relative to controls.</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="there-are-lots-of-other-simple-and-complex-effect-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="there-are-lots-of-other-simple-and-complex-effect-sizes">There are Lots of Other Simple and Complex Effect Sizes</h2>
+<p>An effect sizes is the quantitative answer to a research question. Given the diversity of research questions, it should come as no surprise that there are lots of other effect sizes.</p>
+<p>Pearson’s <em>r</em> is an effect size – it answer the question: to what degree are these variables linearly related to each other? And, again, you can have a simple effect size (How much are hippocampal volume and spatial reasoning related) and contrasts that involved differences in effect sizes (How much do men and women differ in the relationship between hippocampal volume and spatial reasoning – this question is about the <em>difference</em> in R values between these groups).</p>
+<p>Variance is also an effect size! You might be interested, for example, in diversity in brain volume– in which case the effect size of interest might be the variance in brain volume observed across a set of scans. And, again, simple effects often lead to questions comparing effects (To what extent is diversity in brain size altered in autism? This would be a question about the difference in variance observed between a population with autism and normal controls).</p>
+<p>We could go on, but hopefully you get the point: although scientists most typically examine differences in means and medians, there are lots of different effect sizes.</p>
+<p>One thing you may have noticed is that “effect size” is a poor turn of phrase – it describes a quantitative outcome of <strong>any</strong> study, whether it be observational or experimental. If we compare ventricule size in schizophrenics and controls, we are conducting an observational study, and yet we still call the difference observed an <em>effect</em> size.</p>
+</section>
+</section>
+<section id="effect-sizes-need-expressions-of-uncertainty" class="level1">
+<h1>Effect Sizes Need Expressions of Uncertainty</h1>
+<p>We determine an effect size from a finite set of data, but wish to draw conclusions about the world at large. There will always be uncertainty in generalizing from sample to population, and therefore every effect size needs an accompanying <em>uncertainty interval</em> <em>- an expression of how wrong the observed effect size might be</em>.</p>
+<p>There are a surprising number of options for quantifying uncertainty. First, there are radically different statistical approachs: you could use a frequentist approach (that’s the approach that generates <em>p</em> values), a Bayesian approach, a re-sampling based approach, and more. Because frequentist approaches currently dominate the life and health sciences, we’ll only discuss these approaches within this workshop. For a good resources on effect sizes and uncertainty in Bayesian approaches see <span class="citation" data-cites="kruschke2018 kruschke2014">(<a href="#ref-kruschke2018" role="doc-biblioref">Kruschke and Liddell 2018</a>; <a href="#ref-kruschke2014" role="doc-biblioref">Kruschke 2014</a>)</span>.</p>
+<section id="interpreting-confidence-intervals" class="level2">
+<h2 class="anchored" data-anchor-id="interpreting-confidence-intervals">Interpreting Confidence Intervals</h2>
+<p>Within a frequentist approach, there are some choices. For a given effect size we could report its standard error (typical expected error), margin of error (largest error expected in a certain % of cases), or a confidence interval. In general, it is best practice to report a confidence interval– this expresses a wider range of uncertainty than a standard error, and it can easily be reported even for effect sizes that can have assymetrical expected error (like Pearson’s r). The use of a 95% confidence interval has become quite typical, but the level of confidence requires thought and judgement.</p>
+<p>In general, we would report an effect size alongside its confidence interval. So, for example, suppose you measured neurogenesis in adult and stressed mice, finding an average of 3,500 new neurons in control mice and 2,700 new neurons in stressed mice. You would report the mean difference, your key effect size of interest, along with its confidence interval: <em>M</em><sub>diff</sub> = -800 neurons 95% CI[-1500, -100]. The confidence interval summarizes expected sampling error in your experiment, giving a list of effect sizes that most compatible with your data.</p>
+<p>Confidence intervals help quantify <strong>expected sampling variation</strong>–the normal differences scientists encounter when drawing random samples from a larger population. Sampling error is typically the least of your problems– you can also miss the truth due to bias and/or measurement error. Thus, you should consider confidence intervals <em>optimistic</em>– they express only one source of uncertainty and do so under an idealized set of conditions that are not typically met in the real world. In fact, in political polling, <em>real</em> error (which can be determined after an election) averages about <em>twice</em> as large as expected sampling error! Conditions within a lab may help limit non-sampling error, so perhaps the polling example is a bit extreme. Still, it is wise to take confidence intervals with a grain of salt.</p>
+<p>Another thing to remember about confidence intervals is that it is not helpful to make to big of a point about values being outside the confidence interval rather than within. In the example above, we imagined stress effect of neurogenesis: <em>M</em><sub>diff</sub> = -800 neurons 95% CI[-1500, -100]. Note that confidence interval summarizes a distribution of expected sampling error that stretches out towards infinity in both directions; the 95% CI covers 95% of the area of that distribution. In practice, that means that a reduction of, say -80 neurons is not dramatically less compatible with the data than the upper limit of the confidence interval (-100). So, within reason, consider the boundaries of a confidence interval fairly fuzzy – both because the decline in compatibility is continuous rather than sharp, and because a confidence interval is, as described above, rather optimistic.</p>
+</section>
+<section id="more-complex-effect-sizes-more-uncertainty" class="level2">
+<h2 class="anchored" data-anchor-id="more-complex-effect-sizes-more-uncertainty">More Complex Effect Sizes, More Uncertainty</h2>
+<p>Research programs often grow in complexity over time as we dig into a phenomenon and probe its inner mechanisms. For example, it was once an open question if there is <em>any</em> neurogenesis in adult mammalian brains. At this stage, researchers were interested in simply characterizing neurogenesis: how many (if any) new neurons are produced per day/week/month?</p>
+<p>Once it was established that there is considerable neurogenesis in the adult brains of lab specieis (perhaps including humans), research questions became more complex as researchers began to look at the factors influencing neurogensis and the mechanisms underlying neurogenesis. For example, researchers began investigating the impact of early-life stress on neurogenesis. This called for examining a <em>difference</em> betwen groups (Mstressed - Mcontrol), a more complex effect size.</p>
+<p>And, again, once a factor important to a phenomenon is established, research questions often become even more complex. So, for example, researchers who have found a stress effect on neurogenesis might want to know if this effect is mediated by cortisol. They thus plan a factorial study manipulating both stress and cortisol function. They are now interested in estimating the degree to which the stress effect is reduced when cortisol signaling is eliminated. (See, for example <span class="citation" data-cites="mirescu2004">(<a href="#ref-mirescu2004" role="doc-biblioref">Mirescu, Peters, and Gould 2004</a>)</span>).</p>
+<p>Why bring all this up? Because it is important to understand that as effect sizes become more complex, uncertainty increase.</p>
+<p>Let’s examine this for means. For a single mean, the standard error is:</p>
+<p><img src="images/clipboard-2373207920.png" class="img-fluid"></p>
+<p>So let’s say we have been conducting simple studies and find that <em>N</em> = 10 gives us reasonably short confidence intervals. Next, though, we want to take compare groups, and thus estimate the <em>difference</em> between two means. If we keep the sample size the same (<em>N</em> = 10/group), then our standard error will grow (all else being equal):</p>
+<p><img src="images/clipboard-1087663852.png" class="img-fluid"></p>
+<p>That is, assuming everything else stays the same, a difference in means has a standard error 1.4x as big as the standard error for a single group – so we either have to live with that increase in uncertainty or consider a larger sample size.</p>
+<p>As you might expect, the problem grows and grows as the effect size becomes more complex. If we cant to compare two simple effects (and interaction, or difference on a difference) then we get:</p>
+<p><img src="images/clipboard-3667033087.png" class="img-fluid"></p>
+<p>That is, the expected error for an interaction is 2 times as big as for a single group (assuming sample size and all else stays the same).</p>
+<p>It gets even worse when we realize that effect sizes often get <strong>smaller</strong> as questions get more complex. For example, stress may cut neurogenesis by 1/2. At <em>best</em> blocking cortisol might fully restore neurogenesis–but if it is one of many factors, it might only partially restore neurogenesis, say to 3/4 of typical levels. In that case, then, the difference in simple effects (difference in stress effect between normal and cortisol-blocked animals) will be only about 1/4 of typical neurogenesis, a smaller effect that would typically require <em>more</em> samples to study.</p>
+<p>So - as research questions become more complex, we should expect more uncertainty over smaller effects! That means developing a fruitful line of reserarch is going to be hard. We need either lots of resources, or we need effect sizes so big that even as our questions become more complex we can study them with reasonable sample sizes.</p>
+<p>From this discussion there are some important lessons to keep in mind when sample-size planning:</p>
+<ul>
+<li><p>More complex questions generally require much bigger samples.</p></li>
+<li><p>It is important to make a sample size for your most complex research question. The sample-size needed for a simple difference in means will not be adequate for comparing effects across contexts!</p></li>
+<li><p>Fruitful science is built on typically built on developing assays with large initial effects (e.g.&nbsp;fear conditioning, LTP) where complex studies can still be achieved with reasonable sample sizes.</p></li>
+</ul>
+</section>
+</section>
+<section id="obtaining-effect-sizes-and-confidence-intervals" class="level1">
+<h1>Obtaining Effect Sizes and Confidence Intervals</h1>
+<p>For researchers used to <em>p</em> values and hypothesis tests, obtaining effect sizes and confidence intervals can initially feel like a challenge. The good news, though, is that for every <em>p</em> value there is <em>always</em> a corresponding effect size and uncertainty interval. In fact, all a hypothesis test with a <em>p</em> value is doing is checking to see if the null hypothesis is within the confidence interval. So, although it can feel a bit daunting at first, you can easily leverage what you know about hypothesis testing to obtaining effect sizes and confidence intervals.</p>
+<section id="two-groups-with-a-quantitative-outcome" class="level2">
+<h2 class="anchored" data-anchor-id="two-groups-with-a-quantitative-outcome">Two-Groups With a Quantitative Outcome</h2>
+<p>Let’s start with a simple two-group design with a continuous variable. Sticking with my obsession with neurogenesis, let’s imagine you have measured adult neurogenesis in adult mice raised under either stressful or normal conditions. You find a mean of 3,500 neurons in the 6 control animals with a standard deviation of 500. In the 6 animals in the stressed group you find a mean of 2,700 neurons with a standard deviation of 550.</p>
+<p>You would often reach for a t-test for this analysis. But we can also compute the mean difference between the groups and its confidence interval. Here’s how we would proceed with the statpsych pacakge for R:</p>
+<div class="cell">
+<div class="cell-output cell-output-stderr">
+<pre><code>Loading required package: statpsych</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                             Estimate       SE         t        df          p
+Equal Variances Assumed:         -800 303.4524 -2.636328 10.000000 0.02489034
+Equal Variances Not Assumed:     -800 303.4524 -2.636328  9.910515 0.02506589
+                                    LL        UL
+Equal Variances Assumed:     -1476.134 -123.8660
+Equal Variances Not Assumed: -1476.962 -123.0376</code></pre>
+</div>
+</div>
+<p>You can see the effect size (-800) both for when we assume equal variance (as in a standard t-test) and for when we drop that assumption (as is done in a Welch’s t-test). There are good arguments that we should always prefer not to assume equal variance (when variances actually are equal, both approaches yield about the same results, when variances are not equal we really need to analyze it that way… so why not just default to always avoiding the assumption?). So, unless you have specific reasons or pre-registered your analyses, it is a good practice to use the estimate without equal variance assumed.</p>
+<p>From this output, we see <em>M</em>diff = -800 95% CI[-1476, -123]. Again, we should treat the entire CI (and even values beyond it) as reasonable/compatible with the data (at least in the absence of other evidence).</p>
+<p>Note that statpsych also emits the corresponding <em>t</em>-test, which we could also report. The t-test and the confidence interval have an exact correspondance: <em>p</em> will always be less than .05 when the 95% CI does not include 0 (as is the case here); <em>p</em> will always be &gt;= .05 when the 95% CI <em>does</em> include 0. We could make the same statements about the <em>p</em> boundary of .01 and a 99% CI, and .1 with a 90% CI, etc. What this means, overall, is that the <em>test</em> and the <em>estimate</em> are from the same model, same data, and will always have corresponding results: from the confidence interval you know if the finding is statistically significant; from the <em>p</em> value you know if 0 is in the confidence interval. Because the confidence interval tells you about significance <em>and more</em> there are many who believe we could get by with only reporting the effect size and confidence interval.</p>
+</section>
+<section id="two-groups-with-a-quantitative-outcome-compare-medians-rather-than-means" class="level2">
+<h2 class="anchored" data-anchor-id="two-groups-with-a-quantitative-outcome-compare-medians-rather-than-means">Two Groups with a Quantitative Outcome: Compare Medians Rather than Means</h2>
+<p>Neurogenesis experiments yield neuron counts, and counts are typically skewed, violating the assumptions for a <em>t</em>-test. In these cases, researchers often reach for a non-parametric test. We can do that, too, comparing the <em>medians</em> between both groups (there’s even a good argument that we should almost always do this… but set that aside for now).</p>
+<p>To compare medians with statpsych we need the raw data. In the example below I’ve generated fake raw data for a typical neurogenesis experiment and then used statpsych to estimate the median difference betwen groups:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> Median1 Median2 Median1-Median2      SE        LL       UL
+    2756  3116.5          -360.5 448.298 -1239.148 518.1479</code></pre>
+</div>
+</div>
+<p>Here we see obtain a median difference: -361 neurson 95% CI[-1239, 518]. In this fake data, the effect of stress is more ambiguous – the CI is compatible with large decreases in neurogenesis, but also with small declines, no change at all, and even a modest increase. It would take more data to more clearly determine the typical difference. Fortunately, effect sizes can be synthesized through meta-analysis, lettings us use multiple small studies to narrow in on the truth (as long as we can get an unbiased collection of studies to synthesize).</p>
+<p>Comparison of median differences roughly corresponds to a Mann-Whitney U, but not perfectly, as the mean difference does to the <em>t</em>-test.</p>
+</section>
+<section id="two-groups-with-a-quantitative-outcome-express-effect-sizes-in-different-ways" class="level2">
+<h2 class="anchored" data-anchor-id="two-groups-with-a-quantitative-outcome-express-effect-sizes-in-different-ways">Two Groups with a Quantitative Outcome: Express Effect Sizes in Different Ways</h2>
+<p>Effect sizes are quantitative. It is not surprising that quantities can be re-expressed in different units (e.g.&nbsp;length can be expressed in feet, inches, meters, etc.). The same is true for effect sizes: we normally express them in the same units as measured (number of neurons, in our example), but can re-express them in different units.</p>
+<p>For example, we can express a mean difference as a mean <em>ratio</em>– quantifying the ratio between the control and treated groups. Ditto for median differences. Here’s the code for median differences in statpsych (using the same fake data as in the difference of medians example above):</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code> Median1 Median2 Median1/Median2        LL       UL
+    2756  3116.5       0.8843254 0.6524854 1.198542</code></pre>
+</div>
+</div>
+<p>We see that stressed animals had 88% of the neurogenesis of controls, 95% CI[65%, 120%].</p>
+<p>Note that even if we change the units, our interpration shouldn’t change (someone who is unusually tall in meters should still be considered unusually tall measured in feet). So, just as we obseved ambiguous results when thinking about the difference in medians, we have the same reaction to the ratio: this data is compatible with large reductions in neurogenesis, small reductions, no change, and even a modest increase.</p>
+<p>One of the most popular transformations is to express mean differences as standardized mean differences, dividing them by the standard deviation to put them in standard deviation units (Cohen’s <em>d).</em> Here’s the code in statpsych for the mean difference example above:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                          Estimate adj Estimate        SE        LL          UL
+Unweighted standardizer: -1.522085    -1.405001 0.7189458 -2.931193 -0.11297695
+Weighted standardizer:   -1.522085    -1.405001 0.6702018 -2.835656 -0.20851341
+Group 1 standardizer:    -1.454545    -1.224880 0.7595127 -2.943163  0.03407204
+Group 2 standardizer:    -1.600000    -1.347368 0.8354639 -3.237479  0.03747924</code></pre>
+</div>
+</div>
+<p>Note the output is a bit more complex– that’s because what seems like the simple instruction to “divide by the standard deviation” is a bit complex. Should we average just average the two groups standard deviations (top line)? Or should we pool the standard deviations based on sample size (second line)? Or should we use one of the groups as our standardized (lines 3 and 4)? Given this complexity (and others), it is usually best to stick with raw-score effect sizes. When you do want to use/interpret Cohen’s d, the average sd (top line) corresponds to the assumptions in a Welch’s t-test, and so is probably the best default option.</p>
+<p>In this example, we see that stress reduced neurogenesis: <em>d</em>avg = -1.5 95% CI[-2.9, -0.11]. Just as with the raw-score, we see this is a very large effect, but with considerable uncertainty–the daa are compatible with a <em>huge</em> decline (3 standard deviations, almost no overlap in distributions between the groups), modest declines, and even fairly subtle declines (just over a tenth of a standard deviation). Note the 95% CI does exclude 0, so we know this we could reject the null of exactly 0 at a stringency of .05 – but that doesn’t mean that we’ve demonstrated an effect that would be easy to study further!</p>
+</section>
+<section id="complex-designs-effect-sizes-and-confidence-intervals-for-an-interaction" class="level2">
+<h2 class="anchored" data-anchor-id="complex-designs-effect-sizes-and-confidence-intervals-for-an-interaction">Complex Designs; Effect Sizes and Confidence Intervals for An Interaction</h2>
+<p>As research questions become more complex, we turn to factorial designs, in which more than one independent variable is manipulated. Current norms are to analyze factorial designs with an ANOVA, generating F tests for the main effects and interactions. Each <em>F</em> test has an effect size associated with it known as eta-squared, the percentage of variance accounted for. More often than not, however, the researcher’s main research questions are about magnitude of mean or median differences across cells. Specifically, complex designs are usually with the goal of knowing how much one independent variable influences the effect of the other. We answer this question with the difference on the difference, the difference between simple effects. It sounds a bit complicated, but it is simple in practice.</p>
+<p>Continuing with our neurogenesis example, imagine you completed a factorial study to determine the role of cortisol in mediating the effects of stress on neurogenesis. You will raise mice under stressful conditions or normal conditions. In addition, 1/2 the mice in each rearing condition will have their adrenal glands removed at a young age; the other 1/2 will undergo a sham surgery. You’ll run 6 animals per cell in this 2x2 factorial design.</p>
+<p>Below is some fake data and how we can estimate effect sizes for mean differences with statpsych:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3153.667</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2717.167</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2856.833</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3316.833</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>          Estimate       SE           t        df          p         LL
+AB:      -896.5000 419.1506 -2.13884916 17.392502 0.04691144 -1779.3127
+A:         11.7500 209.5753  0.05606576 17.392502 0.95592847  -429.6564
+B:       -151.4167 209.5753 -0.72249283 17.392502 0.47959455  -592.8230
+A at b1: -436.5000 289.1121 -1.50979500  7.543165 0.17179077 -1110.2877
+A at b2:  460.0000 303.4822  1.51573956  9.997743 0.16054463  -216.2212
+B at a1: -599.6667 335.2416 -1.78875977  9.724923 0.10478869 -1349.5053
+B at a2:  296.8333 251.5956  1.17980342  8.420328 0.27033500  -278.3444
+                 UL
+AB:       -13.68725
+A:        453.15637
+B:        289.98971
+A at b1:  237.28765
+A at b2: 1136.22121
+B at a1:  150.17201
+B at a2:  872.01109</code></pre>
+</div>
+</div>
+<p>This is a lot of output to digest. We’ve defined the manipulation of cortisol as variable B and the manipulation of stress as Variable C (see documentaiton from statpsych). Let’s focus on the simple effects of stress (variable A):</p>
+<ul>
+<li><p>For sham operated animals (b1), there is a large but uncertain effect of stress: <em>M</em><sub>stress_with_cortisoal</sub> = -437 95% CI [-1110, 237]</p></li>
+<li><p>For adrenelectomized animals (b2), animals in the stressed condition had <em>higher</em>&nbsp;levels of neurogenesis than controls: <em>M</em><sub>stress_effect_without_cortisol</sub> = 460 95% CI[-216, 1136]</p></li>
+<li><p>Thus, adrenelectomy transformed the effect of stress, turning it from a -437 neuron decrement to a 460 increase, a large though somewhat uncertain interaction: <em>M</em><sub>⍙⍙</sub> = -897 95% CI [-1779, -14]. Note that this interaction effect size has a p value – this will correspond to the <em>p</em> value for the test of this 2x2 interaction in an ANOVA.</p></li>
+</ul>
+<p>We’ve focused here on comparing means – but we could also do the same analysis of a complex design while comparing medians (see <code>statpsych::ci.2x2.median.bs</code>). And, for categorical outcomes we can compare proportions (see <code>statpsych::ci.2x2.prop.bs</code>). And while this example uses a fully-between subjects design, we can obtain the same effect sizes estimates for within-subjects and mixed designs (e.g.&nbsp;see <code>statpsych::ci.2x2.mean.ws</code> and <code>statpsych::ci.2x2.mean.mixed</code>).</p>
+</section>
+<section id="lots-of-other-effect-sizes" class="level2">
+<h2 class="anchored" data-anchor-id="lots-of-other-effect-sizes">Lots of Other Effect Sizes</h2>
+<p>The <a href="https://dgbonett.github.io/statpsych/reference/index.html">statpsych</a> package can help you obtain effect sizes for lots of additional research designs. Here’s a sampler:</p>
+<table class="caption-top table">
+<tbody>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.mean.bs.html"><code>ci.2x2.mean.bs()</code></a></td>
+<td>Computes tests and confidence intervals of effects in a 2x2 between-subjects design for means</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.mean.mixed.html"><code>ci.2x2.mean.mixed()</code></a></td>
+<td>Computes tests and confidence intervals of effects in a 2x2 mixed design for means</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.mean.ws.html"><code>ci.2x2.mean.ws()</code></a></td>
+<td>Computes tests and confidence intervals of effects in a 2x2 within-subjects design for means</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.median.bs.html"><code>ci.2x2.median.bs()</code></a></td>
+<td>Computes tests and confidence intervals of effects in a 2x2 between-subjects design for medians</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.median.mixed.html"><code>ci.2x2.median.mixed()</code></a></td>
+<td>Computes confidence intervals of effects in a 2x2 mixed design for medians</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.median.ws.html"><code>ci.2x2.median.ws()</code></a></td>
+<td>Computes confidence intervals of effects in a 2x2 within-subjects design for medians</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.prop.bs.html"><code>ci.2x2.prop.bs()</code></a></td>
+<td>Computes tests and confidence intervals of effects in a 2x2 between- subjects design for proportions</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.prop.mixed.html"><code>ci.2x2.prop.mixed()</code></a></td>
+<td>Computes tests and confidence intervals of effects in a 2x2 mixed factorial design for proportions</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.stdmean.bs.html"><code>ci.2x2.stdmean.bs()</code></a></td>
+<td>Computes confidence intervals of standardized effects in a 2x2 between-subjects design</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.stdmean.mixed.html"><code>ci.2x2.stdmean.mixed()</code></a></td>
+<td>Computes confidence intervals of standardized effects in a 2x2 mixed design</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.2x2.stdmean.ws.html"><code>ci.2x2.stdmean.ws()</code></a></td>
+<td>Computes confidence intervals of standardized effects in a 2x2 within-subjects design</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.agree.3rater.html"><code>ci.agree.3rater()</code></a></td>
+<td>Computes confidence intervals for a 3-rater design with dichotomous ratings</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.agree.html"><code>ci.agree()</code></a></td>
+<td>Confidence interval for a G-index of agreement</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.agree2.html"><code>ci.agree2()</code></a></td>
+<td>Confidence interval for G-index difference in a 2-group design</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.bayes.normal.html"><code>ci.bayes.normal()</code></a></td>
+<td>Bayesian credible interval for a normal prior distribution</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.bayes.prop.html"><code>ci.bayes.prop()</code></a></td>
+<td>Bayesian credible interval for a proportion</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.biphi.html"><code>ci.biphi()</code></a></td>
+<td>Confidence interval for a biserial-phi correlation</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.bscor.html"><code>ci.bscor()</code></a></td>
+<td>Confidence interval for a biserial correlation</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.cod.html"><code>ci.cod()</code></a></td>
+<td>Confidence interval for a coefficient of dispersion</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.condslope.log.html"><code>ci.condslope.log()</code></a></td>
+<td>Confidence intervals for conditional (simple) slopes in a logistic model</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.condslope.html"><code>ci.condslope()</code></a></td>
+<td>Confidence intervals for conditional (simple) slopes in a linear model</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.cor.dep.html"><code>ci.cor.dep()</code></a></td>
+<td>Confidence interval for a difference in dependent Pearson correlations</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.cor.html"><code>ci.cor()</code></a></td>
+<td>Confidence interval for a Pearson or partial correlation</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.cor2.gen.html"><code>ci.cor2.gen()</code></a></td>
+<td>Confidence interval for a 2-group correlation difference</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.cor2.html"><code>ci.cor2()</code></a></td>
+<td>Confidence interval for a 2-group Pearson correlation difference</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.cqv.html"><code>ci.cqv()</code></a></td>
+<td>Confidence interval for a coefficient of quartile variation</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.cramer.html"><code>ci.cramer()</code></a></td>
+<td>Confidence interval for Cramer’s V</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.cronbach.html"><code>ci.cronbach()</code></a></td>
+<td>Confidence interval for a Cronbach reliability</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.cronbach2.html"><code>ci.cronbach2()</code></a></td>
+<td>Confidence interval for a difference in Cronbach reliabilities in a 2-group design</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.cv.html"><code>ci.cv()</code></a></td>
+<td>Confidence interval for a coefficient of variation</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.etasqr.html"><code>ci.etasqr()</code></a></td>
+<td>Confidence interval for eta-squared</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.fisher.html"><code>ci.fisher()</code></a></td>
+<td>Fisher confidence interval</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.indirect.html"><code>ci.indirect()</code></a></td>
+<td>Confidence interval for an indirect effect</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.kappa.html"><code>ci.kappa()</code></a></td>
+<td>Confidence interval for two kappa reliability coefficients</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.lc.gen.bs.html"><code>ci.lc.gen.bs()</code></a></td>
+<td>Confidence interval for a linear contrast of parameters in a between-subjects design</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.lc.glm.html"><code>ci.lc.glm()</code></a></td>
+<td>Confidence interval for a linear contrast of general linear model parameters</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.lc.mean.bs.html"><code>ci.lc.mean.bs()</code></a></td>
+<td>Confidence interval for a linear contrast of means in a between-subjects design</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.lc.median.bs.html"><code>ci.lc.median.bs()</code></a></td>
+<td>Confidence interval for a linear contrast of medians in a between-subjects design</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.lc.prop.bs.html"><code>ci.lc.prop.bs()</code></a></td>
+<td>Confidence interval for a linear contrast of proportions in a between- subjects design</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.lc.reg.html"><code>ci.lc.reg()</code></a></td>
+<td>Confidence interval for a linear contrast of regression coefficients in multiple group regression model</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.lc.stdmean.bs.html"><code>ci.lc.stdmean.bs()</code></a></td>
+<td>Confidence interval for a standardized linear contrast of means in a between-subjects design</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.lc.stdmean.ws.html"><code>ci.lc.stdmean.ws()</code></a></td>
+<td>Confidence interval for a standardized linear contrast of means in a within-subjects design</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.mad.html"><code>ci.mad()</code></a></td>
+<td>Confidence interval for a mean absolute deviation</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.mann.html"><code>ci.mann()</code></a></td>
+<td>Confidence interval for a Mann-Whitney parameter</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.mape.html"><code>ci.mape()</code></a></td>
+<td>Confidence interval for a mean absolute prediction error</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.mean.fpc.html"><code>ci.mean.fpc()</code></a></td>
+<td>Confidence interval for a mean with a finite population correction</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.mean.ps.html"><code>ci.mean.ps()</code></a></td>
+<td>Confidence interval for a paired-samples mean difference</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.mean.html"><code>ci.mean()</code></a> <a href="https://dgbonett.github.io/statpsych/reference/ci.mean.html"><code>ci.mean1()</code></a></td>
+<td>Confidence interval for a mean</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.mean2.html"><code>ci.mean2()</code></a></td>
+<td>Confidence interval for a 2-group mean difference</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.median.ps.html"><code>ci.median.ps()</code></a></td>
+<td>Confidence interval for a paired-samples median difference</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.median.html"><code>ci.median()</code></a> <a href="https://dgbonett.github.io/statpsych/reference/ci.median.html"><code>ci.median1()</code></a></td>
+<td>Confidence interval for a median</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.median2.html"><code>ci.median2()</code></a></td>
+<td>Confidence interval for a 2-group median difference</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.oddsratio.html"><code>ci.oddsratio()</code></a></td>
+<td>Confidence interval for an odds ratio</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.pairs.mult.html"><code>ci.pairs.mult()</code></a></td>
+<td>Confidence intervals for pairwise proportion differences of a multinomial variable</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.pairs.prop.bs.html"><code>ci.pairs.prop.bs()</code></a></td>
+<td>Bonferroni confidence intervals for all pairwise proportion differences in a between-subjects design</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.pbcor.html"><code>ci.pbcor()</code></a></td>
+<td>Confidence intervals for point-biserial correlations</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.phi.html"><code>ci.phi()</code></a></td>
+<td>Confidence interval for a phi correlation</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.poisson.html"><code>ci.poisson()</code></a></td>
+<td>Confidence interval for a Poisson rate</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.popsize.html"><code>ci.popsize()</code></a></td>
+<td>Confidence interval for an unknown population size</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.prop.fpc.html"><code>ci.prop.fpc()</code></a></td>
+<td>Confidence interval for a proportion with a finite population correction</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.prop.inv.html"><code>ci.prop.inv()</code></a></td>
+<td>Confidence interval for a proportion using inverse sampling</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.prop.ps.html"><code>ci.prop.ps()</code></a></td>
+<td>Confidence interval for a paired-samples proportion difference</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.prop.html"><code>ci.prop()</code></a> <a href="https://dgbonett.github.io/statpsych/reference/ci.prop.html"><code>ci.prop1()</code></a></td>
+<td>Confidence intervals for a proportion</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.prop2.inv.html"><code>ci.prop2.inv()</code></a></td>
+<td>Confidence interval for a 2-group proportion difference using inverse sampling</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.prop2.html"><code>ci.prop2()</code></a></td>
+<td>Confidence interval for a 2-group proportion difference</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.pv.html"><code>ci.pv()</code></a></td>
+<td>Confidence intervals for positive and negative predictive values with retrospective sampling</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.random.anova.html"><code>ci.random.anova()</code></a></td>
+<td>Confidence intervals for parameters of one-way random effects ANOVA</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.cod2.html"><code>ci.ratio.cod2()</code></a></td>
+<td>Confidence interval for a ratio of dispersion coefficients in a 2-group design</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.cv2.html"><code>ci.ratio.cv2()</code></a></td>
+<td>Confidence interval for a ratio of coefficients of variation in a 2-group design</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.mad.ps.html"><code>ci.ratio.mad.ps()</code></a></td>
+<td>Confidence interval for a paired-sample MAD ratio</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.mad2.html"><code>ci.ratio.mad2()</code></a></td>
+<td>Confidence interval for a 2-group ratio of mean absolute deviations</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.mape2.html"><code>ci.ratio.mape2()</code></a></td>
+<td>Confidence interval for a ratio of mean absolute prediction errors in a 2-group design</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.mean.ps.html"><code>ci.ratio.mean.ps()</code></a></td>
+<td>Confidence interval for a paired-samples mean ratio</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.mean2.html"><code>ci.ratio.mean2()</code></a></td>
+<td>Confidence interval for a 2-group mean ratio</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.median.ps.html"><code>ci.ratio.median.ps()</code></a></td>
+<td>Confidence interval for a paired-samples median ratio</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.median2.html"><code>ci.ratio.median2()</code></a></td>
+<td>Confidence interval for a 2-group median ratio</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.poisson2.html"><code>ci.ratio.poisson2()</code></a></td>
+<td>Confidence interval for a ratio of Poisson rates in a 2-group design</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.prop.ps.html"><code>ci.ratio.prop.ps()</code></a></td>
+<td>Confidence interval for a paired-samples proportion ratio</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.prop2.html"><code>ci.ratio.prop2()</code></a></td>
+<td>Confidence interval for a 2-group proportion ratio</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.ratio.sd2.html"><code>ci.ratio.sd2()</code></a></td>
+<td>Confidence interval for a 2-group ratio of standard deviations</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.rel2.html"><code>ci.rel2()</code></a></td>
+<td>Confidence interval for a 2-group reliability difference</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.reliability.html"><code>ci.reliability()</code></a></td>
+<td>Confidence interval for a reliability coefficient</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.rsqr.html"><code>ci.rsqr()</code></a></td>
+<td>Confidence interval for squared multiple correlation</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.sign.html"><code>ci.sign()</code></a></td>
+<td>Confidence interval for the parameter of the one-sample sign test</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.slope.mean.bs.html"><code>ci.slope.mean.bs()</code></a></td>
+<td>Confidence interval for the slope of means in a one-factor experimental design with a quantitative between-subjects factor</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.slope.prop.bs.html"><code>ci.slope.prop.bs()</code></a></td>
+<td>Confidence interval for a slope of a proportion in a single-factor experimental design with a quantitative between-subjects factor</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.spcor.html"><code>ci.spcor()</code></a></td>
+<td>Confidence interval for a semipartial correlation</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.spear.html"><code>ci.spear()</code></a></td>
+<td>Confidence interval for a Spearman correlation</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.spear2.html"><code>ci.spear2()</code></a></td>
+<td>Confidence interval for a 2-group Spearman correlation difference</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.stdmean.ps.html"><code>ci.stdmean.ps()</code></a></td>
+<td>Confidence intervals for a paired-samples standardized mean difference</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.stdmean.html"><code>ci.stdmean()</code></a> <a href="https://dgbonett.github.io/statpsych/reference/ci.stdmean.html"><code>ci.stdmean1()</code></a></td>
+<td>Confidence interval for a standardized mean</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.stdmean.strat.html"><code>ci.stdmean.strat()</code></a></td>
+<td>Confidence intervals for a 2-group standardized mean difference with stratified sampling</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.stdmean2.html"><code>ci.stdmean2()</code></a></td>
+<td>Confidence intervals for a 2-group standardized mean difference</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.tetra.html"><code>ci.tetra()</code></a></td>
+<td>Confidence interval for a tetrachoric correlation</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.theil.html"><code>ci.theil()</code></a></td>
+<td>Theil-Sen estimate and confidence interval for slope</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.tukey.html"><code>ci.tukey()</code></a></td>
+<td>Tukey-Kramer confidence intervals for all pairwise mean differences in a between-subjects design</td>
+</tr>
+<tr class="odd">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.var.upper.html"><code>ci.var.upper()</code></a></td>
+<td>Upper confidence limit of a variance</td>
+</tr>
+<tr class="even">
+<td><a href="https://dgbonett.github.io/statpsych/reference/ci.yule.html"><code>ci.yule()</code></a></td>
+<td>Confidence intervals for generalized Yule coefficients</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="exercises" class="level2">
+<h2 class="anchored" data-anchor-id="exercises">Exercises</h2>
+<ul>
+<li><p>Anush will compare expression of <em>egr1</em> between control animals and those with a conditonal knockout of <em>creb1.</em> He will conduct a simple two-group experiment and his primary outcome (gene expression) is quantitative. &lt;div class=‘webex-radiogroup’ id=‘radio_RTSDXCHXFG’&gt;&lt;label&gt;&lt;input type=“radio” autocomplete=“off” name=“radio_RTSDXCHXFG” value=““&gt;&lt;/input&gt; &lt;span&gt;This is a biased approach that capitilizes on chance&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type=”radio” autocomplete=“off” name=“radio_RTSDXCHXFG” value=“answer”&gt;&lt;/input&gt; &lt;span&gt;Smart work, Joe, no wonder you always confirm your hypotheses!&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;</p></li>
+<li><p>Anisha wants to run a single-cell transcriptomics experiment. She finds a paper that runs 3 biological replicates. She decides to use the same sample size. What should we make of this approach? &lt;div class=‘webex-radiogroup’ id=‘radio_WZMSQSHDJO’&gt;&lt;label&gt;&lt;input type=“radio” autocomplete=“off” name=“radio_WZMSQSHDJO” value=““&gt;&lt;/input&gt; &lt;span&gt;Sadly, the published literature is not always a good guide -- many fields regularly use inadquate sample sizes; Anisha needs more information to know if this is reasonable&lt;/span&gt;&lt;/label&gt;&lt;label&gt;&lt;input type=”radio” autocomplete=“off” name=“radio_WZMSQSHDJO” value=“answer”&gt;&lt;/input&gt; &lt;span&gt;Sweet; as long as you have a citation to back you up, you're fine!&lt;/span&gt;&lt;/label&gt;&lt;/div&gt;</p></li>
+</ul>
 
 
 
-</main> <!-- /main -->
+</section>
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">References</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-kruschke2014" class="csl-entry" role="listitem">
+Kruschke, John K. 2014. <em>Doing Bayesian Data Analysis: A Tutorial with r, JAGS, and Stan, Second Edition</em>.
+</div>
+<div id="ref-kruschke2018" class="csl-entry" role="listitem">
+Kruschke, John K., and Torrin M. Liddell. 2018. <span>“The Bayesian New Statistics: Hypothesis Testing, Estimation, Meta-Analysis, and Power Analysis from a Bayesian Perspective.”</span> <em>Psychonomic Bulletin &amp; Review</em> 25 (1): 178–206. <a href="https://doi.org/10.3758/s13423-016-1221-4">https://doi.org/10.3758/s13423-016-1221-4</a>.
+</div>
+<div id="ref-mirescu2004" class="csl-entry" role="listitem">
+Mirescu, Christian, Jennifer D. Peters, and Elizabeth Gould. 2004. <span>“Early Life Experience Alters Response of Adult Neurogenesis to Stress.”</span> <em>Nature Neuroscience</em> 7 (8): 841–46. <a href="https://doi.org/10.1038/nn1290">https://doi.org/10.1038/nn1290</a>.
+</div>
+</div></section></div></main> <!-- /main -->
 <script>
 
-
-
 /* update total correct if #webex-total_correct exists */
-
 update_total_correct = function() {
-
   console.log("webex: update total_correct");
 
-
-
   var t = document.getElementsByClassName("webex-total_correct");
-
   for (var i = 0; i < t.length; i++) {
-
     p = t[i].parentElement;
-
     var correct = p.getElementsByClassName("webex-correct").length;
-
     var solvemes = p.getElementsByClassName("webex-solveme").length;
-
     var radiogroups = p.getElementsByClassName("webex-radiogroup").length;
-
     var selects = p.getElementsByClassName("webex-select").length;
 
-
-
     t[i].innerHTML = correct + " of " + (solvemes + radiogroups + selects) + " correct";
-
   }
-
 }
-
-
 
 /* webex-solution button toggling function */
-
 b_func = function() {
-
   console.log("webex: toggle hide");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('open')) {
-
     cl.remove("open");
-
   } else {
-
     cl.add("open");
-
   }
-
 }
-
-
 
 /* check answers */
-
 check_func = function() {
-
   console.log("webex: check answers");
 
-
-
   var cl = this.parentElement.classList;
-
   if (cl.contains('unchecked')) {
-
     cl.remove("unchecked");
-
     this.innerHTML = "Hide Answers";
-
   } else {
-
     cl.add("unchecked");
-
     this.innerHTML = "Show Answers";
-
   }
-
 }
-
-
 
 /* function for checking solveme answers */
-
 solveme_func = function(e) {
-
   console.log("webex: check solveme");
 
-
-
   var real_answers = JSON.parse(this.dataset.answer);
-
   var my_answer = this.value;
-
   var cl = this.classList;
-
   if (cl.contains("ignorecase")) {
-
     my_answer = my_answer.toLowerCase();
-
   }
-
   if (cl.contains("nospaces")) {
-
     my_answer = my_answer.replace(/ /g, "")
-
   }
-
-
 
   if (my_answer == "") {
-
     cl.remove("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else if (real_answers.includes(my_answer)) {
-
     cl.add("webex-correct");
-
     cl.remove("webex-incorrect");
-
   } else {
-
     cl.add("webex-incorrect");
-
     cl.remove("webex-correct");
-
   }
-
-
 
   // match numeric answers within a specified tolerance
-
   if(this.dataset.tol > 0){
-
     var tol = JSON.parse(this.dataset.tol);
-
     var matches = real_answers.map(x => Math.abs(x - my_answer) < tol)
-
     if (matches.reduce((a, b) => a + b, 0) > 0) {
-
       cl.add("webex-correct");
-
     } else {
-
       cl.remove("webex-correct");
-
     }
-
   }
-
-
 
   // added regex bit
-
   if (cl.contains("regex")){
-
     answer_regex = RegExp(real_answers.join("|"))
-
     if (answer_regex.test(my_answer)) {
-
       cl.add("webex-correct");
-
     }
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 /* function for checking select answers */
-
 select_func = function(e) {
-
   console.log("webex: check select");
-
-
 
   var cl = this.classList
 
-
-
   /* add style */
-
   cl.remove("webex-incorrect");
-
   cl.remove("webex-correct");
-
   if (this.value == "answer") {
-
     cl.add("webex-correct");
-
   } else if (this.value != "blank") {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 /* function for checking radiogroups answers */
-
 radiogroups_func = function(e) {
-
   console.log("webex: check radiogroups");
 
-
-
   var checked_button = document.querySelector('input[name=' + this.id + ']:checked');
-
   var cl = checked_button.parentElement.classList;
-
   var labels = checked_button.parentElement.parentElement.children;
 
-
-
   /* get rid of styles */
-
   for (i = 0; i < labels.length; i++) {
-
     labels[i].classList.remove("webex-incorrect");
-
     labels[i].classList.remove("webex-correct");
-
   }
-
-
 
   /* add style */
-
   if (checked_button.value == "answer") {
-
     cl.add("webex-correct");
-
   } else {
-
     cl.add("webex-incorrect");
-
   }
 
-
-
   update_total_correct();
-
 }
-
-
 
 window.onload = function() {
-
   console.log("webex onload");
-
   /* set up solution buttons */
-
   var buttons = document.getElementsByTagName("button");
 
-
-
   for (var i = 0; i < buttons.length; i++) {
-
     if (buttons[i].parentElement.classList.contains('webex-solution')) {
-
       buttons[i].onclick = b_func;
-
     }
-
   }
-
-
 
   var check_sections = document.getElementsByClassName("webex-check");
-
   console.log("check:", check_sections.length);
-
   for (var i = 0; i < check_sections.length; i++) {
-
     check_sections[i].classList.add("unchecked");
 
-
-
     let btn = document.createElement("button");
-
     btn.innerHTML = "Show Answers";
-
     btn.classList.add("webex-check-button");
-
     btn.onclick = check_func;
-
     check_sections[i].appendChild(btn);
 
-
-
     let spn = document.createElement("span");
-
     spn.classList.add("webex-total_correct");
-
     check_sections[i].appendChild(spn);
-
   }
-
-
 
   /* set up webex-solveme inputs */
-
   var solveme = document.getElementsByClassName("webex-solveme");
 
-
-
   for (var i = 0; i < solveme.length; i++) {
-
     /* make sure input boxes don't auto-anything */
-
     solveme[i].setAttribute("autocomplete","off");
-
     solveme[i].setAttribute("autocorrect", "off");
-
     solveme[i].setAttribute("autocapitalize", "off");
-
     solveme[i].setAttribute("spellcheck", "false");
-
     solveme[i].value = "";
 
-
-
     /* adjust answer for ignorecase or nospaces */
-
     var cl = solveme[i].classList;
-
     var real_answer = solveme[i].dataset.answer;
-
     if (cl.contains("ignorecase")) {
-
       real_answer = real_answer.toLowerCase();
-
     }
-
     if (cl.contains("nospaces")) {
-
       real_answer = real_answer.replace(/ /g, "");
-
     }
-
     solveme[i].dataset.answer = real_answer;
 
-
-
     /* attach checking function */
-
     solveme[i].onkeyup = solveme_func;
-
     solveme[i].onchange = solveme_func;
 
-
-
     solveme[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
-
-
 
   /* set up radiogroups */
-
   var radiogroups = document.getElementsByClassName("webex-radiogroup");
-
   for (var i = 0; i < radiogroups.length; i++) {
-
     radiogroups[i].onchange = radiogroups_func;
-
   }
-
-
 
   /* set up selects */
-
   var selects = document.getElementsByClassName("webex-select");
-
   for (var i = 0; i < selects.length; i++) {
-
     selects[i].onchange = select_func;
-
     selects[i].insertAdjacentHTML("afterend", " <span class='webex-icon'></span>")
-
   }
 
-
-
   update_total_correct();
-
 }
 
-
-
 </script>
-
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
